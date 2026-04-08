@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment & Secrets
+.env
+.env.local
+.env.production
+*.key
+*.pem
+
+# Logs
+*.log
+logs/
+
+# Build output
+dist/
+build/
+unpackage/
+
+# Upload files (use cloud storage instead)
+uploads/
