@@ -37,6 +37,15 @@
 - 计划注册公司，上架各大应用商店
 - 尚未购买服务器和开发者账号
 
+### Git & GitHub 配置（2026-04-08 完成）
+- GitHub 用户名：Tugoukezhang
+- GitHub 邮箱：1135638409@qq.com
+- 仓库地址：https://github.com/Tugoukezhang/beauty-app
+- 仓库可见性：Public
+- Token 已存入 Windows 凭据管理器（cmdkey）
+- 本地分支：main，已关联远程 origin/main
+- 换电脑后需要重新配置 Token 和凭据
+
 ### 沟通偏好
 - 中文交流
 - 目前在公司用手机聊天，回家后用自己的电脑开始开发
