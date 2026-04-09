@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python
 __pycache__/
 *.py[cod]
@@ -84,3 +85,7 @@ reports/*
 # Test files
 test_*.py
 *_test.py
+=======
+.workbuddy/
+.git/
+>>>>>>> fa898170552ba68660c83efa3ab3e6682fb85544
