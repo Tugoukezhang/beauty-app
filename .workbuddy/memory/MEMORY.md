@@ -1,6 +1,5 @@
 # MEMORY.md - 长期记忆
 
-<<<<<<< HEAD
 ## 一、小红书新娘妆博主起号项目
 
 ### 项目定位（2026-04-07 确定）
@@ -32,11 +31,12 @@
 
 ---
 
-## 二、美妆微信小程序（先行项目）
+## 二、美妆微信小程序「美妆」（当前主项目）
 
 ### 项目优先级（2026-04-08 调整）
-**原计划**：先开发美妆APP
-**调整后**：先开发微信小程序进行市场测试
+- **原计划**：先开发美妆APP
+- **调整后**：先开发微信小程序进行市场测试
+- **项目名称**：i妆
 
 ### 小程序功能方案（2026-04-08 确定）
 
@@ -52,57 +52,98 @@
 - 小红书、你今天真好看、每妆APP、化妆大全APP
 
 #### 技术方案
-- 前端：微信小程序 + TDesign
+- 前端：微信小程序原生 + TDesign 组件库
 - 后端：Python FastAPI
+- 数据库：MySQL + Redis
 - 存储：腾讯云COS
 - 支付：微信支付
 
+#### 定价方案B（妆币+会员混合，1元=10妆币）
+| 档位 | 金额 | 妆币 | 额外权益 |
+|------|------|------|----------|
+| 基础档 | ¥6 | 60 | 1个月会员体验 |
+| 标准档 | ¥30 | 330 | 3个月会员 |
+| 大额档 | ¥98 | 1150 | 6个月会员 |
+| 年卡档 | ¥198 | - | 12个月会员+专属头像框 |
+
 #### 已生成文档
-- `美妆小程序项目文档.md`
-- `APP功能借鉴分析.md`
+- `美妆小程序项目文档_V2.2.md`
+- `APP功能借鉴分析_V2.2.md`
+- `美妆小程序准备清单.md`
 
 ---
 
-## 三、美妆综合服务平台APP（后续项目）
-=======
-## 美妆综合服务平台项目
->>>>>>> 01c36285ded4f86209a0913cdf01b5beaba4bc7a
+## 三、小程序开发进度（2026-04-09 更新）
+
+### 开发进度总览
+
+| 模块 | 状态 | 完成时间 | 页面数 | 积分消耗 |
+|------|------|----------|--------|----------|
+| M1 基础架构 | 完成 | 04-08 21:42 | 11个 | ~150 |
+| M2 用户系统 | 完成 | 04-08 22:02 | 7个 | ~350 |
+| M3 课程系统 | 完成 | 04-08 22:20 | 5个 | ~550 |
+| M4 内容社区 | 完成 | 04-08 22:45 | 5个 | ~600 |
+| M5 商业系统 | 完成 | 04-09 | 4个 | ~700 |
+| M6 管理后台 | 待开发 | - | - | - |
+
+**累计完成：M1-M5，5个模块，32个页面，约2350积分**
+
+### M5 商业系统详情（2026-04-09 完成）
+
+**新增页面：**
+- `pages/recharge/recharge` - 充值中心（妆币6档+会员3档）
+- `pages/vip/vip` - 会员中心（8大权益+成长值）
+- `pages/task/task` - 每日任务（签到+6个任务类型）
+- `pages/payment/result/result` - 支付结果页
+
+**云函数：**
+- `cloudfunctions/payment` - 统一下单、订单查询
+- `cloudfunctions/paymentCallback` - 支付回调处理
+
+**检测修复：**
+- 修复 API 引用路径（`../utils/request` → `./request`）
+- 移除 app.json 中重复的 `i-tabs`/`i-tab-panel` 注册
+
+### 完成页面清单
+
+**M1基础架构（11页）**：首页/分类/社区/个人中心/登录/课程详情/搜索/课程列表等
+
+**M2用户系统（7页）**：login/profile/favorites/studyRecord/settings/protocol/privacy
+
+**M3课程系统（5页）**：category/courseList/courseDetail/coursePlay/search
+
+**M4内容社区（5页）**：community/postDetail/publish/topicDetail/user
+
+### 待开发（M6管理后台）
+- 课程管理（上传视频、定价）
+- 用户管理、订单管理
+- 数据统计、老师管理
+- 活动管理、系统设置
+
+---
+
+## 四、美妆综合服务平台APP（后续项目）
 
 ### 项目概述
-用户想做一个美妆综合服务平台APP，定位是"美妆界的点评+得到+滴滴"。
+定位是"美妆界的点评+得到+滴滴"。
 
 ### MVP 功能范围（V1.0）
 1. **课程系统** — 化妆课程分类/详情/视频播放/购买
-<<<<<<< HEAD
-2. **社区功能** — 发帖/评论/点赞/收藏/关注/话题标签
-3. **用户系统** — 手机号+验证码注册登录、个人中心
-
-### 技术方案
-- 前端：uni-app + Vue 3（iOS + Android + 小程序）
-- 后端：Python FastAPI
-- 数据库：MySQL + Redis
-- 存储：阿里云 OSS / 腾讯云 COS
-
-=======
 2. **社区功能** — 发帖/评论/点赞/收藏/关注/话题标签（不带购买链接）
 3. **用户系统** — 手机号+验证码注册登录、个人中心
 
->>>>>>> 01c36285ded4f86209a0913cdf01b5beaba4bc7a
 ### 暂不包含（后续版本）
 - AI 肤质分析（需第三方API）
 - AR 实时试妆（需第三方SDK）
 - 约妆平台（化妆师接单）
 - 老师辅导（1v1视频）
 
-<<<<<<< HEAD
-=======
 ### 技术方案
 - 前端：uni-app + Vue 3（iOS + Android + 小程序）
 - 后端：Python FastAPI
 - 数据库：MySQL + Redis
 - 存储：阿里云 OSS / 腾讯云 COS
 
->>>>>>> 01c36285ded4f86209a0913cdf01b5beaba4bc7a
 ### 扩展路线
 - V1.5 → AI肤质分析
 - V2.0 → AR试妆
@@ -112,139 +153,75 @@
 ### 商业模式
 课程付费 40% + 约妆抽佣 35% + 辅导付费 15% + 广告 10%
 
-<<<<<<< HEAD
 ---
 
-## 用户情况
-- 不会写代码，APP开发完全依赖AI
-=======
-### 用户情况
-- 用户不会写代码，APP开发完全依赖AI
->>>>>>> 01c36285ded4f86209a0913cdf01b5beaba4bc7a
-- 服务器运维一知半解，需要部署脚本和指导
-- 计划注册公司，上架各大应用商店
-- 尚未购买服务器和开发者账号
-
-<<<<<<< HEAD
-### Git & GitHub 配置
-=======
-### Git & GitHub 配置（2026-04-08 完成）
->>>>>>> 01c36285ded4f86209a0913cdf01b5beaba4bc7a
-- GitHub 用户名：Tugoukezhang
-- GitHub 邮箱：1135638409@qq.com
-- 仓库地址：https://github.com/Tugoukezhang/beauty-app
-- 仓库可见性：Public
-<<<<<<< HEAD
-=======
-- Token 已存入 Windows 凭据管理器（cmdkey）
-- 本地分支：main，已关联远程 origin/main
-- 换电脑后需要重新配置 Token 和凭据
->>>>>>> 01c36285ded4f86209a0913cdf01b5beaba4bc7a
-
-### 沟通偏好
-- 中文交流
-- 目前在公司用手机聊天，回家后用自己的电脑开始开发
-
-<<<<<<< HEAD
-### 已安装 Skills（2026-04-08 更新）
-**核心项目 Skills（11个）：**
-- fullstack-dev, frontend-dev, ui-ux-pro-max
-- tencentcloud-cos, wechatpay-product-coupon, wechatpay-basic-payment
-- market-researcher, video-frames, github
-- wechat-miniprogram, tdesign-miniprogram
-- find-skills, agent-browser, skills-security-check
-
-**Skills 清理记录（2026-04-08）：**
-- 清理前：1,740 个 Skills
-- 清理后：1,518 个 Skills
-- 清理数量：222 个不相关 Skills
-- 清理内容：Android/iOS/Angular/AWS/Kubernetes 等无关技术栈
-- 清理脚本：`cleanup-skills.bat`
-
-### 待安装 Skills
-- tapd-openapi（团队项目管理，可选）
-- cos-vectors（AI肤质分析时再装）
-
----
-
-## 四、项目开发规则（2026-04-08 确定）
+## 五、项目开发规则
 
 ### 开发规范
 1. **积分暂停机制**：积分消耗超过2000时暂停，等待用户确认继续
 2. **三检制度**：每模块完成后执行代码自检 → 复检 → 最终行为测试
 3. **自动继续**：开发过程中卡住时尝试继续执行
-4. **版本管理**：每模块完成后记忆储存，并上传GitHub min分支
+4. **版本管理**：每模块完成后记忆储存，并上传GitHub
 
 ### Git分支策略
 - main分支：最终稳定版本
 - dev分支：开发中版本
-- min分支：每模块完成后上传存档
 
 ### 开发流程
-每模块开发遵循：
-1. 需求确认
-2. 代码编写
-3. 自检（语法、逻辑）
-4. 复检（功能完整性）
-5. 行为测试（实际运行测试）
-6. 记忆更新
-7. Git提交
+每模块开发遵循：需求确认 → 代码编写 → 自检 → 复检 → 行为测试 → 记忆更新 → Git提交
 
 ---
 
-## 五、小程序开发进度（2026-04-08 更新）
+## 六、用户情况
+- 用户不会写代码，APP开发完全依赖AI
+- 服务器运维一知半解，需要部署脚本和指导
+- 计划注册公司，上架各大应用商店
+- 尚未购买服务器和开发者账号
 
-### 开发进度总览
+### Git & GitHub 配置
+- GitHub 用户名：Tugoukezhang
+- GitHub 邮箱：1135638409@qq.com
+- 仓库地址：https://github.com/Tugoukezhang/beauty-app
+- 仓库可见性：Public
+- Token 已存入 Windows 凭据管理器（cmdkey）
+- 本地分支：main，已关联远程 origin/main
+- 换电脑后需要重新配置 Token 和凭据
 
-| 模块 | 状态 | 完成时间 | 页面数 | 积分消耗 |
-|------|------|----------|--------|----------|
-| ✅ M1 基础架构 | 完成 | 21:42 | 11个 | ~150 |
-| ✅ M2 用户系统 | 完成 | 22:02 | 7个 | ~350 |
-| ✅ M3 课程系统 | 完成 | 22:20 | 5个 | ~550 |
-| ✅ M4 内容社区 | 完成 | 22:45 | 5个 | ~600 |
-| ⏳ M5 商业系统 | 待开发 | - | - | - |
-| ⏳ M6 管理后台 | 待开发 | - | - | - |
+### 沟通偏好
+- 中文交流
 
-**累计完成：M1-M4，4个模块，28个页面，约1650积分**
+---
 
-### M4页面清单
-- community/             - 社区首页（话题分类、瀑布流）
-- community/postDetail/  - 帖子详情
-- community/publish/     - 发帖页面
-- community/topicDetail/  - 话题详情
-- user/                  - 用户主页
+## 七、已安装 Skills
 
-### 小程序核心功能
-- ✅ 用户登录/注册
-- ✅ 课程学习（分类、详情、视频播放）
-- ✅ 内容社区（发帖、评论、点赞、话题）
-- ✅ 个人中心（收藏、学习记录、设置）
-
-### 待开发（M5商业系统）
-- 充值系统（妆币充值、会员购买）
-- 微信支付对接
-- 会员权益中心
-- 积分任务系统
-=======
-### 已安装 Skills（2026-04-07 确认）
-开发相关：
+**核心项目 Skills：**
 - fullstack-dev（全栈架构/API设计）
 - frontend-dev（前端UI/动画）
 - ui-ux-pro-max（UI/UX设计规范）
 - tencentcloud-cos（腾讯云对象存储）
 - wechatpay-product-coupon（微信支付商品券）
+- wechatpay-basic-payment（微信支付核心）
 - market-researcher（市场调研）
 - video-frames（视频帧提取）
 - github（版本管理）
+- wechat-miniprogram（微信小程序）
+- tdesign-miniprogram（小程序UI组件）
 - find-skills（搜索新Skills）
+- agent-browser（浏览器操作）
+- skills-security-check（Skills安全检查）
+- tencentmap-miniprogram-skill（腾讯地图小程序版）
+- cos-vectors（COS向量存储）
 
-小程序相关：
-- wechat-miniprogram
-- tdesign-miniprogram
-- 微信小程序开发框架
+**专业文档Skills：**
+- project-docs（项目文档编写）
+- technical-design-doc（技术设计文档）
+- strategy-document（策略文档）
+- breakdown-feature-prd（功能PRD分解）
+- deep-research（深度研究）
+- market-research（市场研究）
+- market-sizing-analysis（市场规模分析）
 
-### 待安装 Skills（按需）
-- 微信支付核心接入（课程购买支付，非商品券）
-- tapd-openapi（团队项目管理，可选）
-- cos-vectors（AI肤质分析时再装）
->>>>>>> 01c36285ded4f86209a0913cdf01b5beaba4bc7a
+### Skills 清理记录（2026-04-08）
+- 清理前：1,740 个 Skills
+- 清理后：1,518 个 Skills
+- 清理内容：Android/iOS/Angular/AWS/Kubernetes 等无关技术栈
