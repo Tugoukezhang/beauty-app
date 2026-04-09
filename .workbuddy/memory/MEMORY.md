@@ -84,9 +84,14 @@
 | M3 课程系统 | 完成 | 04-08 22:20 | 5个 | ~550 |
 | M4 内容社区 | 完成 | 04-08 22:45 | 5个 | ~600 |
 | M5 商业系统 | 完成 | 04-09 | 4个 | ~700 |
-| M6 管理后台 | 待开发 | - | - | - |
+| **M6 管理后台** | **✅ 已完成** | 04-09 | **8个** | ~800 |
 
-**累计完成：M1-M5，5个模块，32个页面，约2350积分**
+**累计完成：M1-M6，6个模块，40个页面，约3000积分**
+
+### M6 管理后台详情（2026-04-09 完成，另一台电脑开发）
+**包含8个页面：admin/courseManage/userManage/orderManage/dataStats/teacherManage/activityManage/systemSettings/login**
+
+**代码位置：** `beauty-app-main/beauty-app-main/src/pages/admin/`
 
 ### M5 商业系统详情（2026-04-09 完成）
 
