@@ -1,0 +1,51 @@
+{
+  "workbuddy_path": "C:\\Program Files\\Tencent\\WorkBuddy\\WorkBuddy.exe",
+  "signin_button_coords": {
+    "x": 1800,
+    "y": 100
+  },
+  "signin_time": "09:00",
+  "selfcheck_time": "10:00",
+  "max_attempts": 3,
+  "wait_for_startup": 30,
+  "check_interval": 2,
+  "log_level": "INFO",
+  "report_format": ["txt", "json"],
+  
+  "skills_dirs": [
+    "C:\\Users\\%USERNAME%\\.workbuddy\\skills",
+    "C:\\Users\\%USERNAME%\\WorkBuddy\\.workbuddy\\skills"
+  ],
+  "workbuddy_settings_path": "C:\\Users\\%USERNAME%\\.workbuddy\\settings.json",
+  "database_path": "skills_memory.db",
+  
+  "check_skill_md": true,
+  "check_skill_toml": true,
+  "check_settings": true,
+  "auto_fix": false,
+  "backup_before_fix": true,
+  
+  "directories": {
+    "screenshots": "./screenshots",
+    "reports": "./reports",
+    "logs": "./logs",
+    "backups": "./backups",
+    "database": "./database"
+  },
+  
+  "notification": {
+    "enabled": false,
+    "type": "console",
+    "webhook_url": ""
+  },
+  
+  "scheduling": {
+    "auto_signin_enabled": true,
+    "auto_selfcheck_enabled": true,
+    "signin_cron": "0 9 * * *",
+    "selfcheck_cron": "0 10 * * *"
+  },
+  
+  "version": "1.0.0",
+  "description": "WorkBuddy自检程序配置文件 - 美妆项目扩展"
+}

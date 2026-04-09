@@ -1,0 +1,23 @@
+# WorkBuddy自检程序依赖库
+# 美妆项目扩展版本
+
+# 核心依赖
+pyautogui>=0.9.54
+pygetwindow>=0.0.9
+Pillow>=10.0.0
+
+# 数据处理
+sqlite3
+
+# 开发工具（可选）
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0
+
+# 版本信息
+python>=3.7
+
+# 注意：
+# 1. sqlite3是Python标准库，不需要单独安装
+# 2. 如果使用其他数据库，请添加相应依赖
+# 3. 运行前请确保已安装Python和pip

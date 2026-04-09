@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# WorkBuddy specific
+.workbuddy/
+*.db
+*.log
+reports/
+screenshots/
+logs/
+
+# OS
+Thumbs.db
+
+# Config files (personal)
+config.json
+private_settings.json
+
+# Python packages
+site-packages/
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# Screenshots and logs (already excluded above but being explicit)
+screenshots/*
+!screenshots/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# Reports
+reports/*
+!reports/.gitkeep
+
+# Backup files
+*.bak
+*.backup
+
+# Binary files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test files
+test_*.py
+*_test.py
