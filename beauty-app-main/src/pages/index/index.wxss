@@ -1,78 +1,534 @@
 /**
- * 首页样式
+ * i妆 - 首页样式（场景化化妆台）
+ * 核心理念：2D化妆台场景 + 少量精准入口 + 个性化推荐
  */
 
-.page-container {
+.home-page {
   min-height: 100vh;
-  background-color: var(--bg-color);
+  background: #F8F4F6;
+  padding-bottom: 20rpx;
 }
 
-/* 搜索栏 */
-.search-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 20rpx 24rpx;
-  background-color: #fff;
-}
-
-/* 内容滚动区 */
-.content-scroll {
-  height: calc(100vh - 100rpx);
-}
-
-/* 轮播图 */
-.banner-section {
-  padding: 0 24rpx;
-}
-
-.banner-swiper {
-  width: 100%;
-  height: 320rpx;
-  border-radius: var(--radius-md);
+/* ========== 场景化化妆台区域 ========== */
+.vanity-scene {
+  position: relative;
+  background: linear-gradient(180deg, #FFF0F5 0%, #FFE8F0 40%, #FDE2EE 70%, #F8F4F6 100%);
+  padding: 0 0 30rpx;
   overflow: hidden;
 }
 
-.banner-image {
-  width: 100%;
-  height: 100%;
-}
-
-/* 分类导航 */
-.category-nav {
+/* 顶部栏 */
+.top-bar {
   display: flex;
-  flex-wrap: wrap;
-  padding: 24rpx;
-  background-color: #fff;
-  margin-bottom: 16rpx;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx 0;
+  position: relative;
+  z-index: 10;
 }
 
-.category-item {
-  width: 25%;
+.logo-area {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 40rpx;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FF6B9D, #FF3D7F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2rpx;
+}
+
+.top-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.top-btn {
+  width: 64rpx;
+  height: 64rpx;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.top-icon {
+  font-size: 32rpx;
+}
+
+.dot-badge {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 14rpx;
+  height: 14rpx;
+  background: #FF3D7F;
+  border-radius: 50%;
+  border: 2rpx solid #FFF0F5;
+}
+
+/* ========== 化妆台主场景 ========== */
+.scene-main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 520rpx;
+  margin: 20rpx 0 10rpx;
+}
+
+/* 桌面 */
+.scene-main::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  height: 60rpx;
+  background: linear-gradient(180deg, #E8C4D0 0%, #D4A8BA 100%);
+  border-radius: 8rpx;
+  box-shadow: 0 8rpx 24rpx rgba(180, 120, 150, 0.2);
+}
+
+/* ========== 大镜子 ========== */
+.mirror {
+  position: relative;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 24rpx;
 }
 
-.category-icon {
-  width: 96rpx;
-  height: 96rpx;
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--primary-color-light), var(--primary-color));
-  margin-bottom: 12rpx;
+.mirror-frame {
+  width: 260rpx;
+  height: 320rpx;
+  background: linear-gradient(180deg, #D4A8BA 0%, #C4909E 100%);
+  border-radius: 50% 50% 8rpx 8rpx;
+  padding: 8rpx;
+  box-shadow: 0 8rpx 32rpx rgba(180, 120, 150, 0.3),
+              inset 0 2rpx 4rpx rgba(255,255,255,0.3);
 }
 
-.category-name {
-  font-size: var(--font-sm);
-  color: var(--text-primary);
+.mirror-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #FFF5F8 0%, #FFE8F0 60%, #FDDCE8 100%);
+  border-radius: 50% 50% 4rpx 4rpx;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 区块 */
+/* 镜子里的2D人物 - CSS绘制 */
+.mirror-character {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: charFloat 3s ease-in-out infinite;
+}
+
+@keyframes charFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6rpx); }
+}
+
+/* 头发 */
+.char-hair {
+  width: 100rpx;
+  height: 70rpx;
+  background: linear-gradient(180deg, #4A2C2A 0%, #3A1C1A 100%);
+  border-radius: 50% 50% 30% 30%;
+  position: relative;
+  z-index: 2;
+}
+
+/* 脸 */
+.char-face {
+  width: 80rpx;
+  height: 90rpx;
+  background: linear-gradient(180deg, #FFE0CC 0%, #FFD4B8 100%);
+  border-radius: 40% 40% 35% 35%;
+  position: relative;
+  z-index: 3;
+  margin-top: -20rpx;
+}
+
+/* 眼睛 */
+.char-eyes {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  padding-top: 26rpx;
+}
+
+.char-eye {
+  width: 14rpx;
+  height: 18rpx;
+  background: #3A1C1A;
+  border-radius: 50%;
+  position: relative;
+}
+
+.char-eye::after {
+  content: '';
+  position: absolute;
+  top: 4rpx;
+  right: 2rpx;
+  width: 5rpx;
+  height: 5rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* 腮红 */
+.char-blush {
+  position: absolute;
+  width: 16rpx;
+  height: 10rpx;
+  background: rgba(255, 130, 160, 0.5);
+  border-radius: 50%;
+  top: 48rpx;
+}
+
+.char-blush.left { left: 8rpx; }
+.char-blush.right { right: 8rpx; }
+
+/* 嘴巴 */
+.char-mouth {
+  position: absolute;
+  bottom: 22rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12rpx;
+  height: 6rpx;
+  background: #FF8FAA;
+  border-radius: 0 0 50% 50%;
+}
+
+/* 身体 */
+.char-body {
+  width: 90rpx;
+  height: 60rpx;
+  background: linear-gradient(180deg, #FF6B9D 0%, #FF3D7F 100%);
+  border-radius: 20rpx 20rpx 0 0;
+  margin-top: -8rpx;
+  position: relative;
+  z-index: 1;
+}
+
+/* 镜子光泽 */
+.mirror-glow {
+  position: absolute;
+  top: 20rpx;
+  left: 30rpx;
+  width: 60rpx;
+  height: 100rpx;
+  background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+.mirror-label {
+  font-size: 22rpx;
+  color: #C4909E;
+  margin-top: 8rpx;
+}
+
+/* ========== 桌面化妆用品 ========== */
+.vanity-items {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.vanity-items > view {
+  pointer-events: auto;
+}
+
+/* 左侧物品 */
+.item-left {
+  position: absolute;
+  left: 40rpx;
+  top: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-left-2 {
+  position: absolute;
+  left: 20rpx;
+  bottom: 90rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 右侧物品 */
+.item-right {
+  position: absolute;
+  right: 40rpx;
+  top: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-right-2 {
+  position: absolute;
+  right: 20rpx;
+  bottom: 90rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-label {
+  font-size: 20rpx;
+  color: #C4909E;
+  margin-top: 6rpx;
+  white-space: nowrap;
+}
+
+/* 化妆品瓶子 - 口红 */
+.lipstick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottle-cap {
+  width: 24rpx;
+  height: 16rpx;
+  background: linear-gradient(180deg, #D4A8BA, #B88A9C);
+  border-radius: 4rpx 4rpx 0 0;
+}
+
+.bottle-body {
+  width: 20rpx;
+  height: 40rpx;
+  background: linear-gradient(180deg, #FF3D7F, #CC0044);
+  border-radius: 0 0 4rpx 4rpx;
+  box-shadow: 0 4rpx 8rpx rgba(255, 61, 127, 0.3);
+}
+
+/* 化妆品瓶子 - 香水 */
+.perfume {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfume-head {
+  width: 12rpx;
+  height: 8rpx;
+  background: #D4A8BA;
+  border-radius: 2rpx;
+}
+
+.perfume-body {
+  width: 32rpx;
+  height: 44rpx;
+  background: linear-gradient(180deg, #F0C8D8, #E0A8C0);
+  border-radius: 4rpx;
+  box-shadow: 0 4rpx 8rpx rgba(200, 150, 180, 0.3);
+}
+
+/* 化妆品瓶子 - 眼影盘 */
+.palette {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.palette-inner {
+  width: 48rpx;
+  height: 36rpx;
+  background: linear-gradient(135deg, #8B5E3C, #6B3E1C);
+  border-radius: 6rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  padding: 4rpx;
+  box-shadow: 0 4rpx 8rpx rgba(100, 60, 20, 0.3);
+}
+
+.palette-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
+.palette-dot.d1 { background: #FF6B9D; }
+.palette-dot.d2 { background: #FFB347; }
+.palette-dot.d3 { background: #87CEEB; }
+.palette-dot.d4 { background: #DDA0DD; }
+
+/* 化妆品瓶子 - 面霜 */
+.cream {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cream-lid {
+  width: 36rpx;
+  height: 10rpx;
+  background: #F0E0D0;
+  border-radius: 4rpx 4rpx 0 0;
+}
+
+.cream-body {
+  width: 36rpx;
+  height: 28rpx;
+  background: linear-gradient(180deg, #FFF5E8, #FFE8CC);
+  border-radius: 0 0 6rpx 6rpx;
+  box-shadow: 0 4rpx 8rpx rgba(200, 150, 80, 0.2);
+}
+
+/* 桌面装饰 */
+.desk-decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.decor-flower {
+  position: absolute;
+  top: 30rpx;
+  right: 180rpx;
+  font-size: 32rpx;
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.decor-star {
+  position: absolute;
+  top: 60rpx;
+  left: 160rpx;
+  font-size: 24rpx;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.decor-ribbon {
+  position: absolute;
+  bottom: 80rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28rpx;
+  animation: floatSlow 5s ease-in-out infinite 1s;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8rpx); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* 每日一句 */
+.daily-quote {
+  text-align: center;
+  padding: 16rpx 40rpx;
+  position: relative;
+  z-index: 5;
+}
+
+.quote-text {
+  font-size: 24rpx;
+  color: #B88A9C;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.quote-author {
+  font-size: 20rpx;
+  color: #D4A8BA;
+  display: block;
+  margin-top: 4rpx;
+}
+
+/* ========== 功能快捷入口 ========== */
+.quick-entry {
+  display: flex;
+  justify-content: space-around;
+  padding: 30rpx 10rpx;
+  margin: 0 20rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(180, 120, 150, 0.08);
+  margin-top: -16rpx;
+  position: relative;
+  z-index: 10;
+}
+
+.entry-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.entry-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  transition: transform 0.2s;
+}
+
+.entry-icon:active {
+  transform: scale(0.9);
+}
+
+.entry-icon.bride { background: linear-gradient(135deg, #FFF0F5, #FFE0EB); }
+.entry-icon.course { background: linear-gradient(135deg, #F0F5FF, #E0EBFF); }
+.entry-icon.community { background: linear-gradient(135deg, #F5FFF0, #EBFFE0); }
+.entry-icon.shop { background: linear-gradient(135deg, #FFF5F0, #FFE8D0); }
+.entry-icon.mirror { background: linear-gradient(135deg, #F8F0FF, #EDE0FF); }
+
+.entry-name {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.entry-desc {
+  font-size: 18rpx;
+  color: #999;
+}
+
+/* ========== 推荐课程区域 ========== */
 .section {
-  background-color: #fff;
-  margin-bottom: 16rpx;
-  padding: 24rpx;
+  margin: 20rpx 20rpx 0;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(180, 120, 150, 0.06);
 }
 
 .section-header {
@@ -83,108 +539,94 @@
 }
 
 .section-title {
-  font-size: var(--font-lg);
-  font-weight: bold;
-  color: var(--text-primary);
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333;
 }
 
 .section-more {
   display: flex;
   align-items: center;
-  font-size: var(--font-sm);
-  color: var(--text-tertiary);
-}
-
-.section-more .icon-arrow-right {
-  margin-left: 4rpx;
   font-size: 24rpx;
+  color: #999;
+  gap: 4rpx;
 }
 
-/* 课程横向滚动 */
-.course-scroll {
+.arrow {
+  font-size: 28rpx;
+}
+
+/* 推荐课程横向滚动 */
+.recommend-scroll {
   width: 100%;
   white-space: nowrap;
 }
 
-.course-list {
-  display: inline-flex;
-  gap: 24rpx;
-}
-
-.course-card {
-  width: 280rpx;
-  flex-shrink: 0;
-  background-color: #fff;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-
-.course-cover {
-  width: 280rpx;
-  height: 180rpx;
-}
-
-.course-info {
-  padding: 16rpx;
-}
-
-.course-title {
-  font-size: var(--font-md);
-  color: var(--text-primary);
-  margin-bottom: 12rpx;
-}
-
-.course-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.course-teacher {
-  font-size: var(--font-xs);
-  color: var(--text-tertiary);
-}
-
-.course-price {
-  font-size: var(--font-md);
-  color: var(--primary-color);
-  font-weight: bold;
-}
-
-/* 推荐课程列表 */
 .recommend-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24rpx;
+  display: inline-flex;
+  gap: 20rpx;
 }
 
 .recommend-card {
-  display: flex;
-  background-color: #fff;
-  border-radius: var(--radius-md);
+  width: 260rpx;
+  flex-shrink: 0;
+  border-radius: 16rpx;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  background: #FAFAFA;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
 }
 
 .recommend-cover {
-  width: 240rpx;
-  height: 180rpx;
-  flex-shrink: 0;
+  width: 260rpx;
+  height: 160rpx;
+  background: linear-gradient(135deg, #FFE0EB, #FFF0F5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cover-emoji {
+  font-size: 56rpx;
+}
+
+.cover-tag {
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+  background: #4CAF50;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+  font-weight: 500;
 }
 
 .recommend-info {
-  flex: 1;
   padding: 16rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .recommend-title {
-  font-size: var(--font-md);
-  color: var(--text-primary);
-  line-height: 1.4;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.recommend-meta {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.recommend-level,
+.recommend-lessons {
+  font-size: 20rpx;
+  color: #999;
 }
 
 .recommend-bottom {
@@ -193,85 +635,156 @@
   align-items: center;
 }
 
-.recommend-teacher {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-  font-size: var(--font-xs);
-  color: var(--text-tertiary);
-}
-
-.teacher-avatar {
-  width: 40rpx;
-  height: 40rpx;
-  border-radius: var(--radius-full);
-}
-
 .recommend-price {
-  font-size: var(--font-lg);
-  color: var(--primary-color);
-  font-weight: bold;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #FF6B9D;
 }
 
-/* 社区列表 */
-.community-list {
+.recommend-free {
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #4CAF50;
+}
+
+.recommend-students {
+  font-size: 18rpx;
+  color: #BBB;
+}
+
+/* ========== 热门动态 ========== */
+.posts-list {
   display: flex;
   flex-direction: column;
+  gap: 20rpx;
+}
+
+.post-card {
+  background: #FAFAFA;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  margin-bottom: 12rpx;
+}
+
+.post-avatar {
+  width: 56rpx;
+  height: 56rpx;
+  background: linear-gradient(135deg, #FFE0EB, #FFF0F5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+.post-user {
+  display: flex;
+  flex-direction: column;
+  gap: 2rpx;
+}
+
+.post-name {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.post-time {
+  font-size: 20rpx;
+  color: #BBB;
+}
+
+.post-content {
+  font-size: 26rpx;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-tags {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.post-tag {
+  font-size: 22rpx;
+  color: #FF6B9D;
+  background: #FFF0F5;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.post-stats {
+  display: flex;
   gap: 24rpx;
 }
 
-.community-card {
-  background-color: #fff;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
+.stat-item {
+  font-size: 22rpx;
+  color: #999;
 }
 
-.community-image {
-  width: 100%;
-  height: 400rpx;
+/* ========== 每日任务 ========== */
+.daily-task {
+  margin: 20rpx 20rpx 0;
+  padding: 24rpx 28rpx;
+  background: linear-gradient(135deg, #FF6B9D, #FF8FAB);
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 157, 0.25);
 }
 
-.community-info {
-  padding: 16rpx;
-}
-
-.community-title {
-  font-size: var(--font-md);
-  color: var(--text-primary);
-  line-height: 1.4;
-  margin-bottom: 16rpx;
-}
-
-.community-meta {
+.task-left {
   display: flex;
   align-items: center;
-  gap: 12rpx;
-}
-
-.user-avatar {
-  width: 48rpx;
-  height: 48rpx;
-  border-radius: var(--radius-full);
-}
-
-.user-name {
-  flex: 1;
-  font-size: var(--font-sm);
-  color: var(--text-secondary);
-}
-
-.interaction {
-  display: flex;
   gap: 16rpx;
-  font-size: var(--font-xs);
-  color: var(--text-tertiary);
+  flex: 1;
 }
 
-/* 加载更多 */
-.loading-more {
-  text-align: center;
-  padding: 24rpx;
-  color: var(--text-tertiary);
-  font-size: var(--font-sm);
+.task-emoji {
+  font-size: 40rpx;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.task-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+.task-desc {
+  font-size: 22rpx;
+  color: rgba(255,255,255,0.8);
+}
+
+.task-btn {
+  padding: 12rpx 28rpx;
+  background: rgba(255,255,255,0.25);
+  border-radius: 30rpx;
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+/* 安全区域 */
+.safe-bottom {
+  height: 20rpx;
 }

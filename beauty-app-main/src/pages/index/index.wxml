@@ -1,73 +1,151 @@
 <!--
-  首页
-  @description 首页展示：搜索、分类、推荐课程、热门帖子
+  i妆 - 首页（场景化化妆台）
+  设计灵感：每妆APP的2D动漫化妆台场景
+  核心理念：沉浸式化妆台 + 少量精准入口 + 个性化推荐
 -->
-<view class="page-container">
-  <!-- 顶部搜索栏 -->
-  <view class="search-bar" bindtap="onSearchTap">
-    <i-search placeholder="搜索课程、老师" disabled />
-  </view>
+<view class="home-page">
 
-  <!-- 内容区域 -->
-  <scroll-view 
-    scroll-y 
-    class="content-scroll"
-    enable-back-to-top
-    bindscrolltolower="onLoadMore"
-  >
-    <!-- 轮播图 -->
-    <view class="banner-section">
-      <swiper 
-        class="banner-swiper" 
-        indicator-dots 
-        autoplay 
-        interval="3000" 
-        circular
-        indicator-color="rgba(255,255,255,0.5)"
-        indicator-active-color="#ffffff"
-      >
-        <swiper-item wx:for="{{banners}}" wx:key="id">
-          <image class="banner-image" src="{{item.image}}" mode="aspectFill" />
-        </swiper-item>
-      </swiper>
-    </view>
+  <!-- ====== 场景化化妆台区域 ====== -->
+  <view class="vanity-scene">
 
-    <!-- 热门课程 -->
-    <view class="section">
-      <view class="section-header">
-        <text class="section-title">热门课程</text>
-        <view class="section-more" bindtap="goToCourseList">
-          <text>查看更多</text>
-          <text class="iconfont icon-arrow-right">›</text>
+    <!-- 顶部状态栏 -->
+    <view class="top-bar">
+      <view class="logo-area">
+        <text class="logo-text">i妆</text>
+      </view>
+      <view class="top-actions">
+        <view class="top-btn" bindtap="onSearchTap">
+          <text class="top-icon">🔍</text>
+        </view>
+        <view class="top-btn" bindtap="goToMessages">
+          <text class="top-icon">🔔</text>
+          <view class="dot-badge" wx:if="{{hasNewMessage}}"></view>
         </view>
       </view>
-      <scroll-view scroll-x class="course-scroll">
-        <view class="course-list">
-          <view 
-            class="course-card" 
-            wx:for="{{hotCourses}}" 
-            wx:key="id"
-            bindtap="goToCourseDetail"
-            data-id="{{item.id}}"
-          >
-            <image class="course-cover" src="{{item.cover}}" mode="aspectFill" />
-            <view class="course-info">
-              <text class="course-title text-ellipsis">{{item.title}}</text>
-              <view class="course-meta">
-                <text class="course-teacher">{{item.teacherName}}</text>
-                <text class="course-price">¥{{item.price}}</text>
+    </view>
+
+    <!-- 化妆台主场景 -->
+    <view class="scene-main">
+      <!-- 大镜子 -->
+      <view class="mirror" bindtap="goToMirror">
+        <view class="mirror-frame">
+          <view class="mirror-inner">
+            <!-- 镜子里的2D人物 -->
+            <view class="mirror-character">
+              <view class="char-hair"></view>
+              <view class="char-face">
+                <view class="char-eyes">
+                  <view class="char-eye left"></view>
+                  <view class="char-eye right"></view>
+                </view>
+                <view class="char-blush left"></view>
+                <view class="char-blush right"></view>
+                <view class="char-mouth"></view>
               </view>
+              <view class="char-body"></view>
             </view>
+            <!-- 镜子光泽 -->
+            <view class="mirror-glow"></view>
           </view>
         </view>
-      </scroll-view>
+        <text class="mirror-label">🪞 补光镜</text>
+      </view>
+
+      <!-- 桌面化妆用品（散落在镜子周围） -->
+      <view class="vanity-items">
+        <!-- 左侧物品 -->
+        <view class="item-left" bindtap="goToThemeMakeup">
+          <view class="cosmetic-bottle lipstick">
+            <view class="bottle-cap"></view>
+            <view class="bottle-body"></view>
+          </view>
+          <text class="item-label">主题妆</text>
+        </view>
+
+        <view class="item-left-2" bindtap="goToCommunity">
+          <view class="cosmetic-bottle perfume">
+            <view class="perfume-head"></view>
+            <view class="perfume-body"></view>
+          </view>
+          <text class="item-label">玩法</text>
+        </view>
+
+        <!-- 右侧物品 -->
+        <view class="item-right" bindtap="goToCourseList">
+          <view class="cosmetic-bottle palette">
+            <view class="palette-inner">
+              <view class="palette-dot d1"></view>
+              <view class="palette-dot d2"></view>
+              <view class="palette-dot d3"></view>
+              <view class="palette-dot d4"></view>
+            </view>
+          </view>
+          <text class="item-label">课程</text>
+        </view>
+
+        <view class="item-right-2" bindtap="goToShop">
+          <view class="cosmetic-bottle cream">
+            <view class="cream-lid"></view>
+            <view class="cream-body"></view>
+          </view>
+          <text class="item-label">商城</text>
+        </view>
+      </view>
+
+      <!-- 桌面装饰 -->
+      <view class="desk-decor">
+        <view class="decor-flower">🌸</view>
+        <view class="decor-star">✨</view>
+        <view class="decor-ribbon">🎀</view>
+      </view>
     </view>
 
-    <!-- 精选推荐 -->
-    <view class="section">
-      <view class="section-header">
-        <text class="section-title">精选推荐</text>
+    <!-- 每日一句 -->
+    <view class="daily-quote">
+      <text class="quote-text">{{dailyQuote.text}}</text>
+      <text class="quote-author">— {{dailyQuote.author}}</text>
+    </view>
+  </view>
+
+  <!-- ====== 功能快捷入口 ====== -->
+  <view class="quick-entry">
+    <view class="entry-item" bindtap="goToThemeMakeup">
+      <view class="entry-icon bride">👰</view>
+      <text class="entry-name">主题妆</text>
+      <text class="entry-desc">新娘·古风·Cos</text>
+    </view>
+    <view class="entry-item" bindtap="goToCourseList">
+      <view class="entry-icon course">📚</view>
+      <text class="entry-name">课程</text>
+      <text class="entry-desc">专属定制学习</text>
+    </view>
+    <view class="entry-item" bindtap="goToCommunity">
+      <view class="entry-icon community">💬</view>
+      <text class="entry-name">玩法</text>
+      <text class="entry-desc">社区互动分享</text>
+    </view>
+    <view class="entry-item" bindtap="goToShop">
+      <view class="entry-icon shop">🛍️</view>
+      <text class="entry-name">商城</text>
+      <text class="entry-desc">美妆好物推荐</text>
+    </view>
+    <view class="entry-item" bindtap="goToMirror">
+      <view class="entry-icon mirror">🪞</view>
+      <text class="entry-name">补光镜</text>
+      <text class="entry-desc">自拍补光神器</text>
+    </view>
+  </view>
+
+  <!-- ====== 为你推荐 ====== -->
+  <view class="section recommend-section">
+    <view class="section-header">
+      <text class="section-title">✨ 为你推荐</text>
+      <view class="section-more" bindtap="goToCourseList">
+        <text>更多</text>
+        <text class="arrow">›</text>
       </view>
+    </view>
+    <scroll-view scroll-x class="recommend-scroll" enhanced show-scrollbar="{{false}}">
       <view class="recommend-list">
         <view 
           class="recommend-card" 
@@ -76,60 +154,77 @@
           bindtap="goToCourseDetail"
           data-id="{{item.id}}"
         >
-          <image class="recommend-cover" src="{{item.cover}}" mode="aspectFill" />
+          <view class="recommend-cover">
+            <text class="cover-emoji">{{item.emoji}}</text>
+            <view class="cover-tag" wx:if="{{item.isFree}}">免费</view>
+          </view>
           <view class="recommend-info">
-            <text class="recommend-title text-ellipsis-2">{{item.title}}</text>
+            <text class="recommend-title">{{item.title}}</text>
+            <view class="recommend-meta">
+              <text class="recommend-level">{{item.level}}</text>
+              <text class="recommend-lessons">{{item.lessons}}节</text>
+            </view>
             <view class="recommend-bottom">
-              <view class="recommend-teacher">
-                <image class="teacher-avatar" src="{{item.teacherAvatar}}" />
-                <text>{{item.teacherName}}</text>
-              </view>
-              <text class="recommend-price">¥{{item.price}}</text>
+              <text class="recommend-price" wx:if="{{item.price > 0}}">¥{{item.price}}</text>
+              <text class="recommend-free" wx:else>免费</text>
+              <text class="recommend-students">{{item.studentCount}}人学过</text>
             </view>
           </view>
         </view>
       </view>
-    </view>
+    </scroll-view>
+  </view>
 
-    <!-- 热门社区 -->
-    <view class="section">
-      <view class="section-header">
-        <text class="section-title">热门社区</text>
-        <view class="section-more" bindtap="switchToCommunity">
-          <text>查看更多</text>
-          <text class="iconfont icon-arrow-right">›</text>
-        </view>
+  <!-- ====== 热门动态 ====== -->
+  <view class="section community-section">
+    <view class="section-header">
+      <text class="section-title">🔥 热门动态</text>
+      <view class="section-more" bindtap="switchToCommunity">
+        <text>更多</text>
+        <text class="arrow">›</text>
       </view>
-      <view class="community-list">
-        <view 
-          class="community-card" 
-          wx:for="{{hotPosts}}" 
-          wx:key="id"
-          bindtap="goToPostDetail"
-          data-id="{{item.id}}"
-        >
-          <image class="community-image" src="{{item.coverImage}}" mode="aspectFill" />
-          <view class="community-info">
-            <text class="community-title text-ellipsis-2">{{item.content}}</text>
-            <view class="community-meta">
-              <image class="user-avatar" src="{{item.userAvatar}}" />
-              <text class="user-name">{{item.userName}}</text>
-              <view class="interaction">
-                <text>❤️ {{item.likeCount}}</text>
-                <text>💬 {{item.commentCount}}</text>
-              </view>
-            </view>
+    </view>
+    <view class="posts-list">
+      <view 
+        class="post-card" 
+        wx:for="{{hotPosts}}" 
+        wx:key="id"
+        bindtap="goToPostDetail"
+        data-id="{{item.id}}"
+      >
+        <view class="post-header">
+          <view class="post-avatar">
+            <text>{{item.avatarEmoji}}</text>
+          </view>
+          <view class="post-user">
+            <text class="post-name">{{item.userName}}</text>
+            <text class="post-time">{{item.time}}</text>
           </view>
         </view>
+        <text class="post-content">{{item.content}}</text>
+        <view class="post-tags" wx:if="{{item.tags.length}}">
+          <text class="post-tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">#{{tag}}</text>
+        </view>
+        <view class="post-stats">
+          <text class="stat-item">❤️ {{item.likeCount}}</text>
+          <text class="stat-item">💬 {{item.commentCount}}</text>
+        </view>
       </view>
     </view>
+  </view>
 
-    <!-- 加载更多 -->
-    <view class="loading-more" wx:if="{{hasMore}}">
-      <text>加载中...</text>
+  <!-- ====== 每日任务提醒 ====== -->
+  <view class="daily-task" bindtap="goToTask" wx:if="{{showDailyTask}}">
+    <view class="task-left">
+      <text class="task-emoji">🎯</text>
+      <view class="task-info">
+        <text class="task-title">今日任务</text>
+        <text class="task-desc">完成1节课程学习，领取10妆币</text>
+      </view>
     </view>
-    <view class="loading-more" wx:else>
-      <text>没有更多了</text>
-    </view>
-  </scroll-view>
+    <view class="task-btn">去完成</view>
+  </view>
+
+  <!-- 底部安全区域 -->
+  <view class="safe-bottom"></view>
 </view>
