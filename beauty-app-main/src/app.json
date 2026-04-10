@@ -20,6 +20,8 @@
     "pages/community/vote/vote",
     "pages/onboarding/onboarding",
     "pages/avatar/avatar",
+    "pages/recommend/recommend",
+    "pages/play/play",
     "pages/user/user",
     "pages/recharge/recharge",
     "pages/vip/vip",
@@ -54,10 +56,10 @@
         "selectedIconPath": "assets/icons/home-active.png"
       },
       {
-        "pagePath": "pages/category/category",
-        "text": "课程",
-        "iconPath": "assets/icons/course.png",
-        "selectedIconPath": "assets/icons/course-active.png"
+        "pagePath": "pages/recommend/recommend",
+        "text": "用品推荐",
+        "iconPath": "assets/icons/recommend.png",
+        "selectedIconPath": "assets/icons/recommend-active.png"
       },
       {
         "pagePath": "pages/community/community",
@@ -66,10 +68,16 @@
         "selectedIconPath": "assets/icons/community-active.png"
       },
       {
-        "pagePath": "pages/profile/profile",
-        "text": "我的",
-        "iconPath": "assets/icons/user.png",
-        "selectedIconPath": "assets/icons/user-active.png"
+        "pagePath": "pages/play/play",
+        "text": "玩法",
+        "iconPath": "assets/icons/play.png",
+        "selectedIconPath": "assets/icons/play-active.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "专属课程",
+        "iconPath": "assets/icons/course.png",
+        "selectedIconPath": "assets/icons/course-active.png"
       }
     ]
   },

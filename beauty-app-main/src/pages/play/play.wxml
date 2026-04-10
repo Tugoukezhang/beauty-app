@@ -1,0 +1,11 @@
+<!-- i妆 - 玩法 -->
+<view class="play-page">
+  <view class="page-header">
+    <text class="page-title">玩法</text>
+  </view>
+  <view class="coming-soon">
+    <text class="coming-emoji">🎮</text>
+    <text class="coming-text">趣味玩法即将上线</text>
+    <text class="coming-sub">和姐妹一起玩转美妆</text>
+  </view>
+</view>

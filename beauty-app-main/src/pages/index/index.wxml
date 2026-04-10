@@ -1,7 +1,7 @@
 <!--
   i妆 - 首页（沉浸式化妆台）
-  设计理念：只有人物+化妆台+入口，极致干净
-  推荐课程在"课程"Tab，热门动态在"社区"Tab
+  设计理念：只有人物+化妆台+桌面化妆用品
+  桌面用品可点击进入对应功能
 -->
 <view class="home-page">
 
@@ -11,12 +11,12 @@
       <text class="logo-text">i妆</text>
     </view>
     <view class="top-actions">
-      <view class="top-btn" bindtap="onSearchTap">
-        <text class="top-icon">🔍</text>
-      </view>
       <view class="top-btn" bindtap="goToMessages">
         <text class="top-icon">🔔</text>
         <view class="dot-badge" wx:if="{{hasNewMessage}}"></view>
+      </view>
+      <view class="top-btn" bindtap="goToProfile">
+        <text class="top-icon">👤</text>
       </view>
     </view>
   </view>
@@ -63,7 +63,7 @@
 
     <!-- 化妆台桌面 -->
     <view class="vanity-desk">
-      <!-- 镜子（装饰） -->
+      <!-- 镜子（装饰背景） -->
       <view class="desk-mirror">
         <view class="mirror-frame">
           <view class="mirror-surface">
@@ -72,8 +72,38 @@
         </view>
       </view>
 
-      <!-- 化妆品+入口 -->
+      <!-- 化妆用品（可点击） -->
       <view class="desk-items">
+        <!-- 平板 -->
+        <view class="desk-item" bindtap="goToTablet">
+          <view class="item-icon tablet-icon">
+            <view class="tablet-screen"></view>
+            <view class="tablet-home-btn"></view>
+          </view>
+          <text class="item-text">平板</text>
+        </view>
+
+        <!-- 化妆盒 -->
+        <view class="desk-item" bindtap="goToMakeupBox">
+          <view class="item-icon makeupbox-icon">
+            <view class="box-lid"></view>
+            <view class="box-body">
+              <view class="box-shadow"></view>
+            </view>
+          </view>
+          <text class="item-text">化妆盒</text>
+        </view>
+
+        <!-- 镜子 -->
+        <view class="desk-item" bindtap="goToMirror">
+          <view class="item-icon handheld-mirror-icon">
+            <view class="mirror-handle"></view>
+            <view class="mirror-head"></view>
+          </view>
+          <text class="item-text">镜子</text>
+        </view>
+
+        <!-- 口红 -->
         <view class="desk-item" bindtap="goToThemeMakeup">
           <view class="item-icon lipstick-icon">
             <view class="lipstick-cap"></view>
@@ -82,6 +112,7 @@
           <text class="item-text">主题妆</text>
         </view>
 
+        <!-- 眼影盘 -->
         <view class="desk-item" bindtap="goToCourseList">
           <view class="item-icon palette-icon">
             <view class="palette-base">
@@ -91,29 +122,6 @@
             </view>
           </view>
           <text class="item-text">课程</text>
-        </view>
-
-        <view class="desk-item" bindtap="goToCommunity">
-          <view class="item-icon perfume-icon">
-            <view class="perfume-nozzle"></view>
-            <view class="perfume-bottle"></view>
-          </view>
-          <text class="item-text">玩法</text>
-        </view>
-
-        <view class="desk-item" bindtap="goToShop">
-          <view class="item-icon cream-icon">
-            <view class="cream-lid"></view>
-            <view class="cream-jar"></view>
-          </view>
-          <text class="item-text">商城</text>
-        </view>
-
-        <view class="desk-item" bindtap="goToMirror">
-          <view class="item-icon mirror-icon">
-            <view class="mirror-mini"></view>
-          </view>
-          <text class="item-text">补光镜</text>
         </view>
       </view>
     </view>

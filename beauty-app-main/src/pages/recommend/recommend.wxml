@@ -1,0 +1,11 @@
+<!-- i妆 - 用品推荐 -->
+<view class="recommend-page">
+  <view class="page-header">
+    <text class="page-title">用品推荐</text>
+  </view>
+  <view class="coming-soon">
+    <text class="coming-emoji">🛍️</text>
+    <text class="coming-text">用品推荐功能即将上线</text>
+    <text class="coming-sub">为你精选好物，敬请期待</text>
+  </view>
+</view>

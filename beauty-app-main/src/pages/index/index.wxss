@@ -572,56 +572,115 @@
 .palette-dot.d2 { background: #FFB347; }
 .palette-dot.d3 { background: #87CEEB; }
 
-/* 香水图标 */
-.perfume-nozzle {
-  width: 10rpx;
-  height: 6rpx;
-  background: #D4A8BA;
-  border-radius: 2rpx;
-  margin-bottom: 2rpx;
-}
-
-.perfume-bottle {
-  width: 28rpx;
-  height: 34rpx;
-  background: linear-gradient(180deg, #F0C8D8, #E0A8C0);
-  border-radius: 4rpx;
-}
-
-/* 面霜图标 */
-.cream-lid {
-  width: 30rpx;
-  height: 8rpx;
-  background: #F0E0D0;
-  border-radius: 4rpx 4rpx 0 0;
-}
-
-.cream-jar {
-  width: 30rpx;
-  height: 22rpx;
-  background: linear-gradient(180deg, #FFF5E8, #FFE8CC);
-  border-radius: 0 0 6rpx 6rpx;
-}
-
-/* 小镜子图标 */
-.mirror-mini {
-  width: 28rpx;
-  height: 36rpx;
-  background: linear-gradient(180deg, #F0F0F0, #E8E8E8);
-  border: 3rpx solid #D4A8BA;
-  border-radius: 50% 50% 4rpx 4rpx;
+/* ====== 平板图标 ====== */
+.tablet-icon {
   position: relative;
 }
 
-.mirror-mini::after {
+.tablet-screen {
+  width: 44rpx;
+  height: 56rpx;
+  background: linear-gradient(180deg, #E8D4F0, #D4B8E8);
+  border-radius: 6rpx;
+  border: 3rpx solid #9C7A8A;
+  position: relative;
+}
+
+.tablet-screen::after {
   content: '';
   position: absolute;
-  top: 4rpx;
-  left: 4rpx;
+  top: 6rpx;
+  left: 6rpx;
+  width: 24rpx;
+  height: 4rpx;
+  background: rgba(255, 107, 157, 0.4);
+  border-radius: 2rpx;
+}
+
+.tablet-home-btn {
   width: 8rpx;
-  height: 12rpx;
+  height: 8rpx;
+  background: #9C7A8A;
+  border-radius: 50%;
+  margin-top: 3rpx;
+}
+
+/* ====== 化妆盒图标 ====== */
+.makeupbox-icon {
+  position: relative;
+}
+
+.box-lid {
+  width: 42rpx;
+  height: 10rpx;
+  background: linear-gradient(135deg, #FF6B9D, #FF3D7F);
+  border-radius: 4rpx 4rpx 0 0;
+  position: relative;
+}
+
+.box-lid::after {
+  content: '';
+  position: absolute;
+  top: 2rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10rpx;
+  height: 4rpx;
+  background: #FFD0E0;
+  border-radius: 2rpx;
+}
+
+.box-body {
+  width: 42rpx;
+  height: 28rpx;
+  background: linear-gradient(180deg, #FFD0E0, #FFB8CC);
+  border-radius: 0 0 6rpx 6rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.box-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8rpx;
+  background: rgba(255, 107, 157, 0.15);
+}
+
+/* ====== 手持镜子图标 ====== */
+.handheld-mirror-icon {
+  position: relative;
+}
+
+.mirror-handle {
+  width: 8rpx;
+  height: 20rpx;
+  background: linear-gradient(180deg, #D4A8BA, #B8909E);
+  border-radius: 4rpx;
+  margin: 0 auto;
+}
+
+.mirror-head {
+  width: 36rpx;
+  height: 42rpx;
+  background: linear-gradient(180deg, rgba(255,245,248,0.8), rgba(255,232,240,0.4));
+  border: 3rpx solid #D4A8BA;
+  border-radius: 50% 50% 8rpx 8rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.mirror-head::after {
+  content: '';
+  position: absolute;
+  top: 6rpx;
+  left: 6rpx;
+  width: 10rpx;
+  height: 14rpx;
   background: rgba(255,255,255,0.6);
   border-radius: 50%;
+  transform: rotate(-15deg);
 }
 
 /* ========== 每日一句 ========== */

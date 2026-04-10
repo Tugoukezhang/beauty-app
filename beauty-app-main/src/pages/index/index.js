@@ -90,6 +90,26 @@ Page({
     wx.showToast({ title: '消息功能开发中', icon: 'none' });
   },
 
+  /** "我的"页面 - 从顶部进入 */
+  goToProfile() {
+    wx.navigateTo({ url: '/pages/profile/profile' });
+  },
+
+  /** 平板 - 视频教程/直播 */
+  goToTablet() {
+    wx.showToast({ title: '平板功能开发中', icon: 'none' });
+  },
+
+  /** 化妆盒 - 化妆品管理 */
+  goToMakeupBox() {
+    wx.showToast({ title: '化妆盒功能开发中', icon: 'none' });
+  },
+
+  /** 镜子 - 补光镜/相机 */
+  goToMirror() {
+    wx.showToast({ title: '镜子功能开发中', icon: 'none' });
+  },
+
   goToThemeMakeup() {
     wx.switchTab({ url: '/pages/category/category' });
   },
@@ -103,11 +123,7 @@ Page({
   },
 
   goToShop() {
-    wx.showToast({ title: '商城功能开发中', icon: 'none' });
-  },
-
-  goToMirror() {
-    wx.showToast({ title: '补光镜功能开发中', icon: 'none' });
+    wx.switchTab({ url: '/pages/recommend/recommend' });
   },
 
   goToTask() {
