@@ -1,0 +1,222 @@
+<!--
+  i妆 - 换装中心
+  CSS组件化换装系统：发型/发饰/衣服/手持
+  即时预览 + 保存配置
+-->
+<view class="avatar-page">
+
+  <!-- 顶部标题 -->
+  <view class="page-header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="page-title">我的形象</text>
+    <view class="header-right"></view>
+  </view>
+
+  <!-- ====== 人物预览区 ====== -->
+  <view class="preview-area">
+    <!-- 装饰 -->
+    <view class="preview-particles">
+      <view class="pp pp1">✨</view>
+      <view class="pp pp2">🌸</view>
+      <view class="pp pp3">💫</view>
+    </view>
+
+    <!-- 人物预览 -->
+    <view class="preview-character" animation="{{charAnimation}}">
+      <!-- 头发 -->
+      <view class="p-hair {{avatar.hairStyle}}"></view>
+      <!-- 发饰 -->
+      <view class="p-accessory {{avatar.accessory}}" wx:if="{{avatar.accessory}}"></view>
+      <!-- 脸 -->
+      <view class="p-face">
+        <view class="p-eyes">
+          <view class="p-eye left"></view>
+          <view class="p-eye right"></view>
+        </view>
+        <view class="p-blush left"></view>
+        <view class="p-blush right"></view>
+        <view class="p-mouth"></view>
+      </view>
+      <!-- 身体/衣服 -->
+      <view class="p-dress {{avatar.dressStyle}}"></view>
+      <!-- 手持物品 -->
+      <view class="p-hand-item {{avatar.handItem}}" wx:if="{{avatar.handItem}}"></view>
+    </view>
+
+    <!-- 形象名称 -->
+    <view class="avatar-name-area">
+      <text class="avatar-name">{{avatarName}}</text>
+    </view>
+  </view>
+
+  <!-- ====== 分类选择器 ====== -->
+  <view class="category-tabs">
+    <view class="cat-tab {{activeCategory === 'hair' ? 'active' : ''}}" bindtap="switchCategory" data-cat="hair">
+      <text class="cat-emoji">💇</text>
+      <text class="cat-label">发型</text>
+    </view>
+    <view class="cat-tab {{activeCategory === 'accessory' ? 'active' : ''}}" bindtap="switchCategory" data-cat="accessory">
+      <text class="cat-emoji">🎀</text>
+      <text class="cat-label">发饰</text>
+    </view>
+    <view class="cat-tab {{activeCategory === 'dress' ? 'active' : ''}}" bindtap="switchCategory" data-cat="dress">
+      <text class="cat-emoji">👗</text>
+      <text class="cat-label">衣服</text>
+    </view>
+    <view class="cat-tab {{activeCategory === 'hand' ? 'active' : ''}}" bindtap="switchCategory" data-cat="hand">
+      <text class="cat-emoji">💄</text>
+      <text class="cat-label">手持</text>
+    </view>
+    <view class="cat-tab {{activeCategory === 'face' ? 'active' : ''}}" bindtap="switchCategory" data-cat="face">
+      <text class="cat-emoji">😊</text>
+      <text class="cat-label">肤色</text>
+    </view>
+  </view>
+
+  <!-- ====== 选项列表 ====== -->
+  <view class="options-area">
+
+    <!-- 发型选项 -->
+    <scroll-view scroll-x class="options-scroll" wx:if="{{activeCategory === 'hair'}}">
+      <view class="option-card {{avatar.hairStyle === item.value ? 'selected' : ''}} {{item.locked ? 'locked' : ''}}"
+            bindtap="selectItem"
+            data-type="hairStyle"
+            data-value="{{item.value}}"
+            data-locked="{{item.locked}}"
+            data-price="{{item.price}}"
+            wx:for="{{hairOptions}}"
+            wx:key="value">
+        <view class="option-preview hair-preview {{item.value}}">
+          <view class="mini-hair {{item.value}}"></view>
+        </view>
+        <text class="option-name">{{item.name}}</text>
+        <view class="option-badge" wx:if="{{item.locked}}">
+          <text class="badge-text">{{item.price}}币</text>
+        </view>
+        <view class="option-check" wx:if="{{avatar.hairStyle === item.value}}">✓</view>
+      </view>
+    </scroll-view>
+
+    <!-- 发饰选项 -->
+    <scroll-view scroll-x class="options-scroll" wx:if="{{activeCategory === 'accessory'}}">
+      <view class="option-card {{avatar.accessory === item.value ? 'selected' : ''}} {{item.locked ? 'locked' : ''}}"
+            bindtap="selectItem"
+            data-type="accessory"
+            data-value="{{item.value}}"
+            data-locked="{{item.locked}}"
+            data-price="{{item.price}}"
+            wx:for="{{accessoryOptions}}"
+            wx:key="value">
+        <view class="option-preview acc-preview">
+          <text class="preview-emoji">{{item.emoji}}</text>
+        </view>
+        <text class="option-name">{{item.name}}</text>
+        <view class="option-badge" wx:if="{{item.locked}}">
+          <text class="badge-text">{{item.price}}币</text>
+        </view>
+        <view class="option-check" wx:if="{{avatar.accessory === item.value}}">✓</view>
+      </view>
+    </scroll-view>
+
+    <!-- 衣服选项 -->
+    <scroll-view scroll-x class="options-scroll" wx:if="{{activeCategory === 'dress'}}">
+      <view class="option-card {{avatar.dressStyle === item.value ? 'selected' : ''}} {{item.locked ? 'locked' : ''}}"
+            bindtap="selectItem"
+            data-type="dressStyle"
+            data-value="{{item.value}}"
+            data-locked="{{item.locked}}"
+            data-price="{{item.price}}"
+            wx:for="{{dressOptions}}"
+            wx:key="value">
+        <view class="option-preview dress-preview {{item.value}}">
+          <view class="mini-dress {{item.value}}"></view>
+        </view>
+        <text class="option-name">{{item.name}}</text>
+        <view class="option-badge" wx:if="{{item.locked}}">
+          <text class="badge-text">{{item.price}}币</text>
+        </view>
+        <view class="option-check" wx:if="{{avatar.dressStyle === item.value}}">✓</view>
+      </view>
+    </scroll-view>
+
+    <!-- 手持选项 -->
+    <scroll-view scroll-x class="options-scroll" wx:if="{{activeCategory === 'hand'}}">
+      <view class="option-card {{avatar.handItem === item.value ? 'selected' : ''}} {{item.locked ? 'locked' : ''}}"
+            bindtap="selectItem"
+            data-type="handItem"
+            data-value="{{item.value}}"
+            data-locked="{{item.locked}}"
+            data-price="{{item.price}}"
+            wx:for="{{handOptions}}"
+            wx:key="value">
+        <view class="option-preview hand-preview">
+          <text class="preview-emoji">{{item.emoji}}</text>
+        </view>
+        <text class="option-name">{{item.name}}</text>
+        <view class="option-badge" wx:if="{{item.locked}}">
+          <text class="badge-text">{{item.price}}币</text>
+        </view>
+        <view class="option-check" wx:if="{{avatar.handItem === item.value}}">✓</view>
+      </view>
+    </scroll-view>
+
+    <!-- 肤色选项 -->
+    <scroll-view scroll-x class="options-scroll" wx:if="{{activeCategory === 'face'}}">
+      <view class="option-card {{avatar.skinTone === item.value ? 'selected' : ''}} {{item.locked ? 'locked' : ''}}"
+            bindtap="selectItem"
+            data-type="skinTone"
+            data-value="{{item.value}}"
+            data-locked="{{item.locked}}"
+            data-price="{{item.price}}"
+            wx:for="{{faceOptions}}"
+            wx:key="value">
+        <view class="option-preview skin-preview">
+          <view class="skin-circle" style="background: {{item.color}};"></view>
+        </view>
+        <text class="option-name">{{item.name}}</text>
+        <view class="option-badge" wx:if="{{item.locked}}">
+          <text class="badge-text">{{item.price}}币</text>
+        </view>
+        <view class="option-check" wx:if="{{avatar.skinTone === item.value}}">✓</view>
+      </view>
+    </scroll-view>
+
+  </view>
+
+  <!-- ====== 已拥有/妆币提示 ====== -->
+  <view class="coin-bar">
+    <text class="coin-icon">💎</text>
+    <text class="coin-count">{{coinBalance}}妆币</text>
+    <view class="coin-add" bindtap="goToRecharge">充值</view>
+  </view>
+
+  <!-- ====== 底部按钮 ====== -->
+  <view class="bottom-bar">
+    <view class="btn-reset" bindtap="resetAvatar">重置</view>
+    <view class="btn-save" bindtap="saveAvatar">保存形象</view>
+  </view>
+
+  <!-- 解锁弹窗 -->
+  <view class="unlock-modal" wx:if="{{showUnlockModal}}" bindtap="closeUnlockModal">
+    <view class="unlock-content" catchtap="">
+      <text class="unlock-title">解锁此装扮</text>
+      <view class="unlock-preview-area">
+        <text class="unlock-emoji">{{unlockItem.emoji || '👗'}}</text>
+        <text class="unlock-name">{{unlockItem.name}}</text>
+      </view>
+      <view class="unlock-price">
+        <text class="unlock-price-text">💎 {{unlockItem.price}} 妆币</text>
+        <text class="unlock-balance">余额：{{coinBalance}}妆币</text>
+      </view>
+      <view class="unlock-actions">
+        <view class="unlock-cancel" bindtap="closeUnlockModal">取消</view>
+        <view class="unlock-confirm {{coinBalance < unlockItem.price ? 'disabled' : ''}}" bindtap="confirmUnlock">
+          确认解锁
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

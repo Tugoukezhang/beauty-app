@@ -1,0 +1,851 @@
+/**
+ * i妆 - 换装中心样式
+ * CSS组件化换装系统
+ */
+
+.avatar-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF5F8 0%, #FFE8F0 40%, #F8F4F6 100%);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ========== 顶部栏 ========== */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 30rpx;
+  position: relative;
+  z-index: 10;
+}
+
+.back-btn {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 48rpx;
+  color: #FF6B9D;
+  font-weight: 300;
+}
+
+.page-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #3A1C1A;
+}
+
+.header-right {
+  width: 64rpx;
+}
+
+/* ========== 人物预览区 ========== */
+.preview-area {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 0 30rpx;
+  position: relative;
+  min-height: 420rpx;
+}
+
+.preview-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.pp {
+  position: absolute;
+  font-size: 24rpx;
+}
+
+.pp1 { top: 10%; left: 20%; animation: floatA 5s ease-in-out infinite; }
+.pp2 { top: 20%; right: 22%; animation: floatB 6s ease-in-out infinite 1s; }
+.pp3 { top: 50%; left: 15%; animation: floatA 4s ease-in-out infinite 2s; }
+
+@keyframes floatA {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+  50% { transform: translateY(-16rpx) rotate(10deg); opacity: 1; }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+  50% { transform: translateY(-12rpx) rotate(-8deg); opacity: 1; }
+}
+
+/* 预览人物 - 和首页一致但更大 */
+.preview-character {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  transform: scale(1.3);
+}
+
+/* 头发 */
+.p-hair {
+  width: 150rpx;
+  height: 100rpx;
+  background: linear-gradient(180deg, #5C3A2E 0%, #3A1C1A 100%);
+  border-radius: 50% 50% 35% 35%;
+  position: relative;
+  z-index: 3;
+}
+
+.p-hair.long {
+  width: 170rpx;
+  height: 200rpx;
+  border-radius: 50% 50% 20% 20%;
+}
+
+.p-hair.twintail::before,
+.p-hair.twintail::after {
+  content: '';
+  position: absolute;
+  width: 36rpx;
+  height: 120rpx;
+  background: linear-gradient(180deg, #5C3A2E, #3A1C1A);
+  border-radius: 40%;
+  top: 30rpx;
+}
+
+.p-hair.twintail::before { left: -12rpx; }
+.p-hair.twintail::after { right: -12rpx; }
+
+.p-hair.bob {
+  width: 170rpx;
+  height: 120rpx;
+  border-radius: 45% 45% 30% 30%;
+}
+
+.p-hair.curly::before,
+.p-hair.curly::after {
+  content: '';
+  position: absolute;
+  width: 44rpx;
+  height: 44rpx;
+  background: #5C3A2E;
+  border-radius: 50%;
+  bottom: -10rpx;
+}
+
+.p-hair.curly::before { left: -8rpx; }
+.p-hair.curly::after { right: -8rpx; }
+
+.p-hair.bun {
+  width: 150rpx;
+  height: 100rpx;
+  border-radius: 50% 50% 35% 35%;
+}
+
+.p-hair.bun::after {
+  content: '';
+  position: absolute;
+  top: -30rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 60rpx;
+  background: #5C3A2E;
+  border-radius: 50%;
+}
+
+/* 发饰 */
+.p-accessory {
+  position: absolute;
+  top: 20rpx;
+  right: 10rpx;
+  z-index: 4;
+}
+
+.p-accessory.bow {
+  width: 36rpx;
+  height: 28rpx;
+  background: #FF6B9D;
+  border-radius: 50% 50% 0 50%;
+  box-shadow: 0 0 0 6rpx rgba(255, 107, 157, 0.2);
+}
+
+.p-accessory.crown {
+  width: 46rpx;
+  height: 32rpx;
+  background: linear-gradient(180deg, #FFD700, #FFA500);
+  clip-path: polygon(0% 100%, 15% 30%, 30% 80%, 50% 0%, 70% 80%, 85% 30%, 100% 100%);
+}
+
+.p-accessory.flower {
+  font-size: 34rpx;
+}
+
+.p-accessory.stars {
+  font-size: 28rpx;
+}
+
+.p-accessory.ribbon {
+  width: 40rpx;
+  height: 20rpx;
+  background: linear-gradient(90deg, #87CEEB, #6BB3D9);
+  border-radius: 4rpx;
+  position: relative;
+}
+
+.p-accessory.ribbon::after {
+  content: '';
+  position: absolute;
+  bottom: -12rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rpx;
+  height: 16rpx;
+  background: #87CEEB;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+
+/* 脸 */
+.p-face {
+  width: 120rpx;
+  height: 130rpx;
+  background: linear-gradient(180deg, #FFE0CC 0%, #FFD4B8 100%);
+  border-radius: 42% 42% 38% 38%;
+  position: relative;
+  z-index: 3;
+  margin-top: -28rpx;
+}
+
+/* 肤色变化 */
+.p-face.skin-fair { background: linear-gradient(180deg, #FFE8D6, #FFDCC4); }
+.p-face.skin-light { background: linear-gradient(180deg, #FFE0CC, #FFD4B8); }
+.p-face.skin-medium { background: linear-gradient(180deg, #E8C8A0, #D4B48C); }
+.p-face.skin-tan { background: linear-gradient(180deg, #C8A878, #B89868); }
+.p-face.skin-cool { background: linear-gradient(180deg, #E0D4E8, #D0C0DC); }
+
+/* 眼睛 */
+.p-eyes {
+  display: flex;
+  justify-content: center;
+  gap: 28rpx;
+  padding-top: 36rpx;
+}
+
+.p-eye {
+  width: 18rpx;
+  height: 24rpx;
+  background: #3A1C1A;
+  border-radius: 50%;
+  position: relative;
+  animation: blink 4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 95%, 100% { transform: scaleY(1); }
+  97% { transform: scaleY(0.1); }
+}
+
+.p-eye::after {
+  content: '';
+  position: absolute;
+  top: 4rpx;
+  right: 2rpx;
+  width: 7rpx;
+  height: 7rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* 腮红 */
+.p-blush {
+  position: absolute;
+  width: 20rpx;
+  height: 14rpx;
+  background: rgba(255, 130, 160, 0.45);
+  border-radius: 50%;
+  top: 62rpx;
+}
+
+.p-blush.left { left: 8rpx; }
+.p-blush.right { right: 8rpx; }
+
+/* 嘴巴 */
+.p-mouth {
+  position: absolute;
+  bottom: 28rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rpx;
+  height: 10rpx;
+  background: #FF8FAA;
+  border-radius: 0 0 50% 50%;
+}
+
+/* 衣服 */
+.p-dress {
+  width: 140rpx;
+  height: 90rpx;
+  background: linear-gradient(180deg, #FF6B9D 0%, #FF3D7F 100%);
+  border-radius: 26rpx 26rpx 0 0;
+  margin-top: -12rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.p-dress.princess {
+  width: 160rpx;
+  height: 140rpx;
+  border-radius: 30% 30% 0 0;
+  background: linear-gradient(180deg, #FF6B9D, #FF3D7F, #E0245E);
+}
+
+.p-dress.ancient {
+  width: 170rpx;
+  height: 150rpx;
+  border-radius: 20rpx 20rpx 50% 50%;
+  background: linear-gradient(180deg, #FFD700, #FF8C00);
+}
+
+.p-dress.cos {
+  width: 150rpx;
+  height: 120rpx;
+  border-radius: 24rpx 24rpx 0 0;
+  background: linear-gradient(180deg, #9B59B6, #8E44AD);
+}
+
+.p-dress.elegant {
+  width: 155rpx;
+  height: 130rpx;
+  border-radius: 24rpx 24rpx 0 0;
+  background: linear-gradient(180deg, #2C3E50, #1A252F);
+}
+
+.p-dress.wedding {
+  width: 170rpx;
+  height: 160rpx;
+  border-radius: 30% 30% 50% 50%;
+  background: linear-gradient(180deg, #FFFFFF, #F8F0F4);
+  border: 2rpx solid #FFD0E0;
+}
+
+/* 手持物品 */
+.p-hand-item {
+  position: absolute;
+  bottom: 24rpx;
+  right: -34rpx;
+  z-index: 6;
+}
+
+.p-hand-item.lipstick {
+  width: 18rpx;
+  height: 40rpx;
+  background: linear-gradient(180deg, #FF3D7F, #CC0044);
+  border-radius: 4rpx;
+}
+
+.p-hand-item.brush {
+  width: 10rpx;
+  height: 50rpx;
+  background: linear-gradient(180deg, #D4A8BA, #8B6E7A);
+  border-radius: 2rpx;
+}
+
+.p-hand-item.perfume {
+  width: 24rpx;
+  height: 34rpx;
+  background: linear-gradient(180deg, #F0C8D8, #E0A8C0);
+  border-radius: 4rpx;
+  position: relative;
+}
+
+.p-hand-item.perfume::before {
+  content: '';
+  position: absolute;
+  top: -8rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10rpx;
+  height: 10rpx;
+  background: #D4A8BA;
+  border-radius: 50%;
+}
+
+.p-hand-item.mirror {
+  width: 30rpx;
+  height: 40rpx;
+  background: linear-gradient(180deg, rgba(255,245,248,0.6), rgba(255,232,240,0.3));
+  border: 3rpx solid #D4A8BA;
+  border-radius: 50% 50% 4rpx 4rpx;
+}
+
+.p-hand-item.rose {
+  font-size: 32rpx;
+}
+
+/* 形象名称 */
+.avatar-name-area {
+  margin-top: 20rpx;
+  z-index: 5;
+}
+
+.avatar-name {
+  font-size: 26rpx;
+  color: #C4909E;
+  font-weight: 500;
+}
+
+/* ========== 分类选择器 ========== */
+.category-tabs {
+  display: flex;
+  justify-content: space-around;
+  padding: 16rpx 24rpx;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  margin: 0 24rpx;
+  border-radius: 24rpx;
+}
+
+.cat-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 16rpx;
+  transition: all 0.3s;
+}
+
+.cat-tab.active {
+  background: linear-gradient(135deg, #FF6B9D, #FF3D7F);
+  box-shadow: 0 4rpx 16rpx rgba(255, 61, 127, 0.3);
+}
+
+.cat-emoji {
+  font-size: 32rpx;
+}
+
+.cat-tab.active .cat-emoji {
+  filter: brightness(1.2);
+}
+
+.cat-label {
+  font-size: 20rpx;
+  color: #9C7A8A;
+  font-weight: 500;
+}
+
+.cat-tab.active .cat-label {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ========== 选项列表 ========== */
+.options-area {
+  flex: 1;
+  padding: 24rpx 24rpx 0;
+}
+
+.options-scroll {
+  white-space: nowrap;
+  height: 260rpx;
+}
+
+.option-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160rpx;
+  height: 240rpx;
+  margin-right: 16rpx;
+  background: rgba(255,255,255,0.75);
+  border-radius: 20rpx;
+  padding: 20rpx 12rpx;
+  position: relative;
+  border: 3rpx solid transparent;
+  transition: all 0.25s;
+  vertical-align: top;
+}
+
+.option-card.selected {
+  border-color: #FF6B9D;
+  background: rgba(255, 107, 157, 0.08);
+  box-shadow: 0 4rpx 20rpx rgba(255, 107, 157, 0.2);
+}
+
+.option-card.locked {
+  opacity: 0.7;
+}
+
+.option-card.locked.selected {
+  opacity: 1;
+}
+
+.option-card:active {
+  transform: scale(0.95);
+}
+
+/* 选项预览 */
+.option-preview {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12rpx;
+}
+
+.preview-emoji {
+  font-size: 48rpx;
+}
+
+/* 迷你发型预览 */
+.mini-hair {
+  width: 60rpx;
+  height: 40rpx;
+  background: linear-gradient(180deg, #5C3A2E, #3A1C1A);
+  border-radius: 50% 50% 35% 35%;
+}
+
+.mini-hair.long {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50% 50% 20% 20%;
+}
+
+.mini-hair.twintail {
+  width: 60rpx;
+  height: 40rpx;
+}
+
+.mini-hair.twintail::before,
+.mini-hair.twintail::after {
+  content: '';
+  position: absolute;
+  width: 14rpx;
+  height: 36rpx;
+  background: #5C3A2E;
+  border-radius: 40%;
+  top: 20rpx;
+}
+
+.mini-hair.twintail::before { left: -4rpx; }
+.mini-hair.twintail::after { right: -4rpx; }
+
+.mini-hair.bob {
+  width: 70rpx;
+  height: 50rpx;
+  border-radius: 45% 45% 30% 30%;
+}
+
+.mini-hair.curly {
+  width: 70rpx;
+  height: 50rpx;
+  border-radius: 50%;
+}
+
+.mini-hair.bun {
+  width: 60rpx;
+  height: 40rpx;
+  border-radius: 50% 50% 35% 35%;
+  position: relative;
+}
+
+.mini-hair.bun::after {
+  content: '';
+  position: absolute;
+  top: -16rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24rpx;
+  height: 24rpx;
+  background: #5C3A2E;
+  border-radius: 50%;
+}
+
+.hair-preview {
+  position: relative;
+}
+
+/* 迷你衣服预览 */
+.mini-dress {
+  width: 60rpx;
+  height: 40rpx;
+  background: linear-gradient(180deg, #FF6B9D, #FF3D7F);
+  border-radius: 12rpx 12rpx 0 0;
+}
+
+.mini-dress.princess {
+  width: 70rpx;
+  height: 55rpx;
+  border-radius: 30% 30% 0 0;
+  background: linear-gradient(180deg, #FF6B9D, #E0245E);
+}
+
+.mini-dress.ancient {
+  width: 70rpx;
+  height: 60rpx;
+  border-radius: 8rpx 8rpx 50% 50%;
+  background: linear-gradient(180deg, #FFD700, #FF8C00);
+}
+
+.mini-dress.cos {
+  width: 65rpx;
+  height: 50rpx;
+  background: linear-gradient(180deg, #9B59B6, #8E44AD);
+}
+
+.mini-dress.elegant {
+  width: 65rpx;
+  height: 55rpx;
+  background: linear-gradient(180deg, #2C3E50, #1A252F);
+}
+
+.mini-dress.wedding {
+  width: 70rpx;
+  height: 65rpx;
+  border-radius: 20% 20% 50% 50%;
+  background: linear-gradient(180deg, #FFFFFF, #F8F0F4);
+  border: 2rpx solid #FFD0E0;
+}
+
+.dress-preview {
+  position: relative;
+}
+
+/* 肤色圆圈 */
+.skin-circle {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  border: 3rpx solid rgba(255,255,255,0.6);
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.1);
+}
+
+.option-name {
+  font-size: 22rpx;
+  color: #5A3A4A;
+  font-weight: 500;
+  margin-top: 4rpx;
+}
+
+.option-badge {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  background: linear-gradient(135deg, #FF6B9D, #FF3D7F);
+  border-radius: 12rpx;
+  padding: 2rpx 10rpx;
+}
+
+.badge-text {
+  font-size: 16rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+.option-check {
+  position: absolute;
+  bottom: 8rpx;
+  right: 8rpx;
+  width: 32rpx;
+  height: 32rpx;
+  background: #FF6B9D;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ========== 妆币条 ========== */
+.coin-bar {
+  display: flex;
+  align-items: center;
+  margin: 16rpx 24rpx;
+  padding: 14rpx 24rpx;
+  background: rgba(255,255,255,0.7);
+  border-radius: 40rpx;
+  backdrop-filter: blur(8px);
+}
+
+.coin-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.coin-count {
+  font-size: 26rpx;
+  color: #5A3A4A;
+  font-weight: 600;
+  flex: 1;
+}
+
+.coin-add {
+  font-size: 22rpx;
+  color: #FF6B9D;
+  font-weight: 600;
+  padding: 6rpx 20rpx;
+  background: rgba(255, 107, 157, 0.1);
+  border-radius: 20rpx;
+}
+
+/* ========== 底部按钮 ========== */
+.bottom-bar {
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx 30rpx 30rpx;
+  padding-bottom: calc(30rpx + env(safe-area-inset-bottom));
+}
+
+.btn-reset {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.7);
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  color: #9C7A8A;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+}
+
+.btn-reset:active {
+  background: rgba(255,255,255,0.9);
+}
+
+.btn-save {
+  flex: 2;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FF6B9D, #FF3D7F);
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(255, 61, 127, 0.3);
+}
+
+.btn-save:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+/* ========== 解锁弹窗 ========== */
+.unlock-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.unlock-content {
+  width: 560rpx;
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 48rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.unlock-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #3A1C1A;
+  margin-bottom: 32rpx;
+}
+
+.unlock-preview-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.unlock-emoji {
+  font-size: 72rpx;
+  margin-bottom: 12rpx;
+}
+
+.unlock-name {
+  font-size: 28rpx;
+  color: #5A3A4A;
+  font-weight: 500;
+}
+
+.unlock-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 36rpx;
+}
+
+.unlock-price-text {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #FF3D7F;
+}
+
+.unlock-balance {
+  font-size: 22rpx;
+  color: #9C7A8A;
+  margin-top: 8rpx;
+}
+
+.unlock-actions {
+  display: flex;
+  gap: 20rpx;
+  width: 100%;
+}
+
+.unlock-cancel {
+  flex: 1;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F5F5F5;
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: #9C7A8A;
+  font-weight: 500;
+}
+
+.unlock-confirm {
+  flex: 1;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FF6B9D, #FF3D7F);
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+.unlock-confirm.disabled {
+  background: #D4D4D4;
+  box-shadow: none;
+}

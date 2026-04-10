@@ -186,6 +186,53 @@
 .avatar-hair.twintail::before { left: -10rpx; }
 .avatar-hair.twintail::after { right: -10rpx; }
 
+/* 波波头 */
+.avatar-hair.bob {
+  width: 150rpx;
+  height: 110rpx;
+  border-radius: 45% 45% 30% 30%;
+}
+
+/* 卷发 */
+.avatar-hair.curly {
+  width: 160rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.avatar-hair.curly::before,
+.avatar-hair.curly::after {
+  content: '';
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  background: #5C3A2E;
+  border-radius: 50%;
+  bottom: -8rpx;
+}
+
+.avatar-hair.curly::before { left: -6rpx; }
+.avatar-hair.curly::after { right: -6rpx; }
+
+/* 丸子头 */
+.avatar-hair.bun {
+  width: 130rpx;
+  height: 90rpx;
+  border-radius: 50% 50% 35% 35%;
+}
+
+.avatar-hair.bun::after {
+  content: '';
+  position: absolute;
+  top: -28rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50rpx;
+  height: 50rpx;
+  background: #5C3A2E;
+  border-radius: 50%;
+}
+
 /* 发饰 */
 .avatar-accessory {
   position: absolute;
@@ -211,6 +258,17 @@
 
 .avatar-accessory.flower {
   font-size: 30rpx;
+}
+
+.avatar-accessory.stars {
+  font-size: 24rpx;
+}
+
+.avatar-accessory.ribbon {
+  width: 36rpx;
+  height: 18rpx;
+  background: linear-gradient(90deg, #87CEEB, #6BB3D9);
+  border-radius: 4rpx;
 }
 
 /* 脸 */
@@ -282,6 +340,13 @@
   border-radius: 0 0 50% 50%;
 }
 
+/* 肤色变化 */
+.avatar-face.skin-fair { background: linear-gradient(180deg, #FFE8D6, #FFDCC4); }
+.avatar-face.skin-light { background: linear-gradient(180deg, #FFE0CC, #FFD4B8); }
+.avatar-face.skin-medium { background: linear-gradient(180deg, #E8C8A0, #D4B48C); }
+.avatar-face.skin-tan { background: linear-gradient(180deg, #C8A878, #B89868); }
+.avatar-face.skin-cool { background: linear-gradient(180deg, #E0D4E8, #D0C0DC); }
+
 /* 衣服 */
 .avatar-dress {
   width: 120rpx;
@@ -315,6 +380,21 @@
   background: linear-gradient(180deg, #9B59B6, #8E44AD);
 }
 
+.avatar-dress.elegant {
+  width: 135rpx;
+  height: 110rpx;
+  border-radius: 24rpx 24rpx 0 0;
+  background: linear-gradient(180deg, #2C3E50, #1A252F);
+}
+
+.avatar-dress.wedding {
+  width: 150rpx;
+  height: 140rpx;
+  border-radius: 30% 30% 50% 50%;
+  background: linear-gradient(180deg, #FFFFFF, #F8F0F4);
+  border: 2rpx solid #FFD0E0;
+}
+
 /* 手持物品 */
 .avatar-hand-item {
   position: absolute;
@@ -335,6 +415,38 @@
   height: 44rpx;
   background: linear-gradient(180deg, #D4A8BA, #8B6E7A);
   border-radius: 2rpx;
+}
+
+.avatar-hand-item.perfume {
+  width: 20rpx;
+  height: 30rpx;
+  background: linear-gradient(180deg, #F0C8D8, #E0A8C0);
+  border-radius: 4rpx;
+  position: relative;
+}
+
+.avatar-hand-item.perfume::before {
+  content: '';
+  position: absolute;
+  top: -6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8rpx;
+  height: 8rpx;
+  background: #D4A8BA;
+  border-radius: 50%;
+}
+
+.avatar-hand-item.mirror {
+  width: 26rpx;
+  height: 34rpx;
+  background: linear-gradient(180deg, rgba(255,245,248,0.6), rgba(255,232,240,0.3));
+  border: 2rpx solid #D4A8BA;
+  border-radius: 50% 50% 4rpx 4rpx;
+}
+
+.avatar-hand-item.rose {
+  font-size: 28rpx;
 }
 
 /* ========== 化妆台桌面 ========== */

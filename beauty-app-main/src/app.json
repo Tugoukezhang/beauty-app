@@ -19,6 +19,7 @@
     "pages/community/topicDetail/topicDetail",
     "pages/community/vote/vote",
     "pages/onboarding/onboarding",
+    "pages/avatar/avatar",
     "pages/user/user",
     "pages/recharge/recharge",
     "pages/vip/vip",

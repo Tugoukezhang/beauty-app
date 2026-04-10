@@ -14,10 +14,11 @@ Page({
 
     // 虚拟形象配置（后续接入换装系统）
     avatar: {
-      hairStyle: '',        // '' | 'long' | 'twintail'
-      accessory: '',        // '' | 'bow' | 'crown' | 'flower'
-      dressStyle: '',       // '' | 'princess' | 'ancient' | 'cos'
-      handItem: '',         // '' | 'lipstick' | 'brush'
+      hairStyle: '',        // '' | 'long' | 'twintail' | 'bob' | 'curly' | 'bun'
+      accessory: '',        // '' | 'bow' | 'crown' | 'flower' | 'stars' | 'ribbon'
+      dressStyle: '',       // '' | 'princess' | 'ancient' | 'cos' | 'elegant' | 'wedding'
+      handItem: '',         // '' | 'lipstick' | 'brush' | 'perfume' | 'mirror' | 'rose'
+      skinTone: 'light',    // 'fair' | 'light' | 'medium' | 'tan' | 'cool'
     },
   },
 
@@ -115,8 +116,7 @@ Page({
 
   /** 进入换装页面 */
   goToAvatarCustomize() {
-    wx.showToast({ title: '换装系统开发中', icon: 'none' });
-    // TODO: wx.navigateTo({ url: '/pages/avatar/avatar' });
+    wx.navigateTo({ url: '/pages/avatar/avatar' });
   },
 
   // ======== 分享 ========

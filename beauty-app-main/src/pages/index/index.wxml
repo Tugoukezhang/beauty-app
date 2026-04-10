@@ -40,7 +40,7 @@
         <!-- 发饰 -->
         <view class="avatar-accessory {{avatar.accessory}}" wx:if="{{avatar.accessory}}"></view>
         <!-- 脸 -->
-        <view class="avatar-face">
+        <view class="avatar-face skin-{{avatar.skinTone || 'light'}}">
           <view class="avatar-eyes">
             <view class="avatar-eye left"></view>
             <view class="avatar-eye right"></view>
