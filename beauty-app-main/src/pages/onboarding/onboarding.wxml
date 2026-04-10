@@ -1,0 +1,208 @@
+<!--
+  i妆 - 新用户引导问卷页
+  4步流程：蜕变方向 → 化妆水平 → 个人信息 → 方案生成
+-->
+<view class="onboarding-page">
+
+  <!-- 顶部进度条 -->
+  <view class="progress-bar">
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+    </view>
+    <text class="progress-text">{{currentStep}}/{{totalSteps}}</text>
+  </view>
+
+  <!-- 步骤1：你想蜕变的方向？ -->
+  <view class="step-content" wx:if="{{currentStep === 1}}">
+    <view class="step-header">
+      <text class="step-emoji">✨</text>
+      <text class="step-title">你想蜕变的方向？</text>
+      <text class="step-desc">选择你感兴趣的妆容方向，可多选</text>
+    </view>
+
+    <view class="option-grid">
+      <view 
+        class="option-card {{item.selected ? 'selected' : ''}}" 
+        wx:for="{{directionOptions}}" 
+        wx:key="id"
+        bindtap="toggleDirection"
+        data-id="{{item.id}}"
+      >
+        <text class="option-emoji">{{item.emoji}}</text>
+        <text class="option-name">{{item.name}}</text>
+        <text class="option-desc">{{item.desc}}</text>
+        <view class="option-check" wx:if="{{item.selected}}">✓</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤2：你的化妆水平？ -->
+  <view class="step-content" wx:if="{{currentStep === 2}}">
+    <view class="step-header">
+      <text class="step-emoji">🎨</text>
+      <text class="step-title">你的化妆水平？</text>
+      <text class="step-desc">帮助我们匹配适合你的课程难度</text>
+    </view>
+
+    <view class="level-list">
+      <view 
+        class="level-card {{item.selected ? 'selected' : ''}}" 
+        wx:for="{{levelOptions}}" 
+        wx:key="id"
+        bindtap="selectLevel"
+        data-id="{{item.id}}"
+      >
+        <view class="level-left">
+          <text class="level-emoji">{{item.emoji}}</text>
+          <view class="level-info">
+            <text class="level-name">{{item.name}}</text>
+            <text class="level-desc">{{item.desc}}</text>
+          </view>
+        </view>
+        <view class="level-radio {{item.selected ? 'active' : ''}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤3：了解下你吧 -->
+  <view class="step-content" wx:if="{{currentStep === 3}}">
+    <view class="step-header">
+      <text class="step-emoji">💄</text>
+      <text class="step-title">了解下你吧</text>
+      <text class="step-desc">让我们更精准地为你推荐</text>
+    </view>
+
+    <!-- 肤质 -->
+    <view class="form-section">
+      <text class="form-label">你的肤质</text>
+      <view class="tag-group">
+        <view 
+          class="tag-item {{item.selected ? 'selected' : ''}}" 
+          wx:for="{{skinTypeOptions}}" 
+          wx:key="id"
+          bindtap="selectSkinType"
+          data-id="{{item.id}}"
+        >
+          {{item.emoji}} {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 肤况问题 -->
+    <view class="form-section">
+      <text class="form-label">你关注的肌肤问题</text>
+      <view class="tag-group">
+        <view 
+          class="tag-item small {{item.selected ? 'selected' : ''}}" 
+          wx:for="{{skinIssueOptions}}" 
+          wx:key="id"
+          bindtap="toggleSkinIssue"
+          data-id="{{item.id}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 化妆频率 -->
+    <view class="form-section">
+      <text class="form-label">你多久化一次妆？</text>
+      <view class="tag-group">
+        <view 
+          class="tag-item {{item.selected ? 'selected' : ''}}" 
+          wx:for="{{frequencyOptions}}" 
+          wx:key="id"
+          bindtap="selectFrequency"
+          data-id="{{item.id}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤4：专属方案生成 -->
+  <view class="step-content" wx:if="{{currentStep === 4}}">
+    <!-- 生成中动画 -->
+    <view class="generating" wx:if="{{isGenerating}}">
+      <view class="gen-animation">
+        <text class="gen-emoji">💄</text>
+        <view class="gen-ring"></view>
+      </view>
+      <text class="gen-text">正在为你生成专属方案...</text>
+      <text class="gen-sub">AI 分析你的需求中</text>
+    </view>
+
+    <!-- 生成结果 -->
+    <view class="result-area" wx:if="{{!isGenerating && planGenerated}}">
+      <view class="result-header">
+        <text class="result-emoji">🎉</text>
+        <text class="result-title">你的专属美妆方案</text>
+        <text class="result-desc">基于你的偏好，我们为你定制了以下学习路径</text>
+      </view>
+
+      <!-- 推荐方向 -->
+      <view class="result-section">
+        <text class="result-label">推荐方向</text>
+        <view class="result-tags">
+          <text class="result-tag" wx:for="{{selectedDirections}}" wx:key="id">
+            {{item.emoji}} {{item.name}}
+          </text>
+        </view>
+      </view>
+
+      <!-- 推荐课程 -->
+      <view class="result-section">
+        <text class="result-label">为你推荐的课程</text>
+        <view class="course-card" wx:for="{{recommendedCourses}}" wx:key="id">
+          <view class="course-cover">
+            <text class="course-cover-emoji">{{item.emoji}}</text>
+          </view>
+          <view class="course-info">
+            <text class="course-name">{{item.name}}</text>
+            <text class="course-meta">{{item.level}} · {{item.lessons}}节课</text>
+            <view class="course-price-row">
+              <text class="course-price" wx:if="{{item.price > 0}}">¥{{item.price}}</text>
+              <text class="course-free" wx:else>免费</text>
+              <text class="course-match">{{item.match}}% 匹配</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 今日任务 -->
+      <view class="result-section">
+        <text class="result-label">今日任务</text>
+        <view class="task-card">
+          <text class="task-text">🎯 完成第一节课，开启你的蜕变之旅</text>
+          <text class="task-reward">+10 妆币</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-bar">
+    <view class="btn-skip" wx:if="{{currentStep < 4}}" bindtap="skipOnboarding">
+      <text>跳过</text>
+    </view>
+    <view class="btn-prev" wx:if="{{currentStep > 1 && currentStep < 4}}" bindtap="prevStep">
+      <text>上一步</text>
+    </view>
+    <view 
+      class="btn-next {{canNext ? '' : 'disabled'}}" 
+      wx:if="{{currentStep < 4}}" 
+      bindtap="nextStep"
+    >
+      <text>下一步</text>
+    </view>
+    <view 
+      class="btn-finish" 
+      wx:if="{{currentStep === 4 && planGenerated}}" 
+      bindtap="finishOnboarding"
+    >
+      <text>开始蜕变之旅</text>
+    </view>
+  </view>
+
+</view>

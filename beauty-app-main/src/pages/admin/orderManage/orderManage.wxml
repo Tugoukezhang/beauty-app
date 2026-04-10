@@ -1,0 +1,186 @@
+<view class="order-manage">
+  <!-- 统计卡片 -->
+  <view class="stats-bar">
+    <view class="stat-item">
+      <text class="stat-label">总营收</text>
+      <text class="stat-num">¥{{stats.totalAmount}}</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-label">今日营收</text>
+      <text class="stat-num highlight">¥{{stats.todayAmount}}</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-label">订单总数</text>
+      <text class="stat-num">{{stats.totalCount}}</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-label">退款金额</text>
+      <text class="stat-num refund">¥{{stats.refundAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索和筛选 -->
+  <view class="filter-bar">
+    <view class="search-box">
+      <input 
+        class="search-input" 
+        placeholder="搜索订单号/用户" 
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+      />
+      <text class="search-btn" bindtap="onSearch">搜索</text>
+    </view>
+    <view class="filter-row">
+      <picker mode="selector" range="{{orderTypes}}" bindchange="onTypeChange">
+        <view class="filter-item small">
+          <text class="filter-value">{{typeFilter ? (typeFilter === 'course' ? '课程' : typeFilter === 'vip' ? '会员' : '妆币') : '全部类型'}}</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+      <picker mode="selector" range="{{orderStatus}}" bindchange="onStatusChange">
+        <view class="filter-item small">
+          <text class="filter-value">{{statusFilter ? (statusFilter === 'pending' ? '待支付' : statusFilter === 'paid' ? '已支付' : statusFilter === 'cancelled' ? '已取消' : '已退款') : '全部状态'}}</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+      <picker mode="selector" range="{{dateRanges}}" bindchange="onDateChange">
+        <view class="filter-item small">
+          <text class="filter-value">{{dateRange ? (dateRange === 'today' ? '今日' : dateRange === 'week' ? '本周' : '本月') : '全部时间'}}</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <scroll-view class="order-list" scroll-y bindscrolltolower="onLoadMore">
+    <view class="order-item" wx:for="{{orders}}" wx:key="_id" data-order="{{item}}" bindtap="showOrderDetail">
+      <view class="order-header">
+        <text class="order-no">订单号: {{item.orderNo}}</text>
+        <text class="order-status {{item.status}}">
+          {{item.status === 'pending' ? '待支付' : item.status === 'paid' ? '已支付' : item.status === 'cancelled' ? '已取消' : '已退款'}}
+        </text>
+      </view>
+      <view class="order-body">
+        <view class="order-info">
+          <text class="order-type">{{item.type === 'course' ? '课程购买' : item.type === 'vip' ? '会员充值' : '妆币充值'}}</text>
+          <text class="order-title" wx:if="{{item.title}}">{{item.title}}</text>
+          <text class="order-user">用户: {{item.userName || item.userId}}</text>
+        </view>
+        <view class="order-amount">
+          <text class="amount">¥{{item.amount}}</text>
+          <text class="time">{{item.createTime}}</text>
+        </view>
+      </view>
+      <view class="order-actions" wx:if="{{item.status === 'paid'}}" catchtap="stopPropagation">
+        <text class="action-btn refund" data-id="{{item._id}}" bindtap="handleRefund">退款</text>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{!hasMore && orders.length > 0}}">
+      <text>没有更多了</text>
+    </view>
+    <view class="empty" wx:if="{{!loading && orders.length === 0}}">
+      <text class="empty-icon">📋</text>
+      <text class="empty-text">暂无订单</text>
+    </view>
+  </scroll-view>
+
+  <!-- 订单详情弹窗 -->
+  <view class="modal {{showDetailModal ? 'show' : ''}}" bindtap="closeModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">订单详情</text>
+        <text class="modal-close" bindtap="closeModal">×</text>
+      </view>
+      
+      <scroll-view class="modal-body" scroll-y wx:if="{{selectedOrder}}">
+        <view class="order-status-bar {{selectedOrder.status}}">
+          <text class="status-icon">
+            {{selectedOrder.status === 'pending' ? '⏳' : selectedOrder.status === 'paid' ? '✓' : selectedOrder.status === 'cancelled' ? '✕' : '↩'}}
+          </text>
+          <text class="status-text">
+            {{selectedOrder.status === 'pending' ? '待支付' : selectedOrder.status === 'paid' ? '已支付' : selectedOrder.status === 'cancelled' ? '已取消' : '已退款'}}
+          </text>
+        </view>
+
+        <view class="detail-section">
+          <view class="section-title">订单信息</view>
+          <view class="detail-item">
+            <text class="item-label">订单编号</text>
+            <text class="item-value">{{selectedOrder.orderNo}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="item-label">订单类型</text>
+            <text class="item-value">{{selectedOrder.type === 'course' ? '课程购买' : selectedOrder.type === 'vip' ? '会员充值' : '妆币充值'}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedOrder.title}}">
+            <text class="item-label">商品名称</text>
+            <text class="item-value">{{selectedOrder.title}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="item-label">创建时间</text>
+            <text class="item-value">{{selectedOrder.createTime}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedOrder.payTime}}">
+            <text class="item-label">支付时间</text>
+            <text class="item-value">{{selectedOrder.payTime}}</text>
+          </view>
+        </view>
+
+        <view class="detail-section">
+          <view class="section-title">用户信息</view>
+          <view class="detail-item">
+            <text class="item-label">用户ID</text>
+            <text class="item-value">{{selectedOrder.userId}}</text>
+          </view>
+          <view class="detail-item">
+            <text class="item-label">用户昵称</text>
+            <text class="item-value">{{selectedOrder.userName || '-'}}</text>
+          </view>
+        </view>
+
+        <view class="detail-section">
+          <view class="section-title">金额信息</view>
+          <view class="detail-item">
+            <text class="item-label">订单金额</text>
+            <text class="item-value highlight">¥{{selectedOrder.amount}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedOrder.originalAmount}}">
+            <text class="item-label">原价</text>
+            <text class="item-value">¥{{selectedOrder.originalAmount}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedOrder.discountAmount}}">
+            <text class="item-label">优惠金额</text>
+            <text class="item-value">-¥{{selectedOrder.discountAmount}}</text>
+          </view>
+        </view>
+
+        <view class="detail-section" wx:if="{{selectedOrder.status === 'refunded'}}">
+          <view class="section-title">退款信息</view>
+          <view class="detail-item">
+            <text class="item-label">退款金额</text>
+            <text class="item-value refund">¥{{selectedOrder.refundAmount}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedOrder.refundTime}}">
+            <text class="item-label">退款时间</text>
+            <text class="item-value">{{selectedOrder.refundTime}}</text>
+          </view>
+          <view class="detail-item" wx:if="{{selectedOrder.refundReason}}">
+            <text class="item-label">退款原因</text>
+            <text class="item-value">{{selectedOrder.refundReason}}</text>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class="modal-footer" wx:if="{{selectedOrder && selectedOrder.status === 'paid'}}">
+        <button class="btn-refund" bindtap="handleRefund" data-id="{{selectedOrder._id}}">申请退款</button>
+      </view>
+    </view>
+  </view>
+</view>

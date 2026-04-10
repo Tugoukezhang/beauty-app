@@ -1,0 +1,163 @@
+<view class="system-settings-page">
+  <!-- 基本信息 -->
+  <view class="settings-group">
+    <view class="group-title">基本信息</view>
+    <view class="settings-list">
+      <view class="setting-item" bindtap="chooseLogo">
+        <text class="setting-label">应用Logo</text>
+        <view class="setting-value">
+          <image wx:if="{{settings.appLogo}}" src="{{settings.appLogo}}" class="logo-preview" mode="aspectFill" />
+          <text wx:else class="placeholder">点击上传</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="showEditModal" data-field="appName" data-title="应用名称">
+        <text class="setting-label">应用名称</text>
+        <view class="setting-value">
+          <text>{{settings.appName}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="settings-group">
+    <view class="group-title">联系方式</view>
+    <view class="settings-list">
+      <view class="setting-item" bindtap="showEditModal" data-field="contactPhone" data-title="客服电话">
+        <text class="setting-label">客服电话</text>
+        <view class="setting-value">
+          <text class="placeholder">{{settings.contactPhone || '未设置'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="showEditModal" data-field="contactEmail" data-title="客服邮箱">
+        <text class="setting-label">客服邮箱</text>
+        <view class="setting-value">
+          <text class="placeholder">{{settings.contactEmail || '未设置'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="showEditModal" data-field="customerServiceWechat" data-title="客服微信">
+        <text class="setting-label">客服微信</text>
+        <view class="setting-value">
+          <text class="placeholder">{{settings.customerServiceWechat || '未设置'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 价格设置 -->
+  <view class="settings-group">
+    <view class="group-title">价格设置</view>
+    <view class="settings-list">
+      <view class="setting-item" bindtap="showEditModal" data-field="rechargeRatio" data-title="充值比例">
+        <text class="setting-label">充值比例</text>
+        <view class="setting-value">
+          <text>1元 = {{settings.rechargeRatio}}妆币</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="showEditModal" data-field="vipPrices" data-title="会员价格">
+        <text class="setting-label">会员价格</text>
+        <view class="setting-value">
+          <text class="placeholder">点击查看/编辑</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="showEditModal" data-field="coinPackages" data-title="充值套餐">
+        <text class="setting-label">充值套餐</text>
+        <view class="setting-value">
+          <text class="placeholder">点击查看/编辑</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 协议内容 -->
+  <view class="settings-group">
+    <view class="group-title">协议内容</view>
+    <view class="settings-list">
+      <view class="setting-item" bindtap="showEditModal" data-field="aboutUs" data-title="关于我们">
+        <text class="setting-label">关于我们</text>
+        <view class="setting-value">
+          <text class="placeholder">{{settings.aboutUs ? '已设置' : '未设置'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="showEditModal" data-field="userAgreement" data-title="用户协议">
+        <text class="setting-label">用户协议</text>
+        <view class="setting-value">
+          <text class="placeholder">{{settings.userAgreement ? '已设置' : '未设置'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="showEditModal" data-field="privacyPolicy" data-title="隐私政策">
+        <text class="setting-label">隐私政策</text>
+        <view class="setting-value">
+          <text class="placeholder">{{settings.privacyPolicy ? '已设置' : '未设置'}}</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 系统操作 -->
+  <view class="settings-group">
+    <view class="group-title">系统操作</view>
+    <view class="settings-list">
+      <view class="setting-item" bindtap="exportData">
+        <text class="setting-label">📊 数据导出</text>
+        <view class="setting-value">
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item" bindtap="clearCache">
+        <text class="setting-label">🗑️ 清除缓存</text>
+        <view class="setting-value">
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="setting-item warning" bindtap="systemMaintenance">
+        <text class="setting-label">⚠️ 系统维护模式</text>
+        <view class="setting-value">
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>当前版本 v1.0.0</text>
+    <text>Build 20260409</text>
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showEditModal}}" bindtap="closeModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">编辑{{editTitle}}</text>
+        <text class="close-btn" bindtap="closeModal">×</text>
+      </view>
+      
+      <view class="modal-body">
+        <textarea 
+          class="edit-textarea" 
+          value="{{editValue}}" 
+          bindinput="onInputChange"
+          placeholder="请输入内容..."
+          maxlength="5000"
+        />
+      </view>
+      
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="closeModal">取消</button>
+        <button class="btn-confirm" bindtap="saveSetting">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,464 @@
+.course-manage {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+/* 筛选栏 */
+.filter-bar {
+  background: #fff;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 32rpx;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.search-input {
+  flex: 1;
+  height: 64rpx;
+  font-size: 28rpx;
+}
+
+.search-btn {
+  font-size: 28rpx;
+  color: #ff6b9d;
+  padding: 0 20rpx;
+}
+
+.filter-row {
+  display: flex;
+  gap: 20rpx;
+}
+
+.filter-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+}
+
+.filter-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 10rpx;
+}
+
+.filter-value {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.arrow {
+  font-size: 20rpx;
+  color: #999;
+  margin-left: 10rpx;
+}
+
+/* 统计栏 */
+.stats-bar {
+  display: flex;
+  background: #fff;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-num.highlight {
+  color: #ff6b9d;
+}
+
+.stat-label {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 课程列表 */
+.course-list {
+  height: calc(100vh - 300rpx);
+  padding: 0 20rpx;
+}
+
+.course-item {
+  display: flex;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.course-cover {
+  width: 160rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.course-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.course-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.course-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.course-status {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  margin-left: 10rpx;
+}
+
+.course-status.online {
+  background: #e6f7e6;
+  color: #52c41a;
+}
+
+.course-status.offline {
+  background: #fff1f0;
+  color: #ff4d4f;
+}
+
+.course-status.pending {
+  background: #fff7e6;
+  color: #faad14;
+}
+
+.course-category {
+  font-size: 24rpx;
+  color: #ff6b9d;
+  background: #fff0f3;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  display: inline-block;
+  margin-bottom: 10rpx;
+}
+
+.course-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.course-price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.course-original {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 16rpx;
+}
+
+.course-duration {
+  font-size: 24rpx;
+  color: #666;
+  margin-left: 16rpx;
+}
+
+.course-stats {
+  display: flex;
+  gap: 20rpx;
+}
+
+.course-stats .stat {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.course-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16rpx;
+  margin-left: 20rpx;
+}
+
+.action-btn {
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 6rpx;
+  text-align: center;
+}
+
+.action-btn.toggle {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.action-btn.toggle.online {
+  background: #fff1f0;
+  color: #ff4d4f;
+}
+
+.action-btn.delete {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+/* 空状态 */
+.empty {
+  text-align: center;
+  padding: 100rpx 40rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.empty-tip {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 悬浮按钮 */
+.fab-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 100rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #ff6b9d, #ff8fb0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 157, 0.4);
+  z-index: 100;
+}
+
+.fab-icon {
+  font-size: 48rpx;
+  color: #fff;
+  font-weight: 300;
+}
+
+/* 弹窗 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  width: 100%;
+  height: 85vh;
+  background: #fff;
+  border-radius: 32rpx 32rpx 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal-title {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: #999;
+  line-height: 1;
+}
+
+.modal-body {
+  flex: 1;
+  padding: 30rpx;
+}
+
+.modal-footer {
+  display: flex;
+  padding: 20rpx 30rpx 40rpx;
+  gap: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.btn-cancel, .btn-confirm {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.btn-cancel {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, #ff6b9d, #ff8fb0);
+  color: #fff;
+}
+
+/* 表单 */
+.form-group {
+  margin-bottom: 30rpx;
+}
+
+.form-row {
+  display: flex;
+  gap: 20rpx;
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.required {
+  color: #ff4d4f;
+}
+
+.form-input, .form-picker, .form-textarea {
+  width: 100%;
+  height: 80rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  height: 160rpx;
+  padding: 20rpx 24rpx;
+}
+
+.upload-box {
+  width: 100%;
+  height: 200rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx dashed #ddd;
+}
+
+.upload-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.upload-placeholder {
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 48rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.upload-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.video-preview {
+  text-align: center;
+}
+
+.video-icon {
+  font-size: 48rpx;
+  color: #ff6b9d;
+}
+
+.video-name {
+  display: block;
+  font-size: 26rpx;
+  color: #333;
+  margin-top: 10rpx;
+}
+
+.video-duration {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.loading-more, .no-more {
+  text-align: center;
+  padding: 30rpx;
+  font-size: 26rpx;
+  color: #999;
+}

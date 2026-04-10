@@ -1,0 +1,73 @@
+<view class="admin-container">
+  <!-- 管理员信息 -->
+  <view class="admin-header">
+    <view class="admin-info">
+      <i-avatar size="large" text="{{adminInfo.nickname || '管理员'}}" />
+      <view class="admin-meta">
+        <text class="admin-name">{{adminInfo.nickname || '管理员'}}</text>
+        <text class="admin-role">超级管理员</text>
+      </view>
+    </view>
+    <view class="logout-btn" bindtap="logout">
+      <i-icon name="logout" size="20" />
+    </view>
+  </view>
+
+  <!-- 今日数据概览 -->
+  <view class="stats-section">
+    <view class="section-title">今日概览</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.newUsers}}</text>
+        <text class="stat-label">新增用户</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.newOrders}}</text>
+        <text class="stat-label">新增订单</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">¥{{todayStats.revenue}}</text>
+        <text class="stat-label">今日收入</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.activeUsers}}</text>
+        <text class="stat-label">活跃用户</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="section-title">功能管理</view>
+    <view class="menu-grid">
+      <view 
+        class="menu-item" 
+        wx:for="{{menuList}}" 
+        wx:key="name"
+        data-path="{{item.path}}"
+        bindtap="onMenuTap"
+      >
+        <view class="menu-icon" style="background: {{item.color}}20;">
+          <i-icon name="{{item.icon}}" size="28" color="{{item.color}}" />
+        </view>
+        <text class="menu-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-section">
+    <view class="section-title">快捷操作</view>
+    <i-cell-group>
+      <i-cell title="发布新课程" arrow bindtap="navigateTo" data-url="/pages/admin/courseManage/courseManage?action=add">
+        <i-icon slot="left-icon" name="add" size="20" color="#FF6B9D" />
+      </i-cell>
+      <i-cell title="查看待处理订单" arrow bindtap="navigateTo" data-url="/pages/admin/orderManage/orderManage?status=pending">
+        <i-icon slot="left-icon" name="time" size="20" color="#FFA500" />
+      </i-cell>
+      <i-cell title="用户反馈" arrow bindtap="navigateTo" data-url="/pages/admin/userManage/userManage?tab=feedback">
+        <i-icon slot="left-icon" name="chat" size="20" color="#4ECDC4" />
+      </i-cell>
+    </i-cell-group>
+  </view>
+</view>

@@ -1,0 +1,101 @@
+<view class="search-container">
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <image class="search-icon" src="/assets/icons/icon-search.png" />
+      <input
+        class="search-input"
+        type="text"
+        placeholder="搜索课程、老师"
+        value="{{searchWord}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        focus="true"
+      />
+      <view class="clear-btn" wx:if="{{searchWord}}" bindtap="clearInput">×</view>
+    </view>
+    <view class="cancel-btn" bindtap="cancelSearch">取消</view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-result" wx:if="{{showResult}}">
+    <!-- 加载中 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text>搜索中...</text>
+    </view>
+
+    <!-- 空结果 -->
+    <view class="empty" wx:elif="{{empty}}">
+      <image class="empty-icon" src="/assets/images/empty-search.png" mode="aspectFit" />
+      <text class="empty-text">未找到"{{searchWord}}"相关课程</text>
+      <text class="empty-hint">试试其他关键词吧</text>
+    </view>
+
+    <!-- 结果列表 -->
+    <view class="result-list" wx:else>
+      <view
+        class="result-item"
+        wx:for="{{resultList}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goToCourse"
+      >
+        <image class="result-cover" src="{{item.cover}}" mode="aspectFill" />
+        <view class="result-info">
+          <view class="result-title">{{item.title}}</view>
+          <view class="result-teacher">{{item.teacher.name}}</view>
+          <view class="result-footer">
+            <text class="result-price" wx:if="{{!item.isFree}}">¥{{item.price}}</text>
+            <text class="result-free" wx:if="{{item.isFree}}">免费</text>
+            <text class="result-stats">★ {{item.rating}} · {{item.studyCount}}人学习</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索引导 -->
+  <view class="search-guide" wx:else>
+    <!-- 历史记录 -->
+    <view class="guide-section" wx:if="{{historyList.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">搜索历史</text>
+        <text class="clear-btn" bindtap="clearHistory">清除</text>
+      </view>
+      <view class="keyword-list">
+        <view
+          class="keyword-item"
+          wx:for="{{historyList}}"
+          wx:key="*this"
+          data-keyword="{{item}}"
+          bindtap="onKeywordTap"
+        >
+          {{item}}
+          <text class="delete-icon" data-keyword="{{item}}" catchtap="deleteHistory">×</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 热门搜索 -->
+    <view class="guide-section">
+      <view class="section-header">
+        <text class="section-title">热门搜索</text>
+      </view>
+      <view class="hot-list">
+        <view
+          class="hot-item"
+          wx:for="{{hotList}}"
+          wx:key="id"
+          data-keyword="{{item.keyword}}"
+          bindtap="onKeywordTap"
+        >
+          <view class="hot-rank {{index < 3 ? 'top' : ''}}">{{index + 1}}</view>
+          <view class="hot-content">
+            <view class="hot-keyword">{{item.keyword}}</view>
+            <view class="hot-count">{{item.hot}}次搜索</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

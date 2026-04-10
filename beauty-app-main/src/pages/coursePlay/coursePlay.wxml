@@ -1,0 +1,124 @@
+<view class="course-play-container">
+  <!-- 视频区域 -->
+  <view class="video-section">
+    <video
+      id="courseVideo"
+      class="video-player"
+      src="{{currentChapter.videoUrl}}"
+      poster="{{courseInfo.cover}}"
+      controls
+      show-center-play-btn
+      enable-danmu
+      danmu-list="{{danmuList}}"
+      bindplay="onPlay"
+      bindpause="onPause"
+      bindtimeupdate="onTimeUpdate"
+      bindended="onEnded"
+    />
+
+    <!-- 顶部导航 -->
+    <view class="video-nav">
+      <view class="nav-back" bindtap="goBack">
+        <image class="back-icon" src="/assets/icons/icon-back-white.png" />
+      </view>
+      <view class="nav-title">{{courseInfo.title}}</view>
+      <view class="nav-actions">
+        <view class="nav-btn" bindtap="toggleTool">
+          <image class="nav-icon" src="/assets/icons/icon-tool.png" />
+        </view>
+        <view class="nav-btn" bindtap="toggleCatalog">
+          <image class="nav-icon" src="/assets/icons/icon-catalog.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 章节信息 -->
+  <view class="chapter-info">
+    <view class="chapter-title">{{currentChapter.title}}</view>
+    <view class="chapter-meta">
+      <text class="chapter-duration">{{currentChapter.duration}}</text>
+      <text class="chapter-progress">{{progress}}%</text>
+    </view>
+    <!-- 进度条 -->
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+  </view>
+
+  <!-- 播放控制 -->
+  <view class="play-controls">
+    <view class="control-btn" bindtap="playPrevChapter">
+      <image class="control-icon" src="/assets/icons/icon-prev.png" />
+      <text>上一章</text>
+    </view>
+    <view class="control-btn main" bindtap="togglePlay">
+      <image class="control-icon" src="{{isPlaying ? '/assets/icons/icon-pause.png' : '/assets/icons/icon-play.png'}}" />
+    </view>
+    <view class="control-btn" bindtap="playNextChapter">
+      <text>下一章</text>
+      <image class="control-icon" src="/assets/icons/icon-next.png" />
+    </view>
+  </view>
+
+  <!-- 章节列表 -->
+  <view class="chapter-list-section">
+    <view class="section-title">课程目录</view>
+    <view class="chapter-list">
+      <view
+        class="chapter-item {{item.id === currentChapterId ? 'active' : ''}} {{completedChapters.includes(item.id) ? 'completed' : ''}}"
+        wx:for="{{chapters}}"
+        wx:key="id"
+        data-chapter-id="{{item.id}}"
+        bindtap="switchChapter"
+      >
+        <view class="chapter-left">
+          <view class="chapter-num">
+            <text wx:if="{{completedChapters.includes(item.id)}}">✓</text>
+            <text wx:else>{{index + 1}}</text>
+          </view>
+          <view class="chapter-title-text">{{item.title}}</view>
+        </view>
+        <view class="chapter-right">
+          <text class="chapter-time">{{item.duration}}</text>
+          <text class="chapter-status" wx:if="{{item.id === currentChapterId}}">播放中</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工具清单面板 -->
+  <view class="tool-panel" wx:if="{{showTool}}">
+    <view class="panel-header">
+      <text class="panel-title">工具清单</text>
+      <view class="panel-close" bindtap="toggleTool">×</view>
+    </view>
+    <view class="tool-list">
+      <view class="tool-item" wx:for="{{tools}}" wx:key="name">
+        <text class="tool-name">{{item.name}}</text>
+        <text class="tool-recommend">{{item.recommend}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 目录面板 -->
+  <view class="catalog-panel {{showCatalog ? 'show' : ''}}">
+    <view class="panel-header">
+      <text class="panel-title">目录</text>
+      <view class="panel-close" bindtap="toggleCatalog">×</view>
+    </view>
+    <view class="catalog-list">
+      <view
+        class="catalog-item {{item.id === currentChapterId ? 'active' : ''}}"
+        wx:for="{{chapters}}"
+        wx:key="id"
+        data-chapter-id="{{item.id}}"
+        bindtap="switchChapter"
+      >
+        <text class="catalog-num">{{index + 1}}</text>
+        <text class="catalog-title">{{item.title}}</text>
+        <text class="catalog-time">{{item.duration}}</text>
+      </view>
+    </view>
+  </view>
+</view>

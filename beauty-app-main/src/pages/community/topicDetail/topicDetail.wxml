@@ -1,0 +1,103 @@
+<!-- pages/community/topicDetail/topicDetail.wxml -->
+<view class="topic-detail-container">
+  <!-- 话题头部 -->
+  <view class="topic-header" wx:if="{{topic}}">
+    <image class="topic-cover" src="{{topic.cover}}" mode="aspectFill"></image>
+    <view class="topic-info">
+      <text class="topic-name"># {{topic.name}}</text>
+      <text class="topic-desc">{{topic.description || '暂无描述'}}</text>
+      <view class="topic-stats">
+        <text class="stat-item">{{topic.postCount}} 笔记</text>
+        <text class="stat-item">{{topic.followCount}} 关注</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 排序栏 -->
+  <view class="sort-bar">
+    <view
+      wx:for="{{sortOptions}}"
+      wx:key="id"
+      class="sort-item {{currentSort === item.id ? 'active' : ''}}"
+      bindtap="switchSort"
+      data-sort="{{item.id}}"
+    >
+      {{item.name}}
+    </view>
+  </view>
+
+  <!-- 帖子列表 -->
+  <view class="post-list">
+    <block wx:if="{{posts.length > 0}}">
+      <view
+        wx:for="{{posts}}"
+        wx:key="id"
+        class="post-card"
+        bindtap="goToPostDetail"
+        data-id="{{item.id}}"
+      >
+        <!-- 用户信息 -->
+        <view class="post-header">
+          <view class="user-info">
+            <image class="avatar" src="{{item.avatar || 'https://picsum.photos/100/100?random=avatar'}}" mode="aspectFill"></image>
+            <text class="username">{{item.nickname}}</text>
+          </view>
+        </view>
+
+        <!-- 内容 -->
+        <view class="post-content">
+          <text class="post-text">{{item.content}}</text>
+        </view>
+
+        <!-- 图片 -->
+        <view wx:if="{{item.images && item.images.length > 0}}" class="post-images">
+          <image
+            wx:for="{{item.images}}"
+            wx:for-item="img"
+            wx:key="index"
+            class="post-image {{item.images.length === 1 ? 'single' : ''}}"
+            src="{{img}}"
+            mode="aspectFill"
+          ></image>
+        </view>
+
+        <!-- 互动 -->
+        <view class="interaction-bar">
+          <view class="interaction-item" bindtap="handleLike" data-id="{{item.id}}" data-index="{{index}}">
+            <image
+              src="{{item.isLiked ? '/assets/icons/heart-fill.png' : '/assets/icons/heart.png'}}"
+              mode="aspectFit"
+            ></image>
+            <text>{{item.likes}}</text>
+          </view>
+          <view class="interaction-item">
+            <image src="/assets/icons/comment.png" mode="aspectFit"></image>
+            <text>{{item.comments}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 加载更多 -->
+      <view class="load-more">
+        <block wx:if="{{hasMore}}">
+          <text wx:if="{{loading}}">加载中...</text>
+          <text wx:else bindtap="loadPosts" data-loadmore="true">加载更多</text>
+        </block>
+        <text wx:else class="no-more">没有更多了</text>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view wx:else class="empty-state">
+      <image src="/assets/images/empty-community.png" mode="aspectFit"></image>
+      <text>暂无相关笔记</text>
+      <text class="empty-hint">成为第一个参与者吧</text>
+      <button class="publish-btn" bindtap="goToPublish">发布笔记</button>
+    </view>
+  </view>
+
+  <!-- 发布按钮 -->
+  <view class="fab" bindtap="goToPublish">
+    <image src="/assets/icons/add.png" mode="aspectFit"></image>
+  </view>
+</view>

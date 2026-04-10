@@ -1,0 +1,71 @@
+<view class="result-container {{status}}">
+  <!-- 成功状态 -->
+  <block wx:if="{{status === 'success'}}">
+    <view class="result-icon success">
+      <image src="/assets/icons/icon-success.png" />
+    </view>
+    <text class="result-title">支付成功</text>
+    
+    <!-- 妆币充值成功 -->
+    <view class="result-detail" wx:if="{{type === 'coin'}}">
+      <view class="detail-item">
+        <text class="detail-label">充值金额</text>
+        <text class="detail-value">¥{{amount}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">获得妆币</text>
+        <text class="detail-value highlight">{{coins}} 币</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">订单编号</text>
+        <text class="detail-value order-id">{{orderId}}</text>
+      </view>
+    </view>
+    
+    <!-- 会员购买成功 -->
+    <view class="result-detail" wx:if="{{type === 'vip'}}">
+      <view class="detail-item">
+        <text class="detail-label">支付金额</text>
+        <text class="detail-value">¥{{amount}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">会员时长</text>
+        <text class="detail-value highlight">{{vipDuration}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">订单编号</text>
+        <text class="detail-value order-id">{{orderId}}</text>
+      </view>
+    </view>
+    
+    <view class="result-tips">
+      <text>{{countdown}}秒后自动返回</text>
+    </view>
+    
+    <view class="button-group">
+      <button class="btn-primary" bindtap="goBack">立即返回</button>
+      <button class="btn-secondary" bindtap="viewOrder">查看订单</button>
+    </view>
+  </block>
+  
+  <!-- 失败状态 -->
+  <block wx:if="{{status === 'fail'}}">
+    <view class="result-icon fail">
+      <image src="/assets/icons/icon-fail.png" />
+    </view>
+    <text class="result-title">支付失败</text>
+    <text class="result-desc">订单支付未完成，请重新尝试</text>
+    
+    <view class="result-detail">
+      <view class="detail-item">
+        <text class="detail-label">订单编号</text>
+        <text class="detail-value order-id">{{orderId}}</text>
+      </view>
+    </view>
+    
+    <view class="button-group">
+      <button class="btn-primary" bindtap="repay">重新支付</button>
+      <button class="btn-secondary" bindtap="contactService">联系客服</button>
+    </view>
+  </block>
+</view>

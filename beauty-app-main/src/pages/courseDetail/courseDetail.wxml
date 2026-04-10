@@ -1,0 +1,182 @@
+<view class="course-detail-container">
+  <!-- 顶部封面 -->
+  <view class="course-header">
+    <image class="header-bg" src="{{courseInfo.cover}}" mode="aspectFill" />
+    <view class="header-overlay">
+      <video
+        class="preview-video"
+        wx:if="{{courseInfo.previewVideo}}"
+        src="{{courseInfo.previewVideo}}"
+        poster="{{courseInfo.cover}}"
+        controls
+      />
+      <image wx:else class="cover-img" src="{{courseInfo.cover}}" mode="aspectFill" />
+    </view>
+  </view>
+
+  <!-- 课程信息 -->
+  <view class="course-info-card">
+    <view class="info-top">
+      <view class="course-title">{{courseInfo.title}}</view>
+      <view class="course-meta">
+        <text class="meta-item">★ {{courseInfo.rating}}</text>
+        <text class="meta-item">{{courseInfo.studyCount}}人学习</text>
+        <text class="meta-item">{{courseInfo.chapterCount}}课时</text>
+      </view>
+    </view>
+    <view class="info-bottom">
+      <view class="price-section">
+        <text class="current-price" wx:if="{{!courseInfo.isFree}}">¥{{courseInfo.price}}</text>
+        <text class="free-tag" wx:if="{{courseInfo.isFree}}">免费</text>
+        <text class="original-price" wx:if="{{!courseInfo.isFree && courseInfo.originalPrice > courseInfo.price}}">¥{{courseInfo.originalPrice}}</text>
+      </view>
+      <view class="action-btns">
+        <view class="action-btn" bindtap="toggleFavorite">
+          <image class="btn-icon" src="{{isFavorite ? '/assets/icons/icon-favorite-active.png' : '/assets/icons/icon-favorite.png'}}" />
+          <text>{{isFavorite ? '已收藏' : '收藏'}}</text>
+        </view>
+        <view class="action-btn" bindtap="onShareAppMessage">
+          <image class="btn-icon" src="/assets/icons/icon-share.png" />
+          <text>分享</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 老师信息 -->
+  <view class="teacher-card" bindtap="goToTeacher">
+    <image class="teacher-avatar" src="{{teacherInfo.avatar}}" />
+    <view class="teacher-info">
+      <view class="teacher-name">{{teacherInfo.name}}</view>
+      <view class="teacher-title">{{teacherInfo.title}}</view>
+      <view class="teacher-stats">
+        <text>{{teacherInfo.students}}</text>
+        <text>{{teacherInfo.courses}}课程</text>
+      </view>
+    </view>
+    <view class="follow-btn">+ 关注</view>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view
+      class="tab-item {{activeTab === item.id ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTabChange"
+    >
+      {{item.name}}
+    </view>
+  </view>
+
+  <!-- Tab内容 -->
+  <scroll-view class="tab-content" scroll-y="true">
+    <!-- 介绍 -->
+    <view class="intro-section" wx:if="{{activeTab === 'intro'}}">
+      <view class="section-title">课程介绍</view>
+      <view class="intro-text">{{courseInfo.description}}</view>
+
+      <!-- 工具清单 -->
+      <view class="section-title" wx:if="{{tools.length > 0}}">工具清单</view>
+      <view class="tools-list" wx:if="{{tools.length > 0}}">
+        <view class="tool-item" wx:for="{{tools}}" wx:key="name">
+          <text class="tool-name">{{item.name}}</text>
+          <text class="tool-recommend">{{item.recommend}}</text>
+        </view>
+      </view>
+
+      <!-- 老师简介 -->
+      <view class="section-title">讲师简介</view>
+      <view class="teacher-desc">{{teacherInfo.description}}</view>
+    </view>
+
+    <!-- 目录 -->
+    <view class="catalog-section" wx:if="{{activeTab === 'catalog'}}">
+      <view class="catalog-header">
+        <text>共{{chapters.length}}章 · {{courseInfo.duration}}</text>
+      </view>
+      <view class="chapter-list">
+        <view
+          class="chapter-item {{item.isFree ? 'free' : (isPurchased ? 'purchased' : 'locked')}}"
+          wx:for="{{chapters}}"
+          wx:key="id"
+          data-chapter-id="{{item.id}}"
+          bindtap="{{item.isFree || isPurchased ? 'playFreeChapter' : 'buyNow'}}"
+        >
+          <view class="chapter-left">
+            <view class="chapter-num">{{index + 1}}</view>
+            <view class="chapter-info">
+              <view class="chapter-title">{{item.title}}</view>
+              <view class="chapter-duration">{{item.duration}}</view>
+            </view>
+          </view>
+          <view class="chapter-right">
+            <text class="chapter-tag" wx:if="{{item.isFree}}">试看</text>
+            <text class="chapter-tag locked-tag" wx:elif="{{!isPurchased}}">购买</text>
+            <text class="chapter-tag play-tag" wx:else>播放</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 评价 -->
+    <view class="review-section" wx:if="{{activeTab === 'review'}}">
+      <view class="review-header">
+        <text class="review-count">共{{courseInfo.reviewCount}}条评价</text>
+        <view class="review-summary">
+          <text class="summary-score">{{courseInfo.rating}}</text>
+          <view class="summary-stars">
+            <text wx:for="{{5}}" wx:key="*">★</text>
+          </view>
+        </view>
+      </view>
+      <view class="review-list">
+        <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+          <image class="review-avatar" src="{{item.avatar}}" />
+          <view class="review-content">
+            <view class="review-user">{{item.user}}</view>
+            <view class="review-rating">
+              <text wx:for="{{item.rating}}" wx:key="*">★</text>
+            </view>
+            <view class="review-text">{{item.content}}</view>
+            <view class="review-time">{{item.time}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 相关推荐 -->
+    <view class="related-section" wx:if="{{relatedCourses.length > 0}}">
+      <view class="section-title">相关推荐</view>
+      <scroll-view class="related-scroll" scroll-x="true">
+        <view
+          class="related-item"
+          wx:for="{{relatedCourses}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="goToRelatedCourse"
+        >
+          <image class="related-cover" src="{{item.cover}}" mode="aspectFill" />
+          <view class="related-title">{{item.title}}</view>
+          <view class="related-price">¥{{item.price}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bar-left">
+      <view class="start-btn secondary" wx:if="{{!isPurchased && !courseInfo.isFree}}" bindtap="buyNow">
+        立即购买
+      </view>
+      <view class="start-btn primary" wx:if="{{!isPurchased && !courseInfo.isFree}}">
+        ¥{{courseInfo.price}}
+      </view>
+      <view class="start-btn primary" wx:if="{{isPurchased || courseInfo.isFree}}" bindtap="startLearning">
+        {{isPurchased ? '继续学习' : '开始学习'}}
+      </view>
+    </view>
+  </view>
+</view>

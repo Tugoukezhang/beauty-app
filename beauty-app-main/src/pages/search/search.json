@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "i-search": "tdesign-miniprogram/search/search"
+  },
+  "navigationBarTitleText": "搜索"
+}

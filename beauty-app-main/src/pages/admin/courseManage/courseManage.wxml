@@ -1,0 +1,170 @@
+<view class="course-manage">
+  <!-- 搜索和筛选 -->
+  <view class="filter-bar">
+    <view class="search-box">
+      <input 
+        class="search-input" 
+        placeholder="搜索课程名称" 
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+      />
+      <text class="search-btn" bindtap="onSearch">搜索</text>
+    </view>
+    <view class="filter-row">
+      <picker mode="selector" range="{{categories}}" bindchange="onCategoryChange">
+        <view class="filter-item">
+          <text class="filter-label">分类</text>
+          <text class="filter-value">{{categoryFilter || '全部'}}</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+      <picker mode="selector" range="{{statusList}}" bindchange="onStatusChange">
+        <view class="filter-item">
+          <text class="filter-label">状态</text>
+          <text class="filter-value">{{statusFilter ? (statusFilter === 'online' ? '已上架' : statusFilter === 'offline' ? '已下架' : '审核中') : '全部'}}</text>
+          <text class="arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-bar">
+    <view class="stat-item">
+      <text class="stat-num">{{courses.length}}</text>
+      <text class="stat-label">课程总数</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-num highlight">{{onlineCount}}</text>
+      <text class="stat-label">已上架</text>
+    </view>
+  </view>
+
+  <!-- 课程列表 -->
+  <scroll-view class="course-list" scroll-y bindscrolltolower="onLoadMore">
+    <view class="course-item" wx:for="{{courses}}" wx:key="_id" data-course="{{item}}" bindtap="showEditModal">
+      <image class="course-cover" src="{{item.coverUrl}}" mode="aspectFill"/>
+      <view class="course-info">
+        <view class="course-header">
+          <text class="course-title">{{item.title}}</text>
+          <text class="course-status {{item.status}}">{{item.status === 'online' ? '已上架' : item.status === 'offline' ? '已下架' : '审核中'}}</text>
+        </view>
+        <text class="course-category">{{item.category}}</text>
+        <view class="course-meta">
+          <text class="course-price">¥{{item.price}}</text>
+          <text class="course-original" wx:if="{{item.originalPrice}}">¥{{item.originalPrice}}</text>
+          <text class="course-duration" wx:if="{{item.duration}}">{{item.duration}}分钟</text>
+        </view>
+        <view class="course-stats">
+          <text class="stat">学习 {{item.studyCount || 0}}</text>
+          <text class="stat">收藏 {{item.favoriteCount || 0}}</text>
+        </view>
+      </view>
+      <view class="course-actions" catchtap="stopPropagation">
+        <text class="action-btn toggle {{item.status}}" data-id="{{item._id}}" data-status="{{item.status}}" bindtap="toggleStatus">
+          {{item.status === 'online' ? '下架' : '上架'}}
+        </text>
+        <text class="action-btn delete" data-id="{{item._id}}" bindtap="deleteCourse">删除</text>
+      </view>
+    </view>
+
+    <!-- 加载状态 -->
+    <view class="loading-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    <view class="no-more" wx:if="{{!hasMore && courses.length > 0}}">
+      <text>没有更多了</text>
+    </view>
+    <view class="empty" wx:if="{{!loading && courses.length === 0}}">
+      <text class="empty-icon">📚</text>
+      <text class="empty-text">暂无课程</text>
+      <text class="empty-tip">点击右下角添加课程</text>
+    </view>
+  </scroll-view>
+
+  <!-- 添加按钮 -->
+  <view class="fab-btn" bindtap="showAddModal">
+    <text class="fab-icon">+</text>
+  </view>
+
+  <!-- 添加/编辑弹窗 -->
+  <view class="modal {{showAddModal ? 'show' : ''}}" bindtap="closeModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">{{editingCourse ? '编辑课程' : '添加课程'}}</text>
+        <text class="modal-close" bindtap="closeModal">×</text>
+      </view>
+      
+      <scroll-view class="modal-body" scroll-y>
+        <view class="form-group">
+          <text class="form-label">课程名称 <text class="required">*</text></text>
+          <input class="form-input" placeholder="请输入课程名称" value="{{formData.title}}" data-field="title" bindinput="onFormInput"/>
+        </view>
+
+        <view class="form-group">
+          <text class="form-label">课程分类 <text class="required">*</text></text>
+          <picker mode="selector" range="{{['Cos妆', '古风妆', '新娘妆', '影视特效', '日常妆']}}" bindchange="onFormCategoryChange">
+            <view class="form-picker">{{formData.category || '请选择分类'}}</view>
+          </picker>
+        </view>
+
+        <view class="form-row">
+          <view class="form-group half">
+            <text class="form-label">售价(元) <text class="required">*</text></text>
+            <input class="form-input" type="digit" placeholder="0.00" value="{{formData.price}}" data-field="price" bindinput="onFormInput"/>
+          </view>
+          <view class="form-group half">
+            <text class="form-label">原价(元)</text>
+            <input class="form-input" type="digit" placeholder="0.00" value="{{formData.originalPrice}}" data-field="originalPrice" bindinput="onFormInput"/>
+          </view>
+        </view>
+
+        <view class="form-group">
+          <text class="form-label">课程封面</text>
+          <view class="upload-box" bindtap="uploadCover">
+            <image wx:if="{{formData.coverUrl}}" class="upload-preview" src="{{formData.coverUrl}}" mode="aspectFill"/>
+            <view wx:else class="upload-placeholder">
+              <text class="upload-icon">📷</text>
+              <text class="upload-text">点击上传封面</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="form-group">
+          <text class="form-label">课程视频</text>
+          <view class="upload-box video" bindtap="uploadVideo">
+            <view wx:if="{{formData.videoUrl}}" class="video-preview">
+              <text class="video-icon">▶</text>
+              <text class="video-name">已上传视频</text>
+              <text class="video-duration">{{formData.duration}}分钟</text>
+            </view>
+            <view wx:else class="upload-placeholder">
+              <text class="upload-icon">🎬</text>
+              <text class="upload-text">点击上传视频</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="form-group">
+          <text class="form-label">课程简介</text>
+          <textarea class="form-textarea" placeholder="请输入课程简介" value="{{formData.description}}" data-field="description" bindinput="onFormInput"/>
+        </view>
+
+        <view class="form-group">
+          <text class="form-label">课程状态</text>
+          <picker mode="selector" range="{{['已上架', '已下架', '审核中']}}" bindchange="onFormStatusChange">
+            <view class="form-picker">
+              {{formData.status === 'online' ? '已上架' : formData.status === 'offline' ? '已下架' : '审核中'}}
+            </view>
+          </picker>
+        </view>
+      </scroll-view>
+
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="closeModal">取消</button>
+        <button class="btn-confirm" bindtap="saveCourse">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

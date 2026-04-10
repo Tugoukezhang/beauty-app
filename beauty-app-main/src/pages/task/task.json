@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "每日任务",
+  "navigationBarBackgroundColor": "#FF6B9D",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#f5f5f5",
+  "enablePullDownRefresh": false
+}

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "i-search": "tdesign-miniprogram/search/search",
+    "i-tabs": "tdesign-miniprogram/tabs/tabs",
+    "i-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel"
+  },
+  "navigationBarTitleText": "社区"
+}

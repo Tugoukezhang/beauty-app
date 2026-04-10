@@ -1,0 +1,310 @@
+<!-- pages/community/community.wxml -->
+<view class="community-container">
+  <!-- 顶部搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap" bindtap="goToSearch">
+      <view class="search-icon-css">
+        <view class="sc-circle"></view>
+        <view class="sc-handle"></view>
+      </view>
+      <text class="search-placeholder">搜索笔记、话题、用户</text>
+    </view>
+  </view>
+
+  <!-- Tab切换 -->
+  <view class="tab-bar">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="index"
+      class="tab-item {{activeTab === index ? 'active' : ''}}"
+      bindtap="switchTab"
+      data-index="{{index}}"
+    >
+      {{item}}
+    </view>
+  </view>
+
+  <!-- 推荐页面内容 -->
+  <block wx:if="{{activeTab === 0}}">
+    <!-- 投票Banner -->
+    <view class="vote-banner" bindtap="goToVote">
+      <view class="vote-header">
+        <view class="vote-badge">
+          <text class="vote-icon">📊</text>
+          <text class="vote-badge-text">课程征集</text>
+        </view>
+        <view class="vote-status">
+          <view class="status-dot"></view>
+          <text class="status-text">进行中</text>
+        </view>
+      </view>
+      <view class="vote-question">{{voteQuestion}}</view>
+      <view class="vote-options-preview">
+        <view class="option-tag">A.古风</view>
+        <view class="option-tag">B.特效</view>
+        <view class="option-tag">C.跟妆</view>
+        <view class="option-tag">D.日常</view>
+      </view>
+      <view class="vote-footer">
+        <view class="vote-stat">
+          <text class="vote-count">{{voteTotal || 0}}</text>
+          <text class="vote-count-label">人已参与</text>
+        </view>
+        <view class="vote-cta">
+          <text>立即投票</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 话题分类 -->
+    <view class="topic-bar">
+      <scroll-view scroll-x class="topic-scroll">
+        <view
+          class="topic-item {{activeTopicId === 0 ? 'active' : ''}}"
+          bindtap="selectTopic"
+          data-id="0"
+        >
+          全部
+        </view>
+        <view
+          wx:for="{{topics}}"
+          wx:key="id"
+          class="topic-item {{activeTopicId === item.id ? 'active' : ''}}"
+          bindtap="selectTopic"
+          data-id="{{item.id}}"
+        >
+          #{{item.name}}
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 排序选项 -->
+    <view class="sort-bar">
+      <view
+        class="sort-item {{currentSort === item.id ? 'active' : ''}}"
+        wx:for="{{sortOptions}}"
+        wx:key="id"
+        bindtap="switchSort"
+        data-sort="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+
+    <!-- 帖子列表 -->
+    <view class="post-list">
+      <block wx:if="{{posts.length > 0}}">
+        <view
+          wx:for="{{posts}}"
+          wx:key="id"
+          class="post-card"
+          bindtap="goToPostDetail"
+          data-id="{{item.id}}"
+        >
+          <!-- 用户信息 -->
+          <view class="post-header">
+            <view class="user-info" catchtap="goToUserProfile" data-id="{{item.userId}}">
+              <image class="avatar" src="{{item.avatar || 'https://picsum.photos/100/100?random=avatar'}}" mode="aspectFill"></image>
+              <view class="user-detail">
+                <text class="username">{{item.nickname}}</text>
+                <text class="post-time">{{item.createTime}}</text>
+              </view>
+            </view>
+            <view class="follow-btn {{item.isFollow ? 'following' : ''}}" catchtap="handleFollow" data-id="{{item.userId}}">
+              {{item.isFollow ? '已关注' : '关注'}}
+            </view>
+          </view>
+
+          <!-- 帖子内容 -->
+          <view class="post-content">
+            <text class="post-text {{item.isExpand || item.content.length <= 80 ? '' : 'ellipsis'}}">{{item.content}}</text>
+            <text wx:if="{{item.content.length > 80 && !item.isExpand}}" class="expand-btn" catchtap="toggleExpand" data-index="{{index}}">展开</text>
+          </view>
+
+          <!-- 图片/视频 -->
+          <view wx:if="{{item.images && item.images.length > 0}}" class="post-media">
+            <image
+              wx:for="{{item.images}}"
+              wx:for-item="img"
+              wx:key="index"
+              class="post-image {{item.images.length === 1 ? 'single' : ''}} {{item.images.length === 2 ? 'double' : ''}}"
+              src="{{img}}"
+              mode="aspectFill"
+              catchtap="previewImage"
+              data-urls="{{item.images}}"
+              data-current="{{img}}"
+            ></image>
+          </view>
+
+          <!-- 话题标签 -->
+          <view wx:if="{{item.topic}}" class="post-topic" catchtap="goToTopicDetail" data-id="{{item.topic.id}}">
+            # {{item.topic.name}}
+          </view>
+
+          <!-- 互动栏 -->
+          <view class="interaction-bar">
+            <view class="interaction-item" catchtap="handleLike" data-id="{{item.id}}" data-index="{{index}}">
+              <image
+                class="interaction-icon {{item.isLiked ? 'liked' : ''}}"
+                src="{{item.isLiked ? '/assets/icons/heart-fill.png' : '/assets/icons/heart.png'}}"
+                mode="aspectFit"
+              ></image>
+              <text class="interaction-count">{{item.likes}}</text>
+            </view>
+            <view class="interaction-item" catchtap="goToPostDetail" data-id="{{item.id}}">
+              <image class="interaction-icon" src="/assets/icons/comment.png" mode="aspectFit"></image>
+              <text class="interaction-count">{{item.comments}}</text>
+            </view>
+            <view class="interaction-item" catchtap="handleCollect" data-id="{{item.id}}" data-index="{{index}}">
+              <image
+                class="interaction-icon {{item.isCollected ? 'collected' : ''}}"
+                src="{{item.isCollected ? '/assets/icons/star-fill.png' : '/assets/icons/star.png'}}"
+                mode="aspectFit"
+              ></image>
+            </view>
+            <view class="interaction-item" catchtap="handleShare" data-id="{{item.id}}">
+              <image class="interaction-icon" src="/assets/icons/share.png" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+
+        <!-- 加载更多 -->
+        <view class="load-more">
+          <block wx:if="{{hasMore}}">
+            <text wx:if="{{loading}}">加载中...</text>
+            <text wx:else catchtap="loadMorePosts">加载更多</text>
+          </block>
+          <text wx:else class="no-more">没有更多了，看看其他分类吧~</text>
+        </view>
+      </block>
+
+      <!-- 空状态 -->
+      <view wx:else class="empty-state">
+        <view class="empty-emoji">📝</view>
+        <text class="empty-text">还没有内容</text>
+        <text class="empty-hint">快来发布第一条笔记吧</text>
+        <button class="publish-btn" bindtap="goToPublish">发布笔记</button>
+      </view>
+    </view>
+  </block>
+
+  <!-- 关注页面 -->
+  <block wx:if="{{activeTab === 1}}">
+    <view class="topic-bar">
+      <scroll-view scroll-x class="topic-scroll">
+        <view
+          class="topic-item {{activeTopicId === 0 ? 'active' : ''}}"
+          bindtap="selectTopic"
+          data-id="0"
+        >
+          全部
+        </view>
+        <view
+          wx:for="{{topics}}"
+          wx:key="id"
+          class="topic-item {{activeTopicId === item.id ? 'active' : ''}}"
+          bindtap="selectTopic"
+          data-id="{{item.id}}"
+        >
+          #{{item.name}}
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="sort-bar">
+      <view
+        class="sort-item {{currentSort === item.id ? 'active' : ''}}"
+        wx:for="{{sortOptions}}"
+        wx:key="id"
+        bindtap="switchSort"
+        data-sort="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+
+    <view class="post-list">
+      <block wx:if="{{posts.length > 0}}">
+        <view
+          wx:for="{{posts}}"
+          wx:key="id"
+          class="post-card"
+          bindtap="goToPostDetail"
+          data-id="{{item.id}}"
+        >
+          <view class="post-header">
+            <view class="user-info" catchtap="goToUserProfile" data-id="{{item.userId}}">
+              <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+              <view class="user-detail">
+                <text class="username">{{item.nickname}}</text>
+                <text class="post-time">{{item.createTime}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="post-content">
+            <text class="post-text">{{item.content}}</text>
+          </view>
+          <view wx:if="{{item.images && item.images.length > 0}}" class="post-media">
+            <image
+              wx:for="{{item.images}}"
+              wx:for-item="img"
+              wx:key="index"
+              class="post-image {{item.images.length === 1 ? 'single' : ''}}"
+              src="{{img}}"
+              mode="aspectFill"
+            ></image>
+          </view>
+          <view class="interaction-bar">
+            <view class="interaction-item" catchtap="handleLike" data-id="{{item.id}}" data-index="{{index}}">
+              <image class="interaction-icon {{item.isLiked ? 'liked' : ''}}" src="{{item.isLiked ? '/assets/icons/heart-fill.png' : '/assets/icons/heart.png'}}" mode="aspectFit"></image>
+              <text class="interaction-count">{{item.likes}}</text>
+            </view>
+            <view class="interaction-item">
+              <image class="interaction-icon" src="/assets/icons/comment.png" mode="aspectFit"></image>
+              <text class="interaction-count">{{item.comments}}</text>
+            </view>
+            <view class="interaction-item" catchtap="handleCollect" data-id="{{item.id}}">
+              <image class="interaction-icon {{item.isCollected ? 'collected' : ''}}" src="{{item.isCollected ? '/assets/icons/star-fill.png' : '/assets/icons/star.png'}}" mode="aspectFit"></image>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view wx:else class="empty-state">
+        <view class="empty-emoji">👀</view>
+        <text class="empty-text">还没有关注的内容</text>
+        <text class="empty-hint">去推荐页发现更多精彩吧</text>
+        <button class="publish-btn secondary" bindtap="switchTab" data-index="0">去看看推荐</button>
+      </view>
+    </view>
+  </block>
+
+  <!-- 话题广场 -->
+  <block wx:if="{{activeTab === 2}}">
+    <view class="topic-square-header">
+      <text class="topic-square-title">发现感兴趣的话题</text>
+    </view>
+    <view class="topic-square">
+      <view class="topic-grid">
+        <view
+          wx:for="{{topics}}"
+          wx:key="id"
+          class="topic-card"
+          bindtap="goToTopicDetail"
+          data-id="{{item.id}}"
+        >
+          <image class="topic-cover" src="{{item.cover}}" mode="aspectFill"></image>
+          <view class="topic-info">
+            <text class="topic-name">{{item.name}}</text>
+            <text class="topic-count">{{item.postCount || 0}}篇笔记</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 发布按钮 -->
+  <view class="fab" bindtap="goToPublish">
+    <view class="fab-icon">+</view>
+  </view>
+</view>

@@ -1,0 +1,520 @@
+/* 课程详情页面样式 */
+.course-detail-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+
+/* 顶部封面 */
+.course-header {
+  height: 400rpx;
+  position: relative;
+}
+
+.header-bg {
+  width: 100%;
+  height: 100%;
+  background: #333;
+}
+
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-img {
+  width: 560rpx;
+  height: 320rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 16rpx 32rpx rgba(0, 0, 0, 0.3);
+}
+
+.preview-video {
+  width: 560rpx;
+  height: 320rpx;
+  border-radius: 16rpx;
+}
+
+/* 课程信息卡片 */
+.course-info-card {
+  background: #fff;
+  padding: 32rpx;
+  margin: -40rpx 24rpx 0;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+}
+
+.info-top {
+  border-bottom: 1rpx solid #f0f0f0;
+  padding-bottom: 24rpx;
+}
+
+.course-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+}
+
+.course-meta {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 16rpx;
+}
+
+.meta-item {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.info-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24rpx;
+}
+
+.price-section {
+  display: flex;
+  align-items: baseline;
+}
+
+.current-price {
+  font-size: 48rpx;
+  color: #FF6B9D;
+  font-weight: 600;
+}
+
+.free-tag {
+  font-size: 36rpx;
+  color: #07C160;
+  font-weight: 600;
+}
+
+.original-price {
+  font-size: 28rpx;
+  color: #ccc;
+  text-decoration: line-through;
+  margin-left: 12rpx;
+}
+
+.action-btns {
+  display: flex;
+  gap: 32rpx;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 4rpx;
+}
+
+.action-btn text {
+  font-size: 22rpx;
+  color: #666;
+}
+
+/* 老师卡片 */
+.teacher-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin: 24rpx;
+  padding: 24rpx;
+  border-radius: 16rpx;
+}
+
+.teacher-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.teacher-info {
+  flex: 1;
+  margin-left: 20rpx;
+}
+
+.teacher-name {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.teacher-title {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.teacher-stats {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 8rpx;
+}
+
+.teacher-stats text {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.follow-btn {
+  padding: 12rpx 32rpx;
+  background: linear-gradient(135deg, #FF6B9D, #FFB6C1);
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 32rpx;
+}
+
+/* Tab切换 */
+.tab-bar {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 28rpx 0;
+  font-size: 30rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #FF6B9D;
+  font-weight: 500;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background: #FF6B9D;
+  border-radius: 2rpx;
+}
+
+/* Tab内容 */
+.tab-content {
+  height: calc(100vh - 900rpx);
+  padding: 24rpx;
+}
+
+/* 介绍 */
+.intro-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.intro-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+.tools-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+
+.tool-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx;
+  background: #fafafa;
+  border-radius: 8rpx;
+}
+
+.tool-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.tool-recommend {
+  font-size: 26rpx;
+  color: #FF6B9D;
+}
+
+.teacher-desc {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+/* 目录 */
+.catalog-header {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 20rpx;
+  padding-left: 8rpx;
+}
+
+.chapter-list {
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.chapter-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.chapter-item:last-child {
+  border-bottom: none;
+}
+
+.chapter-left {
+  display: flex;
+  align-items: center;
+}
+
+.chapter-num {
+  width: 48rpx;
+  height: 48rpx;
+  background: #f5f5f5;
+  color: #999;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  flex-shrink: 0;
+}
+
+.chapter-item.free .chapter-num {
+  background: #E6F7E6;
+  color: #07C160;
+}
+
+.chapter-item.purchased .chapter-num {
+  background: #FFF5F8;
+  color: #FF6B9D;
+}
+
+.chapter-info {
+  margin-left: 16rpx;
+}
+
+.chapter-title {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.chapter-duration {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 4rpx;
+}
+
+.chapter-tag {
+  font-size: 24rpx;
+  color: #07C160;
+}
+
+.chapter-tag.locked-tag {
+  color: #FF6B9D;
+}
+
+.chapter-tag.play-tag {
+  color: #999;
+}
+
+/* 评价 */
+.review-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.review-count {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.review-summary {
+  display: flex;
+  align-items: center;
+}
+
+.summary-score {
+  font-size: 40rpx;
+  color: #FF9800;
+  font-weight: 600;
+  margin-right: 8rpx;
+}
+
+.summary-stars {
+  color: #FF9800;
+  font-size: 24rpx;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.review-content {
+  flex: 1;
+  margin-left: 16rpx;
+}
+
+.review-user {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.review-rating {
+  color: #FF9800;
+  font-size: 24rpx;
+  margin: 4rpx 0;
+}
+
+.review-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 8rpx;
+}
+
+.review-time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 相关推荐 */
+.related-section {
+  margin-top: 24rpx;
+}
+
+.related-scroll {
+  display: flex;
+  white-space: nowrap;
+  margin-top: 16rpx;
+}
+
+.related-item {
+  width: 280rpx;
+  margin-right: 20rpx;
+  display: inline-block;
+}
+
+.related-cover {
+  width: 280rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+}
+
+.related-title {
+  font-size: 26rpx;
+  color: #333;
+  margin-top: 12rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-price {
+  font-size: 28rpx;
+  color: #FF6B9D;
+  margin-top: 8rpx;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 16rpx 32rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.bar-left {
+  display: flex;
+  gap: 20rpx;
+}
+
+.start-btn {
+  padding: 24rpx 64rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.start-btn.primary {
+  background: linear-gradient(135deg, #FF6B9D, #FFB6C1);
+  color: #fff;
+}
+
+.start-btn.secondary {
+  background: #fff;
+  color: #FF6B9D;
+  border: 2rpx solid #FF6B9D;
+}

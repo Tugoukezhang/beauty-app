@@ -1,0 +1,404 @@
+/* 会员中心样式 */
+.vip-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+/* VIP卡片 */
+.vip-card {
+  margin: 20rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.vip-card-bg {
+  padding: 40rpx;
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+}
+
+.vip-active .vip-card-bg {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+}
+
+.vip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30rpx;
+}
+
+.vip-user {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  margin-right: 20rpx;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10rpx;
+}
+
+.vip-badge {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8rpx 16rpx;
+  border-radius: 24rpx;
+}
+
+.badge-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 8rpx;
+}
+
+.badge-text {
+  font-size: 22rpx;
+  color: #fff;
+  font-weight: 500;
+}
+
+.not-vip-text {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.vip-status-tag {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12rpx 24rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+/* 成长值 */
+.growth-section {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 24rpx;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+}
+
+.growth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.growth-title {
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: 500;
+}
+
+.growth-value {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.progress-bar {
+  height: 12rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 6rpx;
+  transition: width 0.5s ease;
+}
+
+.growth-tip {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 开通按钮 */
+.vip-action {
+  text-align: center;
+}
+
+.open-vip-btn {
+  background: #fff;
+  color: #FF6B9D;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 28rpx 80rpx;
+  border-radius: 44rpx;
+  border: none;
+  line-height: 1;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.15);
+}
+
+.renew-vip-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #FF8E00;
+  font-size: 30rpx;
+  font-weight: 600;
+  padding: 24rpx 60rpx;
+  border-radius: 40rpx;
+  border: none;
+  line-height: 1;
+}
+
+.open-vip-btn::after,
+.renew-vip-btn::after {
+  display: none;
+}
+
+/* 权益区域 */
+.benefits-section {
+  background: #fff;
+  margin: 20rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+}
+
+.section-header {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-right: 16rpx;
+}
+
+.section-subtitle {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.benefits-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30rpx;
+}
+
+.benefit-item {
+  width: calc(25% - 23rpx);
+  text-align: center;
+}
+
+.benefit-icon-wrap {
+  width: 80rpx;
+  height: 80rpx;
+  background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EC 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16rpx;
+}
+
+.benefit-icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.benefit-title {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.benefit-desc {
+  font-size: 20rpx;
+  color: #999;
+  display: block;
+}
+
+/* 套餐区域 */
+.packages-section {
+  background: #fff;
+  margin: 20rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+}
+
+.package-list {
+  display: flex;
+  gap: 20rpx;
+}
+
+.package-card {
+  flex: 1;
+  border: 2rpx solid #f0f0f0;
+  border-radius: 16rpx;
+  padding: 30rpx 20rpx;
+  text-align: center;
+  position: relative;
+  background: #fafafa;
+}
+
+.package-card.popular {
+  background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EC 100%);
+  border-color: #FF6B9D;
+  transform: scale(1.02);
+}
+
+.package-tag {
+  position: absolute;
+  top: -2rpx;
+  right: -2rpx;
+  background: #FF6B9D;
+  color: #fff;
+  font-size: 18rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 0 16rpx 0 16rpx;
+}
+
+.package-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.package-duration {
+  font-size: 22rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.package-price-wrap {
+  margin-bottom: 12rpx;
+}
+
+.package-price {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #FF6B9D;
+}
+
+.price-symbol {
+  font-size: 24rpx;
+}
+
+.package-original {
+  font-size: 22rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+}
+
+.package-daily {
+  font-size: 20rpx;
+  color: #FF8E53;
+  background: rgba(255, 142, 83, 0.1);
+  padding: 6rpx 12rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+}
+
+/* 会员说明 */
+.vip-notice {
+  background: #fff;
+  margin: 20rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+}
+
+.notice-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.notice-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16rpx;
+}
+
+.notice-dot {
+  font-size: 28rpx;
+  color: #FF6B9D;
+  margin-right: 12rpx;
+  line-height: 1.4;
+}
+
+.notice-text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* 底部栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 20rpx;
+}
+
+.share-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 40rpx;
+  padding: 24rpx;
+}
+
+.share-btn image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+
+.share-btn text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.record-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 100%);
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+  border-radius: 40rpx;
+  padding: 24rpx;
+}
+
+.share-btn::after,
+.record-btn::after {
+  display: none;
+}

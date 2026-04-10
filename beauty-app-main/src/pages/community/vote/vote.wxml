@@ -1,0 +1,102 @@
+<!-- 投票页面 -->
+<view class="vote-page">
+  <!-- 顶部装饰 -->
+  <view class="vote-header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-tag">📊 用户投票</text>
+      <text class="header-title">课程方向征集</text>
+    </view>
+  </view>
+
+  <!-- 投票问题 -->
+  <view class="vote-question-wrap">
+    <text class="vote-question">{{voteQuestion}}</text>
+    <view class="vote-meta">
+      <text class="vote-stat">🔥 {{voteTotal}}人已参与</text>
+      <text class="vote-deadline">截止至4月30日</text>
+    </view>
+  </view>
+
+  <!-- 投票选项 -->
+  <view class="vote-options">
+    <view
+      wx:for="{{options}}"
+      wx:key="id"
+      class="option-item {{selectedId === item.id ? 'selected' : ''}}"
+      bindtap="selectOption"
+      data-id="{{item.id}}"
+    >
+      <!-- 卡片主体 -->
+      <view class="option-main">
+        <!-- 左侧：单选框 -->
+        <view class="option-radio-wrap">
+          <view class="radio-circle {{selectedId === item.id ? 'checked' : ''}}">
+            <view class="radio-dot" wx:if="{{selectedId === item.id}}"></view>
+          </view>
+        </view>
+
+        <!-- 中间：选项内容 -->
+        <view class="option-content">
+          <view class="option-label-row">
+            <text class="option-label">{{item.label}}</text>
+            <text class="option-text">{{item.text}}</text>
+          </view>
+        </view>
+
+        <!-- 右侧：百分比和热度标识 -->
+        <view class="option-right">
+          <text class="percent-num {{hasVoted ? 'show' : ''}}">{{item.percent}}%</text>
+          <view class="leading-badge" wx:if="{{hasVoted && item.isLeading}}">
+            <text>🔥</text>
+            <text class="badge-text">最热</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 进度条（投票后显示） -->
+      <view class="option-progress {{hasVoted ? 'show' : ''}}">
+        <view class="progress-bar {{selectedId === item.id ? 'self' : ''}}" style="width: {{hasVoted ? item.percent + '%' : '0%'}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="vote-action">
+    <block wx:if="{{!hasVoted}}">
+      <button
+        class="submit-btn {{selectedId ? '' : 'disabled'}}"
+        bindtap="submitVote"
+        disabled="{{!selectedId}}"
+      >
+        {{selectedId ? '确认投票' : '请先选择一个选项'}}
+      </button>
+    </block>
+    <block wx:else>
+      <view class="voted-tip">
+        <text class="voted-icon">✓</text>
+        <text>感谢您的投票！</text>
+      </view>
+      <button class="reshare-btn" bindtap="shareVote">分享给好友</button>
+    </block>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="vote-rules">
+    <text class="rules-title">📋 投票规则</text>
+    <view class="rules-list">
+      <view class="rule-item">
+        <text class="rule-num">1</text>
+        <text class="rule-text">每个用户仅可投票一次</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-num">2</text>
+        <text class="rule-text">投票结果将影响下期课程方向</text>
+      </view>
+      <view class="rule-item">
+        <text class="rule-num">3</text>
+        <text class="rule-text">投票后可参与社区话题讨论</text>
+      </view>
+    </view>
+  </view>
+</view>

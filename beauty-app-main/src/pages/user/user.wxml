@@ -1,0 +1,168 @@
+<!-- pages/user/user.wxml -->
+<view class="user-page-container">
+  <!-- 用户信息头部 -->
+  <view class="user-header">
+    <view class="user-bg"></view>
+
+    <!-- 设置按钮 -->
+    <view class="header-actions">
+      <view class="action-btn" bindtap="goToSettings">
+        <text class="action-icon">⚙️</text>
+      </view>
+    </view>
+
+    <view class="user-info-section">
+      <view class="avatar-wrap">
+        <image class="avatar" src="{{user.avatar || ''}}" mode="aspectFill" wx:if="{{user.avatar}}"></image>
+        <view class="avatar-default" wx:else>
+          <text class="avatar-icon">👤</text>
+        </view>
+        <view class="avatar-badge" wx:if="{{user.vipLevel > 0}}">VIP</view>
+      </view>
+
+      <view class="user-detail">
+        <view class="name-row">
+          <text class="username">{{user.nickname || '美妆达人'}}</text>
+          <view class="vip-tag" wx:if="{{user.vipLevel > 0}}">👑</view>
+        </view>
+        <text class="user-bio">{{user.bio || '这个人很懒，什么都没写~'}}</text>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="action-btns" wx:if="{{isOwner}}">
+        <button class="edit-btn" bindtap="goToSettings">编辑资料</button>
+      </view>
+      <view class="action-btns" wx:elif="{{!user.isFollow}}">
+        <button class="follow-btn" bindtap="handleFollow">+ 关注</button>
+      </view>
+      <view class="action-btns" wx:else>
+        <button class="following-btn" bindtap="handleFollow">已关注</button>
+      </view>
+    </view>
+
+    <!-- 数据统计 -->
+    <view class="stats-row">
+      <view class="stat-item">
+        <text class="stat-num">{{user.postCount || 0}}</text>
+        <text class="stat-label">笔记</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{user.followCount || 0}}</text>
+        <text class="stat-label">关注</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{user.fansCount || 0}}</text>
+        <text class="stat-label">粉丝</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{user.likesCount || 0}}</text>
+        <text class="stat-label">获赞</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tab栏 -->
+  <view class="tab-bar">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="index"
+      class="tab-item {{activeTab === index ? 'active' : ''}}"
+      bindtap="onTabChange"
+      data-index="{{index}}"
+    >
+      <text class="tab-text">{{item}}</text>
+      <view class="tab-indicator" wx:if="{{activeTab === index}}"></view>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-area">
+    <!-- 笔记 -->
+    <view wx:if="{{activeTab === 0}}" class="post-grid">
+      <block wx:if="{{posts.length > 0}}">
+        <view
+          wx:for="{{posts}}"
+          wx:key="id"
+          class="grid-item"
+          bindtap="goToPostDetail"
+          data-id="{{item.id}}"
+        >
+          <image src="{{item.images[0] || ''}}" mode="aspectFill" wx:if="{{item.images && item.images[0]}}"></image>
+          <view class="grid-placeholder" wx:else>
+            <text class="placeholder-icon">📷</text>
+          </view>
+          <view class="item-info">
+            <text class="heart-icon">❤️</text>
+            <text class="like-num">{{item.likes || 0}}</text>
+          </view>
+        </view>
+      </block>
+      <view wx:else class="empty-state">
+        <text class="empty-icon">📝</text>
+        <text class="empty-text">还没有发布笔记</text>
+        <text class="empty-hint">去社区分享你的美妆心得吧</text>
+      </view>
+    </view>
+
+    <!-- 收藏 -->
+    <view wx:if="{{activeTab === 1}}" class="post-grid">
+      <block wx:if="{{collections.length > 0}}">
+        <view
+          wx:for="{{collections}}"
+          wx:key="id"
+          class="grid-item"
+          bindtap="goToPostDetail"
+          data-id="{{item.id}}"
+        >
+          <image src="{{item.images[0] || ''}}" mode="aspectFill" wx:if="{{item.images && item.images[0]}}"></image>
+          <view class="grid-placeholder" wx:else>
+            <text class="placeholder-icon">📷</text>
+          </view>
+          <view class="item-info">
+            <text class="heart-icon">❤️</text>
+            <text class="like-num">{{item.likes || 0}}</text>
+          </view>
+        </view>
+      </block>
+      <view wx:else class="empty-state">
+        <text class="empty-icon">❤️</text>
+        <text class="empty-text">还没有收藏</text>
+        <text class="empty-hint">浏览社区发现感兴趣的内容</text>
+      </view>
+    </view>
+
+    <!-- 课程 -->
+    <view wx:if="{{activeTab === 2}}" class="course-list">
+      <block wx:if="{{courses.length > 0}}">
+        <view
+          wx:for="{{courses}}"
+          wx:key="id"
+          class="course-card"
+          bindtap="goToCourseDetail"
+          data-id="{{item.id}}"
+        >
+          <view class="course-cover-wrap">
+            <image class="course-cover" src="{{item.cover || ''}}" mode="aspectFill" wx:if="{{item.cover}}"></image>
+            <view class="cover-placeholder" wx:else>
+              <text>🎬</text>
+            </view>
+            <view class="course-free-tag" wx:if="{{item.price <= 0}}">免费</view>
+          </view>
+          <view class="course-info">
+            <text class="course-title">{{item.title || '课程标题'}}</text>
+            <text class="course-desc">{{item.description || '暂无简介'}}</text>
+            <view class="course-meta">
+              <text class="course-price {{item.price <= 0 ? 'free' : ''}}">{{item.price > 0 ? '¥' + item.price : '免费'}}</text>
+              <text class="course-students">{{item.studentCount || 0}}人学习</text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view wx:else class="empty-state">
+        <text class="empty-icon">📚</text>
+        <text class="empty-text">还没有购买课程</text>
+        <text class="empty-hint">去课程中心发现好课</text>
+      </view>
+    </view>
+  </view>
+</view>

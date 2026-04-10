@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "i-search": "tdesign-miniprogram/search/search"
+  },
+  "navigationBarTitleText": "i妆",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

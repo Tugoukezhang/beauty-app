@@ -1,0 +1,126 @@
+<view class="task-container">
+  <!-- 顶部资产卡片 -->
+  <view class="assets-card">
+    <view class="assets-header">
+      <view class="asset-item">
+        <image class="asset-icon" src="/assets/icons/icon-coin.png" />
+        <view class="asset-info">
+          <text class="asset-value">{{coins}}</text>
+          <text class="asset-label">我的妆币</text>
+        </view>
+      </view>
+      <view class="asset-divider"></view>
+      <view class="asset-item">
+        <image class="asset-icon" src="/assets/icons/icon-points.png" />
+        <view class="asset-info">
+          <text class="asset-value">{{points}}</text>
+          <text class="asset-label">我的积分</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 连续签到 -->
+    <view class="signin-section">
+      <view class="signin-header">
+        <view class="signin-title">
+          <text>已连续签到</text>
+          <text class="signin-days">{{continuousDays}}</text>
+          <text>天</text>
+        </view>
+        <view class="signin-reward">
+          <text>今日奖励 {{signInReward}} 妆币</text>
+        </view>
+      </view>
+      
+      <!-- 签到按钮 -->
+      <button 
+        class="signin-btn {{isSignedToday ? 'signed' : ''}}"
+        bindtap="signIn"
+        disabled="{{isSignedToday}}"
+      >
+        <text wx:if="{{!isSignedToday}}">立即签到</text>
+        <text wx:else>今日已签到</text>
+      </button>
+      
+      <!-- 签到日历 -->
+      <view class="calendar-section">
+        <view class="calendar-header">
+          <text class="calendar-month">{{currentMonth}}</text>
+          <text class="calendar-tip">连续签到7天额外奖励50妆币</text>
+        </view>
+        <view class="calendar-grid">
+          <view class="calendar-weekday" wx:for="['日','一','二','三','四','五','六']" wx:key="index">
+            {{item}}
+          </view>
+          <view 
+            class="calendar-day {{item.signed ? 'signed' : ''}} {{item.today ? 'today' : ''}} {{item.future ? 'future' : ''}}"
+            wx:for="{{signInCalendar}}"
+            wx:key="day"
+            data-day="{{item.day}}"
+            bindtap="{{!item.signed && !item.future && !item.today ? 'makeUpSign' : ''}}"
+          >
+            <text class="day-number">{{item.day}}</text>
+            <image wx:if="{{item.signed}}" class="sign-icon" src="/assets/icons/icon-check-fill.png" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 任务列表 -->
+  <view class="task-section">
+    <view class="section-header">
+      <text class="section-title">每日任务</text>
+      <text class="section-subtitle">完成任务赚取妆币和积分</text>
+    </view>
+    
+    <view class="task-list">
+      <view class="task-item {{item.status}}" wx:for="{{taskList}}" wx:key="id">
+        <view class="task-left">
+          <view class="task-icon-wrap">
+            <image class="task-icon" src="{{item.icon}}" />
+          </view>
+          <view class="task-info">
+            <text class="task-name">{{item.name}}</text>
+            <text class="task-desc">{{item.desc}}</text>
+            <view class="task-progress" wx:if="{{item.status === 'pending' && item.target > 1}}">
+              <view class="progress-bar">
+                <view class="progress-fill" style="width: {{(item.progress/item.target)*100}}%"></view>
+              </view>
+              <text class="progress-text">{{item.progress}}/{{item.target}}</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="task-right">
+          <view class="task-reward">
+            <image class="reward-icon" src="/assets/icons/{{item.rewardType === 'coins' ? 'icon-coin' : 'icon-points'}}.png" />
+            <text class="reward-value">+{{item.reward}}</text>
+          </view>
+          <button 
+            class="task-btn {{item.status}}"
+            data-id="{{item.id}}"
+            bindtap="doTask"
+          >
+            <text wx:if="{{item.status === 'pending'}}">{{item.action}}</text>
+            <text wx:elif="{{item.status === 'completed'}}">领取</text>
+            <text wx:else>已完成</text>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 累计奖励 -->
+  <view class="total-reward">
+    <text class="reward-text">今日已获得 {{totalReward.today}} 妆币，累计获得 {{totalReward.total}} 妆币</text>
+  </view>
+
+  <!-- 提示 -->
+  <view class="task-tips">
+    <view class="tip-title">温馨提示</view>
+    <view class="tip-item">• 每日任务0点重置，请及时完成</view>
+    <view class="tip-item">• 妆币可用于购买课程，积分可兑换礼品</view>
+    <view class="tip-item">• 连续签到7天可额外获得50妆币奖励</view>
+  </view>
+</view>

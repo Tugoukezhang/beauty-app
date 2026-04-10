@@ -1,0 +1,203 @@
+<!-- pages/community/postDetail/postDetail.wxml -->
+<view class="post-detail-container">
+  <!-- 帖子内容 -->
+  <view class="post-content">
+    <!-- 用户信息 -->
+    <view class="post-header">
+      <view class="user-info" bindtap="goToUserProfile" data-id="{{post.userId}}">
+        <image class="avatar" src="{{post.avatar || 'https://picsum.photos/100/100?random=avatar'}}" mode="aspectFill"></image>
+        <view class="user-detail">
+          <text class="username">{{post.nickname}}</text>
+          <text class="post-time">{{post.createTime}}</text>
+        </view>
+      </view>
+      <view
+        wx:if="{{post.userId !== userInfo.id}}"
+        class="follow-btn {{post.isFollow ? 'following' : ''}}"
+        bindtap="handleFollow"
+      >
+        {{post.isFollow ? '已关注' : '关注'}}
+      </view>
+    </view>
+
+    <!-- 文字内容 -->
+    <view class="text-content">
+      <text class="content-text">{{post.content}}</text>
+    </view>
+
+    <!-- 图片/视频 -->
+    <view wx:if="{{post.images && post.images.length > 0}}" class="media-content">
+      <image
+        wx:for="{{post.images}}"
+        wx:key="index"
+        class="post-image {{post.images.length === 1 ? 'single' : ''}} {{post.images.length === 2 ? 'double' : ''}}"
+        src="{{item}}"
+        mode="aspectFill"
+        bindtap="previewImage"
+        data-urls="{{post.images}}"
+        data-current="{{item}}"
+      ></image>
+    </view>
+
+    <view wx:if="{{post.videoUrl}}" class="video-content">
+      <video
+        src="{{post.videoUrl}}"
+        poster="{{post.coverUrl}}"
+        controls
+        show-center-play-btn
+      ></video>
+    </view>
+
+    <!-- 话题标签 -->
+    <view wx:if="{{post.topic}}" class="topic-tag" bindtap="goToTopicDetail" data-id="{{post.topic.id}}">
+      # {{post.topic.name}}
+    </view>
+
+    <!-- 相关课程 -->
+    <view wx:if="{{post.course}}" class="course-card" bindtap="goToCourseDetail" data-id="{{post.course.id}}">
+      <image class="course-cover" src="{{post.course.cover}}" mode="aspectFill"></image>
+      <view class="course-info">
+        <text class="course-title">{{post.course.title}}</text>
+        <text class="course-price">{{post.course.price > 0 ? '¥' + post.course.price : '免费'}}</text>
+      </view>
+      <text class="course-btn">查看课程</text>
+    </view>
+
+    <!-- 互动栏 -->
+    <view class="interaction-bar">
+      <view class="interaction-item" bindtap="handleLike">
+        <image
+          class="icon {{post.isLiked ? 'liked' : ''}}"
+          src="{{post.isLiked ? '/assets/icons/heart-fill.png' : '/assets/icons/heart.png'}}"
+          mode="aspectFit"
+        ></image>
+        <text>{{post.likes}}</text>
+      </view>
+      <view class="interaction-item" bindtap="showCommentBox">
+        <image class="icon" src="/assets/icons/comment.png" mode="aspectFit"></image>
+        <text>{{post.comments}}</text>
+      </view>
+      <view class="interaction-item" bindtap="handleCollect">
+        <image
+          class="icon {{post.isCollected ? 'collected' : ''}}"
+          src="{{post.isCollected ? '/assets/icons/star-fill.png' : '/assets/icons/star.png'}}"
+          mode="aspectFit"
+        ></image>
+      </view>
+      <view class="interaction-item" bindtap="onShareAppMessage">
+        <image class="icon" src="/assets/icons/share.png" mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 热门评论 -->
+  <view class="comment-section">
+    <view class="section-title">
+      <text>评论</text>
+      <text class="comment-count">({{post.comments}})</text>
+    </view>
+
+    <!-- 评论列表 -->
+    <view class="comment-list">
+      <block wx:if="{{comments.length > 0}}">
+        <view
+          wx:for="{{comments}}"
+          wx:key="id"
+          class="comment-item"
+        >
+          <image
+            class="comment-avatar"
+            src="{{item.avatar || 'https://picsum.photos/100/100?random=avatar'}}"
+            mode="aspectFill"
+            bindtap="goToUserProfile"
+            data-id="{{item.userId}}"
+          ></image>
+          <view class="comment-body">
+            <view class="comment-header">
+              <text class="comment-username">{{item.nickname}}</text>
+              <text class="comment-time">{{item.createTime}}</text>
+            </view>
+            <view class="comment-content">
+              <text wx:if="{{item.replyUser}}" class="reply-to">回复 <text class="reply-user">@{{item.replyUser.nickname}}</text>：</text>
+              {{item.content}}
+            </view>
+            <view class="comment-actions">
+              <view class="action-item" bindtap="likeComment" data-index="{{index}}">
+                <image
+                  class="action-icon {{item.isLiked ? 'liked' : ''}}"
+                  src="{{item.isLiked ? '/assets/icons/heart-fill.png' : '/assets/icons/heart.png'}}"
+                  mode="aspectFit"
+                ></image>
+                <text>{{item.likes}}</text>
+              </view>
+              <view class="action-item" bindtap="showCommentBox" data-type="reply" data-comment="{{item}}">
+                <image class="action-icon" src="/assets/icons/comment.png" mode="aspectFit"></image>
+                <text>回复</text>
+              </view>
+              <view
+                wx:if="{{item.userId === userInfo.id}}"
+                class="action-item delete"
+                bindtap="deleteComment"
+                data-index="{{index}}"
+              >
+                <image class="action-icon" src="/assets/icons/delete.png" mode="aspectFit"></image>
+                <text>删除</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 加载更多 -->
+        <view class="load-more" wx:if="{{hasMore}}">
+          <text wx:if="{{loading}}">加载中...</text>
+          <text wx:else bindtap="loadComments" data-loadmore="true">加载更多</text>
+        </view>
+      </block>
+
+      <!-- 空状态 -->
+      <view wx:else class="empty-comments">
+        <image src="https://picsum.photos/200/200?random=empty" mode="aspectFit"></image>
+        <text>还没有评论，快来抢沙发</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="write-comment" bindtap="showCommentBox" data-type="post">
+      <image src="/assets/icons/edit.png" mode="aspectFit"></image>
+      <text>写评论...</text>
+    </view>
+    <view class="bottom-actions">
+      <view class="action-btn" bindtap="handleLike">
+        <image
+          src="{{post.isLiked ? '/assets/icons/heart-fill.png' : '/assets/icons/heart.png'}}"
+          mode="aspectFit"
+        ></image>
+        <text>{{post.likes}}</text>
+      </view>
+      <view class="action-btn" bindtap="handleCollect">
+        <image
+          src="{{post.isCollected ? '/assets/icons/star-fill.png' : '/assets/icons/star.png'}}"
+          mode="aspectFit"
+        ></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评论输入框 -->
+  <view wx:if="{{showCommentInput}}" class="comment-input-box">
+    <view class="input-wrapper">
+      <text wx:if="{{replyTo}}" class="reply-tip">回复 @{{replyTo.nickname}}</text>
+      <input
+        type="text"
+        placeholder="{{replyTo ? '回复' : '说点什么...' }}"
+        value="{{commentContent}}"
+        bindinput="onCommentInput"
+        focus="{{focusCommentInput}}"
+      ></input>
+    </view>
+    <text class="submit-btn" bindtap="submitComment">发送</text>
+    <view class="cancel-btn" bindtap="hideCommentBox">取消</view>
+  </view>
+</view>

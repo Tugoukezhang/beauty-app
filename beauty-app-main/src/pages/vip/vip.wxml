@@ -1,0 +1,114 @@
+<view class="vip-container">
+  <!-- 会员状态卡片 -->
+  <view class="vip-card {{isVip ? 'vip-active' : 'vip-inactive'}}">
+    <view class="vip-card-bg">
+      <view class="vip-header">
+        <view class="vip-user">
+          <image class="user-avatar" src="{{userInfo.avatar || '/assets/images/avatar-default.png'}}" />
+          <view class="user-info">
+            <text class="user-name">{{userInfo.nickname || '用户'}}</text>
+            <view class="vip-badge" wx:if="{{isVip}}">
+              <image class="badge-icon" src="/assets/icons/icon-vip.png" />
+              <text class="badge-text">{{vipLevels[vipLevel-1].name}}</text>
+            </view>
+            <text class="not-vip-text" wx:else>您还不是VIP会员</text>
+          </view>
+        </view>
+        <view class="vip-status-tag" wx:if="{{isVip}}">
+          <text>有效期至 {{vipExpireTime}}</text>
+        </view>
+      </view>
+      
+      <!-- 成长值进度（仅VIP显示） -->
+      <view class="growth-section" wx:if="{{isVip}}">
+        <view class="growth-header">
+          <text class="growth-title">会员成长值</text>
+          <text class="growth-value">{{growthValue}}/{{nextLevelNeed}}</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{growthProgress}}%"></view>
+        </view>
+        <text class="growth-tip">再获得{{nextLevelNeed - growthValue}}成长值可升级</text>
+      </view>
+      
+      <!-- 开通按钮 -->
+      <view class="vip-action" wx:if="{{!isVip}}">
+        <button class="open-vip-btn" bindtap="openVip">立即开通VIP</button>
+      </view>
+      <view class="vip-action" wx:else>
+        <button class="renew-vip-btn" bindtap="openVip">续费会员</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员权益 -->
+  <view class="benefits-section">
+    <view class="section-header">
+      <text class="section-title">VIP专属权益</text>
+      <text class="section-subtitle">8大特权等你解锁</text>
+    </view>
+    <view class="benefits-grid">
+      <view class="benefit-item" wx:for="{{benefits}}" wx:key="index">
+        <view class="benefit-icon-wrap">
+          <image class="benefit-icon" src="{{item.icon}}" />
+        </view>
+        <text class="benefit-title">{{item.title}}</text>
+        <text class="benefit-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员套餐 -->
+  <view class="packages-section" wx:if="{{!isVip}}">
+    <view class="section-header">
+      <text class="section-title">选择会员套餐</text>
+    </view>
+    <view class="package-list">
+      <view 
+        class="package-card {{item.popular ? 'popular' : ''}}"
+        wx:for="{{packages}}"
+        wx:key="id"
+        bindtap="openVip"
+      >
+        <view class="package-tag" wx:if="{{item.popular}}">{{item.tag}}</view>
+        <view class="package-info">
+          <text class="package-name">{{item.name}}</text>
+          <text class="package-duration">{{item.duration}}{{item.unit}}</text>
+        </view>
+        <view class="package-price-wrap">
+          <text class="package-price"><text class="price-symbol">¥</text>{{item.price}}</text>
+          <text class="package-original" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+        </view>
+        <view class="package-daily">低至{{item.dailyPrice}}元/天</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员说明 -->
+  <view class="vip-notice">
+    <view class="notice-title">会员说明</view>
+    <view class="notice-item">
+      <text class="notice-dot">•</text>
+      <text class="notice-text">会员服务一经开通，不支持退款</text>
+    </view>
+    <view class="notice-item">
+      <text class="notice-dot">•</text>
+      <text class="notice-text">会员权益仅限当前账号使用，不可转让</text>
+    </view>
+    <view class="notice-item">
+      <text class="notice-dot">•</text>
+      <text class="notice-text">如遇到问题，请联系客服处理</text>
+    </view>
+  </view>
+
+  <!-- 底部按钮（VIP用户显示） -->
+  <view class="bottom-bar" wx:if="{{isVip}}">
+    <button class="share-btn" open-type="share">
+      <image src="/assets/icons/icon-share.png" />
+      <text>分享给好友</text>
+    </button>
+    <button class="record-btn" bindtap="viewVipRecords">
+      <text>会员记录</text>
+    </button>
+  </view>
+</view>

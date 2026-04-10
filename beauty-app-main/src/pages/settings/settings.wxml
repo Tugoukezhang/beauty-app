@@ -1,0 +1,63 @@
+<view class="settings-container">
+  <!-- 账号安全 -->
+  <view class="section">
+    <view class="section-title">账号安全</view>
+    <view class="setting-item" bindtap="changePhone">
+      <text class="item-label">修改手机号</text>
+      <text class="item-value" wx:if="{{userInfo.phone}}">{{userInfo.phone}}</text>
+      <view class="arrow"></view>
+    </view>
+    <view class="setting-item" bindtap="changePassword">
+      <text class="item-label">修改密码</text>
+      <view class="arrow"></view>
+    </view>
+  </view>
+
+  <!-- 通知与隐私 -->
+  <view class="section">
+    <view class="section-title">通知与隐私</view>
+    <view class="setting-item" bindtap="notificationSettings">
+      <text class="item-label">通知设置</text>
+      <view class="arrow"></view>
+    </view>
+    <view class="setting-item" bindtap="privacySettings">
+      <text class="item-label">隐私设置</text>
+      <view class="arrow"></view>
+    </view>
+  </view>
+
+  <!-- 通用设置 -->
+  <view class="section">
+    <view class="section-title">通用设置</view>
+    <view class="setting-item" bindtap="clearCache">
+      <text class="item-label">清除缓存</text>
+      <text class="item-value">{{cacheSize}}</text>
+    </view>
+  </view>
+
+  <!-- 关于我们 -->
+  <view class="section">
+    <view class="section-title">关于</view>
+    <view class="setting-item" bindtap="aboutUs">
+      <text class="item-label">关于我们</text>
+      <view class="arrow"></view>
+    </view>
+    <view class="setting-item" bindtap="userProtocol">
+      <text class="item-label">用户协议</text>
+      <view class="arrow"></view>
+    </view>
+    <view class="setting-item" bindtap="privacyPolicy">
+      <text class="item-label">隐私政策</text>
+      <view class="arrow"></view>
+    </view>
+    <view class="setting-item no-border">
+      <text class="item-label">当前版本</text>
+      <text class="item-value">{{version}}</text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="logout">退出登录</button>
+  </view>
+</view>

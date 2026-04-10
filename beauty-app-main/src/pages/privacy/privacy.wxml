@@ -1,0 +1,62 @@
+<view class="protocol-container">
+  <view class="protocol-content">
+    <view class="title">隐私政策</view>
+    <view class="update-time">更新日期：2024年1月1日</view>
+
+    <view class="section">
+      <view class="section-title">一、信息收集</view>
+      <view class="section-content">
+        为向您提供服务，美妆学堂会收集以下信息：
+        1. 注册信息：手机号码、昵称、头像等
+        2. 设备信息：设备型号、操作系统版本等
+        3. 位置信息：您开启定位功能时收集
+        4. 课程学习记录
+        5. 社区互动信息
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">二、信息使用</view>
+      <view class="section-content">
+        我们收集的信息用于：
+        1. 提供和改进服务
+        2. 个性化内容推荐
+        3. 账户安全保护
+        4. 客服和问题解答
+        5. 法律法规要求的其他用途
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">三、信息共享</view>
+      <view class="section-content">
+        我们不会与任何第三方共享您的个人信息，法律法规要求除外。
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">四、信息安全</view>
+      <view class="section-content">
+        我们采用行业标准的安全措施保护您的个人信息。
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">五、您的权利</view>
+      <view class="section-content">
+        您有权：
+        1. 访问和修改您的个人信息
+        2. 撤回同意
+        3. 删除您的账户
+        4. 投诉和举报
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">六、联系我们</view>
+      <view class="section-content">
+        如对隐私政策有疑问，请联系：privacy@meizhuang.com
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,168 @@
+/* 学习记录页面样式 */
+.study-record-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 24rpx;
+}
+
+/* 空状态 */
+.empty {
+  padding: 200rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-icon {
+  width: 240rpx;
+  height: 240rpx;
+  margin-bottom: 32rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.empty-hint {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 记录列表 */
+.record-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.record-item {
+  display: flex;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  position: relative;
+}
+
+/* 课程封面 */
+.record-cover {
+  width: 200rpx;
+  height: 150rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+}
+
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8rpx;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B9D, #FFB6C1);
+  transition: width 0.3s;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 107, 157, 0.9);
+  color: #fff;
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+/* 课程信息 */
+.record-info {
+  flex: 1;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-teacher {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.record-meta {
+  margin-top: 12rpx;
+}
+
+.last-chapter {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.last-time {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.chapter-progress {
+  font-size: 24rpx;
+  color: #FF6B9D;
+  margin-top: auto;
+}
+
+/* 操作按钮 */
+.record-actions {
+  position: absolute;
+  right: 24rpx;
+  bottom: 24rpx;
+  display: flex;
+  gap: 16rpx;
+}
+
+.continue-btn {
+  padding: 12rpx 32rpx;
+  background: linear-gradient(135deg, #FF6B9D, #FFB6C1);
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 32rpx;
+}
+
+.delete-btn {
+  padding: 12rpx 24rpx;
+  color: #999;
+  font-size: 24rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 32rpx;
+}
+
+/* 加载状态 */
+.loading {
+  padding: 100rpx 0;
+  text-align: center;
+  color: #999;
+}

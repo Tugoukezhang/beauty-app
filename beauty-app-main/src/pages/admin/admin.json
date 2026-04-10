@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "管理后台",
+  "navigationBarBackgroundColor": "#FF6B9D",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "i-grid": "tdesign-miniprogram/grid/grid",
+    "i-grid-item": "tdesign-miniprogram/grid-item/grid-item",
+    "i-icon": "tdesign-miniprogram/icon/icon",
+    "i-cell": "tdesign-miniprogram/cell/cell",
+    "i-cell-group": "tdesign-miniprogram/cell-group/cell-group",
+    "i-button": "tdesign-miniprogram/button/button"
+  }
+}

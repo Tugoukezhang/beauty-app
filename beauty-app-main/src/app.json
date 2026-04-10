@@ -1,0 +1,126 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/community/community",
+    "pages/profile/profile",
+    "pages/courseDetail/courseDetail",
+    "pages/search/search",
+    "pages/login/login",
+    "pages/courseList/courseList",
+    "pages/coursePlay/coursePlay",
+    "pages/favorites/favorites",
+    "pages/studyRecord/studyRecord",
+    "pages/settings/settings",
+    "pages/protocol/protocol",
+    "pages/privacy/privacy",
+    "pages/community/postDetail/postDetail",
+    "pages/community/publish/publish",
+    "pages/community/topicDetail/topicDetail",
+    "pages/community/vote/vote",
+    "pages/onboarding/onboarding",
+    "pages/user/user",
+    "pages/recharge/recharge",
+    "pages/vip/vip",
+    "pages/task/task",
+    "pages/payment/result/result",
+    "pages/admin/admin",
+    "pages/admin/courseManage/courseManage",
+    "pages/admin/userManage/userManage",
+    "pages/admin/orderManage/orderManage",
+    "pages/admin/dataStats/dataStats",
+    "pages/admin/teacherManage/teacherManage",
+    "pages/admin/activityManage/activityManage",
+    "pages/admin/systemSettings/systemSettings"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "i妆",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF6B9D",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "课程",
+        "iconPath": "assets/icons/course.png",
+        "selectedIconPath": "assets/icons/course-active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区",
+        "iconPath": "assets/icons/community.png",
+        "selectedIconPath": "assets/icons/community-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/icons/user.png",
+        "selectedIconPath": "assets/icons/user-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于提供更好的服务"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"],
+  "usingComponents": {
+    "i-button": "/components/tdesign/button/button",
+    "i-cell": "/components/tdesign/cell/cell",
+    "i-cell-group": "/components/tdesign/cell-group/cell-group",
+    "i-icon": "/components/tdesign/icon/icon",
+    "i-image": "/components/tdesign/image/image",
+    "i-input": "/components/tdesign/input/input",
+    "i-tag": "/components/tdesign/tag/tag",
+    "i-tabs": "/components/tdesign/tabs/tabs",
+    "i-tab-panel": "/components/tdesign/tab-panel/tab-panel",
+    "i-search": "/components/tdesign/search/search",
+    "i-empty": "/components/tdesign/empty/empty",
+    "i-loading": "/components/tdesign/loading/loading",
+    "i-swiper": "/components/tdesign/swiper/swiper",
+    "i-navbar": "/components/tdesign/navbar/navbar",
+    "i-grid": "/components/tdesign/grid/grid",
+    "i-grid-item": "/components/tdesign/grid-item/grid-item",
+    "i-avatar": "/components/tdesign/avatar/avatar",
+    "i-badge": "/components/tdesign/badge/badge",
+    "i-popup": "/components/tdesign/popup/popup",
+    "i-dialog": "/components/tdesign/dialog/dialog",
+    "i-toast": "/components/tdesign/toast/toast",
+    "i-picker": "/components/tdesign/picker/picker",
+    "i-date-time-picker": "/components/tdesign/date-time-picker/date-time-picker",
+    "i-switch": "/components/tdesign/switch/switch",
+    "i-checkbox": "/components/tdesign/checkbox/checkbox",
+    "i-checkbox-group": "/components/tdesign/checkbox-group/checkbox-group",
+    "i-radio": "/components/tdesign/radio/radio",
+    "i-radio-group": "/components/tdesign/radio-group/radio-group",
+    "i-slider": "/components/tdesign/slider/slider",
+    "i-rate": "/components/tdesign/rate/rate",
+    "i-stepper": "/components/tdesign/stepper/stepper",
+    "i-calendar": "/components/tdesign/calendar/calendar",
+    "i-indexes": "/components/tdesign/indexes/indexes",
+    "i-index-anchor": "/components/tdesign/indexes-anchor/indexes-anchor",
+    "i-progress": "/components/tdesign/progress/progress",
+    "i-result": "/components/tdesign/result/result",
+    "i-skeleton": "/components/tdesign/skeleton/skeleton",
+    "i-sticky": "/components/tdesign/sticky/sticky",
+    "i-side-bar": "/components/tdesign/side-bar/side-bar",
+    "i-side-bar-item": "/components/tdesign/side-bar-item/side-bar-item"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

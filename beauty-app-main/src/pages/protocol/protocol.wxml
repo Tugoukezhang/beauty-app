@@ -1,0 +1,84 @@
+<view class="protocol-container">
+  <view class="protocol-content">
+    <view class="title">美妆学堂用户协议</view>
+    <view class="update-time">更新日期：2024年1月1日</view>
+
+    <view class="section">
+      <view class="section-title">一、服务条款的确认和接受</view>
+      <view class="section-content">
+        美妆学堂APP所有权和运营权归本公司所有。用户在使用美妆学堂APP服务时，应遵守以下条款。本协议具有合同效力，用户一旦注册或使用美妆学堂服务，即视为用户已阅读并同意本协议的所有条款。
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">二、服务内容</view>
+      <view class="section-content">
+        美妆学堂为用户提供以下服务：
+        1. 美妆课程在线学习服务
+        2. 美妆社区交流服务
+        3. 美妆产品推荐服务
+        4. 其他由美妆学堂提供的相关服务
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">三、用户注册</view>
+      <view class="section-content">
+        1. 用户注册时应提供真实、准确、完整的个人信息
+        2. 用户应妥善保管账号和密码，因个人原因导致账号被盗用，由用户承担责任
+        3. 用户不得以任何方式转让或授权他人使用自己的账号
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">四、课程购买和使用</view>
+      <view class="section-content">
+        1. 用户购买课程后，可在有效期内无限次观看
+        2. 课程内容仅供个人学习使用，不得进行复制、传播或用于商业目的
+        3. 购买课程后不支持退款（除法律法规另有规定外）
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">五、用户行为规范</view>
+      <view class="section-content">
+        用户在使用服务时不得：
+        1. 违反宪法确定的基本原则
+        2. 危害国家安全、泄露国家秘密
+        3. 散布谣言、扰乱社会秩序
+        4. 侮辱或诽谤他人、侵害他人合法权益
+        5. 发送垃圾信息、虚假信息
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">六、知识产权</view>
+      <view class="section-content">
+        美妆学堂APP的所有内容，包括但不限于课程视频、文字、图片、软件等，其知识产权归美妆学堂或相关权利人所有。用户未经授权，不得擅自使用、修改、传播。
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">七、免责声明</view>
+      <view class="section-content">
+        1. 用户理解并同意，美妆学堂不对课程学习效果作任何承诺
+        2. 因不可抗力导致服务中断，美妆学堂不承担责任
+        3. 用户因违反本协议导致的任何损失，由用户自行承担
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">八、协议修改</view>
+      <view class="section-content">
+        美妆学堂有权随时修改本协议的任何条款，修改后的协议一经公布即生效。用户如继续使用服务，视为同意修改后的协议。
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">九、联系方式</view>
+      <view class="section-content">
+        如对本协议有任何疑问，请联系客服：service@meizhuang.com
+      </view>
+    </view>
+  </view>
+</view>

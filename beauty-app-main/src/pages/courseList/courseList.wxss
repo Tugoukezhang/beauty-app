@@ -1,0 +1,211 @@
+/* 课程列表页面样式 */
+.course-list-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+/* 筛选栏 */
+.filter-bar {
+  display: flex;
+  background: #fff;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.filter-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+  padding: 12rpx 0;
+  position: relative;
+}
+
+.filter-item.active {
+  color: #FF6B9D;
+  font-weight: 500;
+}
+
+.filter-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: #FF6B9D;
+  border-radius: 2rpx;
+}
+
+/* 课程列表 */
+.course-scroll {
+  flex: 1;
+  height: 1px;
+}
+
+.course-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24rpx;
+  gap: 24rpx;
+}
+
+/* 课程卡片 */
+.course-card {
+  width: calc(50% - 12rpx);
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.card-cover {
+  position: relative;
+  width: 100%;
+  height: 200rpx;
+  overflow: hidden;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+}
+
+.card-tags {
+  position: absolute;
+  top: 12rpx;
+  left: 12rpx;
+  display: flex;
+  gap: 8rpx;
+}
+
+.tag-free {
+  background: #07C160;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+
+.tag-vip {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+
+/* 课程信息 */
+.card-info {
+  padding: 20rpx;
+}
+
+.card-title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 78rpx;
+}
+
+.card-teacher {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.teacher-avatar {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  background: #f0f0f0;
+  margin-right: 8rpx;
+}
+
+.teacher-name {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.card-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.price {
+  font-size: 32rpx;
+  color: #FF6B9D;
+  font-weight: 600;
+}
+
+.free {
+  font-size: 28rpx;
+  color: #07C160;
+}
+
+.original {
+  font-size: 24rpx;
+  color: #ccc;
+  text-decoration: line-through;
+  margin-left: 8rpx;
+}
+
+.rating {
+  font-size: 24rpx;
+  color: #FF9800;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12rpx;
+}
+
+.study-count,
+.chapter-count {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200rpx 0;
+}
+
+.empty-icon {
+  width: 240rpx;
+  height: 240rpx;
+  margin-bottom: 32rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 32rpx;
+  color: #999;
+  font-size: 26rpx;
+}

@@ -1,0 +1,133 @@
+<view class="activity-manage-page">
+  <!-- 头部操作栏 -->
+  <view class="header-bar">
+    <view class="add-btn" bindtap="showAddModal">
+      <text class="icon">+</text>
+      <text>创建活动</text>
+    </view>
+  </view>
+
+  <!-- 活动列表 -->
+  <view class="activity-list">
+    <view class="activity-card {{item.status === 2 ? 'ended' : ''}}" wx:for="{{activities}}" wx:key="id">
+      <image class="activity-cover" src="{{item.cover}}" mode="aspectFill" />
+      <view class="activity-content">
+        <view class="activity-header">
+          <text class="activity-title">{{item.title}}</text>
+          <view class="status-tag status-{{item.status}}">
+            {{item.status === 0 ? '未开始' : (item.status === 1 ? '进行中' : '已结束')}}
+          </view>
+        </view>
+        <text class="activity-desc">{{item.content}}</text>
+        <view class="activity-meta">
+          <text class="meta-item">
+            <text class="icon">📅</text>
+            {{item.startTime}} ~ {{item.endTime}}
+          </text>
+          <text class="meta-item type-{{item.type}}">
+            {{item.type === 'discount' ? '限时折扣' : (item.type === 'reduce' ? '满减优惠' : (item.type === 'newuser' ? '新用户专享' : '充值返利'))}}
+          </text>
+        </view>
+        <view class="activity-stats">
+          <view class="stat-item">
+            <text class="stat-value">{{item.participants}}</text>
+            <text class="stat-label">参与人数</text>
+          </view>
+          <view class="stat-item">
+            <text class="stat-value">{{item.orders}}</text>
+            <text class="stat-label">订单数</text>
+          </view>
+        </view>
+      </view>
+      <view class="activity-actions">
+        <view class="action-btn edit" bindtap="showEditModal" data-id="{{item.id}}">
+          <text>编辑</text>
+        </view>
+        <view class="action-btn delete" bindtap="deleteActivity" data-id="{{item.id}}">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加/编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showAddModal}}" bindtap="closeModal">
+    <view class="modal-content" catchtap="stopPropagation">
+      <view class="modal-header">
+        <text class="modal-title">{{isEdit ? '编辑活动' : '创建活动'}}</text>
+        <text class="close-btn" bindtap="closeModal">×</text>
+      </view>
+      
+      <scroll-view class="modal-body" scroll-y>
+        <!-- 封面上传 -->
+        <view class="form-item">
+          <text class="label required">活动封面</text>
+          <view class="cover-upload" bindtap="chooseCover">
+            <image wx:if="{{form.cover}}" src="{{form.cover}}" mode="aspectFill" />
+            <view wx:else class="upload-placeholder">
+              <text class="icon">🖼️</text>
+              <text>点击上传封面</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="form-item">
+          <text class="label required">活动标题</text>
+          <input type="text" value="{{form.title}}" data-field="title" bindinput="onInputChange" placeholder="请输入活动标题" />
+        </view>
+
+        <view class="form-item">
+          <text class="label required">活动类型</text>
+          <picker mode="selector" range="{{typeOptions}}" range-key="label" value="{{typeIndex}}" bindchange="onTypeChange">
+            <view class="picker-value">
+              {{typeOptions[typeIndex].label}}
+              <text class="arrow">▼</text>
+            </view>
+          </picker>
+        </view>
+
+        <view class="form-row">
+          <view class="form-item half">
+            <text class="label required">开始时间</text>
+            <picker mode="date" value="{{form.startTime}}" bindchange="onStartTimeChange">
+              <view class="picker-value">
+                {{form.startTime}}
+                <text class="arrow">▼</text>
+              </view>
+            </picker>
+          </view>
+          <view class="form-item half">
+            <text class="label required">结束时间</text>
+            <picker mode="date" value="{{form.endTime}}" bindchange="onEndTimeChange">
+              <view class="picker-value">
+                {{form.endTime}}
+                <text class="arrow">▼</text>
+              </view>
+            </picker>
+          </view>
+        </view>
+
+        <view class="form-item">
+          <text class="label required">活动内容</text>
+          <textarea value="{{form.content}}" data-field="content" bindinput="onInputChange" placeholder="请输入活动内容描述" maxlength="200" />
+          <text class="word-count">{{form.content.length}}/200</text>
+        </view>
+
+        <view class="form-item">
+          <text class="label">活动状态</text>
+          <picker mode="selector" range="{{statusOptions}}" range-key="label" value="{{form.status}}" bindchange="onStatusChange">
+            <view class="picker-value">
+              {{statusOptions[form.status].label}}
+              <text class="arrow">▼</text>
+            </view>
+          </picker>
+        </view>
+      </scroll-view>
+      
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="closeModal">取消</button>
+        <button class="btn-confirm" bindtap="saveActivity">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,375 @@
+.data-stats-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+/* 时间选择器 */
+.date-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+}
+
+.date-picker {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  background: #f5f5f5;
+  border-radius: 30rpx;
+}
+
+.date-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 10rpx;
+}
+
+.arrow {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.refresh-btn {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 32rpx;
+}
+
+.refresh-btn .icon {
+  font-size: 32rpx;
+}
+
+/* 核心数据卡片 */
+.core-stats {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx;
+  gap: 20rpx;
+}
+
+.stat-card {
+  width: calc(50% - 10rpx);
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+}
+
+.stat-card.highlight {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+}
+
+.stat-card.highlight .stat-value,
+.stat-card.highlight .stat-label {
+  color: #fff;
+}
+
+.stat-value {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 区块卡片 */
+.section-card {
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.section-header {
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 收入构成 */
+.revenue-breakdown {
+  padding: 20rpx 30rpx;
+}
+
+.revenue-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.revenue-item:last-child {
+  border-bottom: none;
+}
+
+.revenue-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  margin-right: 20rpx;
+}
+
+.revenue-icon.course {
+  background: #e3f2fd;
+}
+
+.revenue-icon.vip {
+  background: #fff3e0;
+}
+
+.revenue-info {
+  flex: 1;
+}
+
+.revenue-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.revenue-value {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff6b9d;
+}
+
+.revenue-percent {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 趋势图表 */
+.trend-chart {
+  padding: 30rpx;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 40rpx;
+  margin-bottom: 30rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.legend-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 8rpx;
+  margin-right: 10rpx;
+}
+
+.legend-dot.blue {
+  background: #4a90e2;
+}
+
+.legend-dot.green {
+  background: #5cb85c;
+}
+
+.legend-dot.orange {
+  background: #f0ad4e;
+}
+
+.chart-placeholder {
+  height: 300rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-text {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.placeholder-sub {
+  font-size: 24rpx;
+  color: #bbb;
+}
+
+/* 排行榜 */
+.ranking-list {
+  padding: 10rpx 30rpx;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.ranking-item:last-child {
+  border-bottom: none;
+}
+
+.rank-number {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  background: #f5f5f5;
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.rank-number.top {
+  background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+  color: #fff;
+}
+
+.rank-info {
+  flex: 1;
+}
+
+.rank-title {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+
+.rank-sales {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.rank-revenue {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff6b9d;
+}
+
+/* 用户画像 */
+.profile-section {
+  padding: 24rpx 30rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.profile-section:last-child {
+  border-bottom: none;
+}
+
+.profile-title {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.profile-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.profile-bar {
+  display: flex;
+  align-items: center;
+}
+
+.bar-label {
+  width: 140rpx;
+  font-size: 26rpx;
+  color: #333;
+}
+
+.bar-track {
+  flex: 1;
+  height: 24rpx;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.bar-fill.female {
+  background: linear-gradient(90deg, #ff6b9d 0%, #c44569 100%);
+}
+
+.bar-fill.male {
+  background: linear-gradient(90deg, #4a90e2 0%, #2c5aa0 100%);
+}
+
+.age-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.age-item {
+  flex: 1;
+  min-width: 140rpx;
+  text-align: center;
+  padding: 20rpx;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+}
+
+.age-range {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.age-percent {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ff6b9d;
+}
+
+/* 导出按钮 */
+.export-section {
+  padding: 40rpx 30rpx;
+}
+
+.export-btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+  border: none;
+}

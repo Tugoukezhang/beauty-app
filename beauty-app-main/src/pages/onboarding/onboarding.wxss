@@ -1,0 +1,547 @@
+/**
+ * i妆 - 新用户引导问卷页样式
+ * 4步引导：蜕变方向 → 化妆水平 → 个人信息 → 方案生成
+ */
+
+/* 页面 */
+.onboarding-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF5F8 0%, #FFFFFF 40%);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 160rpx;
+}
+
+/* ========== 顶部进度条 ========== */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 40rpx 20rpx;
+  gap: 20rpx;
+}
+
+.progress-track {
+  flex: 1;
+  height: 8rpx;
+  background: #F0F0F0;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B9D, #FF8FAB);
+  border-radius: 4rpx;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 26rpx;
+  color: #FF6B9D;
+  font-weight: 600;
+  min-width: 60rpx;
+  text-align: right;
+}
+
+/* ========== 步骤头部 ========== */
+.step-content {
+  flex: 1;
+  padding: 0 40rpx;
+}
+
+.step-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 48rpx;
+  padding-top: 20rpx;
+}
+
+.step-emoji {
+  font-size: 72rpx;
+  margin-bottom: 20rpx;
+}
+
+.step-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.step-desc {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* ========== Step1: 蜕变方向 - 网格选项 ========== */
+.option-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.option-card {
+  width: calc(50% - 10rpx);
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 32rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border: 3rpx solid #F0F0F0;
+  transition: all 0.2s;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+
+.option-card.selected {
+  border-color: #FF6B9D;
+  background: #FFF5F8;
+  box-shadow: 0 4rpx 20rpx rgba(255, 107, 157, 0.15);
+}
+
+.option-emoji {
+  font-size: 56rpx;
+  margin-bottom: 16rpx;
+}
+
+.option-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.option-card.selected .option-name {
+  color: #FF6B9D;
+}
+
+.option-desc {
+  font-size: 22rpx;
+  color: #999;
+  text-align: center;
+}
+
+.option-check {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 36rpx;
+  height: 36rpx;
+  background: #FF6B9D;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+/* ========== Step2: 化妆水平 - 列表选项 ========== */
+.level-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.level-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  border: 3rpx solid #F0F0F0;
+  transition: all 0.2s;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+}
+
+.level-card.selected {
+  border-color: #FF6B9D;
+  background: #FFF5F8;
+}
+
+.level-left {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  flex: 1;
+}
+
+.level-emoji {
+  font-size: 48rpx;
+}
+
+.level-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.level-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.level-card.selected .level-name {
+  color: #FF6B9D;
+}
+
+.level-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.level-radio {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 3rpx solid #DDD;
+  transition: all 0.2s;
+}
+
+.level-radio.active {
+  border-color: #FF6B9D;
+  background: #FF6B9D;
+  position: relative;
+}
+
+.level-radio.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16rpx;
+  height: 16rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* ========== Step3: 个人信息 - 标签选择 ========== */
+.form-section {
+  margin-bottom: 40rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.tag-item {
+  padding: 16rpx 28rpx;
+  background: #F8F8F8;
+  border-radius: 40rpx;
+  font-size: 26rpx;
+  color: #666;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.tag-item.small {
+  padding: 14rpx 24rpx;
+  font-size: 24rpx;
+}
+
+.tag-item.selected {
+  background: #FFF0F4;
+  color: #FF6B9D;
+  border-color: #FF6B9D;
+}
+
+/* ========== Step4: 方案生成 ========== */
+
+/* 生成中动画 */
+.generating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 120rpx;
+}
+
+.gen-animation {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 40rpx;
+}
+
+.gen-emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 64rpx;
+}
+
+.gen-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 6rpx solid #FFE0EB;
+  border-top-color: #FF6B9D;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.gen-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.gen-sub {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 生成结果 */
+.result-area {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.result-emoji {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.result-title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.result-desc {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.result-section {
+  margin-bottom: 32rpx;
+}
+
+.result-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.result-tag {
+  padding: 12rpx 24rpx;
+  background: linear-gradient(135deg, #FFF0F4, #FFE0EB);
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  color: #FF6B9D;
+  font-weight: 500;
+}
+
+/* 推荐课程卡片 */
+.course-card {
+  display: flex;
+  gap: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05);
+}
+
+.course-cover {
+  width: 140rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #FFE0EB, #FFF0F4);
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.course-cover-emoji {
+  font-size: 40rpx;
+}
+
+.course-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6rpx;
+}
+
+.course-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.course-meta {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.course-price-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.course-price {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #FF6B9D;
+}
+
+.course-free {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #4CAF50;
+  background: #E8F5E9;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.course-match {
+  font-size: 22rpx;
+  color: #FF9800;
+  font-weight: 500;
+}
+
+/* 今日任务 */
+.task-card {
+  background: linear-gradient(135deg, #FF6B9D, #FF8FAB);
+  border-radius: 16rpx;
+  padding: 28rpx 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-text {
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 500;
+  flex: 1;
+}
+
+.task-reward {
+  font-size: 24rpx;
+  color: #fff;
+  background: rgba(255,255,255,0.25);
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: 600;
+}
+
+/* ========== 底部按钮栏 ========== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 24rpx 40rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1rpx solid #F0F0F0;
+  gap: 20rpx;
+}
+
+.btn-skip {
+  padding: 20rpx 32rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.btn-prev {
+  padding: 20rpx 32rpx;
+  font-size: 28rpx;
+  color: #666;
+  background: #F5F5F5;
+  border-radius: 40rpx;
+}
+
+.btn-next {
+  flex: 1;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, #FF6B9D, #FF8FAB);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 44rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 157, 0.3);
+}
+
+.btn-next.disabled {
+  background: #E0E0E0;
+  box-shadow: none;
+  color: #999;
+}
+
+.btn-finish {
+  flex: 1;
+  padding: 24rpx 0;
+  background: linear-gradient(135deg, #FF6B9D, #FF8FAB);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 44rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 157, 0.3);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}

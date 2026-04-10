@@ -1,0 +1,277 @@
+/**
+ * 首页样式
+ */
+
+.page-container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+}
+
+/* 搜索栏 */
+.search-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 20rpx 24rpx;
+  background-color: #fff;
+}
+
+/* 内容滚动区 */
+.content-scroll {
+  height: calc(100vh - 100rpx);
+}
+
+/* 轮播图 */
+.banner-section {
+  padding: 0 24rpx;
+}
+
+.banner-swiper {
+  width: 100%;
+  height: 320rpx;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 分类导航 */
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24rpx;
+  background-color: #fff;
+  margin-bottom: 16rpx;
+}
+
+.category-item {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.category-icon {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--primary-color-light), var(--primary-color));
+  margin-bottom: 12rpx;
+}
+
+.category-name {
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+/* 区块 */
+.section {
+  background-color: #fff;
+  margin-bottom: 16rpx;
+  padding: 24rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: var(--font-lg);
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.section-more {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-sm);
+  color: var(--text-tertiary);
+}
+
+.section-more .icon-arrow-right {
+  margin-left: 4rpx;
+  font-size: 24rpx;
+}
+
+/* 课程横向滚动 */
+.course-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.course-list {
+  display: inline-flex;
+  gap: 24rpx;
+}
+
+.course-card {
+  width: 280rpx;
+  flex-shrink: 0;
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.course-cover {
+  width: 280rpx;
+  height: 180rpx;
+}
+
+.course-info {
+  padding: 16rpx;
+}
+
+.course-title {
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  margin-bottom: 12rpx;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-teacher {
+  font-size: var(--font-xs);
+  color: var(--text-tertiary);
+}
+
+.course-price {
+  font-size: var(--font-md);
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* 推荐课程列表 */
+.recommend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.recommend-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.recommend-cover {
+  width: 240rpx;
+  height: 180rpx;
+  flex-shrink: 0;
+}
+
+.recommend-info {
+  flex: 1;
+  padding: 16rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recommend-title {
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.recommend-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recommend-teacher {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: var(--font-xs);
+  color: var(--text-tertiary);
+}
+
+.teacher-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: var(--radius-full);
+}
+
+.recommend-price {
+  font-size: var(--font-lg);
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* 社区列表 */
+.community-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.community-card {
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.community-image {
+  width: 100%;
+  height: 400rpx;
+}
+
+.community-info {
+  padding: 16rpx;
+}
+
+.community-title {
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 16rpx;
+}
+
+.community-meta {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.user-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: var(--radius-full);
+}
+
+.user-name {
+  flex: 1;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.interaction {
+  display: flex;
+  gap: 16rpx;
+  font-size: var(--font-xs);
+  color: var(--text-tertiary);
+}
+
+/* 加载更多 */
+.loading-more {
+  text-align: center;
+  padding: 24rpx;
+  color: var(--text-tertiary);
+  font-size: var(--font-sm);
+}

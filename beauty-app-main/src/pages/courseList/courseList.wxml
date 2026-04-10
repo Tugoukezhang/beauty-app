@@ -1,0 +1,82 @@
+<view class="course-list-container">
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view
+      class="filter-item {{item.id === sortBy ? 'active' : ''}}"
+      wx:for="{{sortOptions}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onSortChange"
+    >
+      {{item.name}}
+    </view>
+  </view>
+
+  <!-- 课程列表 -->
+  <scroll-view
+    class="course-scroll"
+    scroll-y="true"
+    bindscrolltolower="loadMoreCourses"
+  >
+    <view class="course-grid">
+      <view
+        class="course-card"
+        wx:for="{{courseList}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goToCourse"
+      >
+        <!-- 封面图 -->
+        <view class="card-cover">
+          <image class="cover-img" src="{{item.cover}}" mode="aspectFill" />
+          <!-- 标签 -->
+          <view class="card-tags">
+            <text class="tag-free" wx:if="{{item.isFree}}">免费</text>
+            <text class="tag-vip" wx:if="{{item.isVip}}">VIP</text>
+          </view>
+        </view>
+
+        <!-- 课程信息 -->
+        <view class="card-info">
+          <view class="card-title">{{item.title}}</view>
+
+          <!-- 老师信息 -->
+          <view class="card-teacher">
+            <image class="teacher-avatar" src="{{item.teacher.avatar}}" />
+            <text class="teacher-name">{{item.teacher.name}}</text>
+          </view>
+
+          <!-- 价格和统计 -->
+          <view class="card-footer">
+            <view class="card-price">
+              <text class="price" wx:if="{{!item.isFree}}">¥{{item.price}}</text>
+              <text class="free" wx:if="{{item.isFree}}">免费</text>
+              <text class="original" wx:if="{{!item.isFree && item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+            </view>
+            <view class="card-stats">
+              <text class="rating">★ {{item.rating}}</text>
+            </view>
+          </view>
+
+          <!-- 学习人数 -->
+          <view class="card-meta">
+            <text class="study-count">{{item.studyCount}}人学习</text>
+            <text class="chapter-count">{{item.chapterCount}}课时</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{!loading && courseList.length === 0}}">
+      <image class="empty-icon" src="/assets/images/empty-course.png" mode="aspectFit" />
+      <text class="empty-text">暂无相关课程</text>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{courseList.length > 0}}">
+      <text wx:if="{{loading && hasMore}}">加载中...</text>
+      <text wx:if="{{!hasMore}}">— 没有更多了 —</text>
+    </view>
+  </scroll-view>
+</view>

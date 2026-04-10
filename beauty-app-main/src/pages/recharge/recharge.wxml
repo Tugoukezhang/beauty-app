@@ -1,0 +1,159 @@
+<view class="recharge-container">
+  <!-- 顶部用户信息 -->
+  <view class="user-header">
+    <view class="user-coins" wx:if="{{activeTab === 'coin'}}">
+      <text class="coins-label">当前妆币</text>
+      <text class="coins-value">{{currentCoins}}</text>
+    </view>
+    <view class="user-vip" wx:if="{{activeTab === 'vip'}}">
+      <view class="vip-status" wx:if="{{isVip}}">
+        <image class="vip-icon" src="/assets/icons/icon-vip.png" />
+        <text class="vip-text">VIP会员有效期至 {{vipExpireTime}}</text>
+      </view>
+      <view class="vip-status vip-inactive" wx:else>
+        <text class="vip-text">您还不是VIP会员</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 'coin' ? 'active' : ''}}" data-tab="coin" bindtap="switchTab">
+      <text class="tab-text">充值妆币</text>
+    </view>
+    <view class="tab-item {{activeTab === 'vip' ? 'active' : ''}}" data-tab="vip" bindtap="switchTab">
+      <text class="tab-text">购买会员</text>
+    </view>
+  </view>
+
+  <!-- 妆币充值区域 -->
+  <view class="section" wx:if="{{activeTab === 'coin'}}">
+    <view class="section-title">选择充值金额</view>
+    <view class="coin-packages">
+      <view 
+        class="package-item {{selectedCoinPackage && selectedCoinPackage.id === item.id ? 'selected' : ''}} {{item.popular ? 'popular' : ''}}"
+        wx:for="{{coinPackages}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="selectCoinPackage"
+      >
+        <view class="popular-tag" wx:if="{{item.popular}}">{{item.tag}}</view>
+        <view class="package-coins">{{item.coins}}<text class="coin-unit">币</text></view>
+        <view class="package-bonus" wx:if="{{item.bonus > 0}}">送{{item.bonus}}币</view>
+        <view class="package-price">¥{{item.amount}}</view>
+      </view>
+    </view>
+    
+    <!-- 选中套餐详情 -->
+    <view class="selected-info" wx:if="{{selectedCoinPackage}}">
+      <view class="info-row">
+        <text class="info-label">充值金额</text>
+        <text class="info-value">¥{{selectedCoinPackage.amount}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">获得妆币</text>
+        <text class="info-value">{{selectedCoinPackage.coins}} 币</text>
+      </view>
+      <view class="info-row" wx:if="{{selectedCoinPackage.bonus > 0}}">
+        <text class="info-label">额外赠送</text>
+        <text class="info-value bonus">+{{selectedCoinPackage.bonus}} 币</text>
+      </view>
+      <view class="info-row total">
+        <text class="info-label">合计到账</text>
+        <text class="info-value total-value">{{selectedCoinPackage.coins + selectedCoinPackage.bonus}} 币</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员购买区域 -->
+  <view class="section" wx:if="{{activeTab === 'vip'}}">
+    <view class="section-title">选择会员套餐</view>
+    <view class="vip-packages">
+      <view 
+        class="vip-item {{selectedVipPackage && selectedVipPackage.id === item.id ? 'selected' : ''}} {{item.popular ? 'popular' : ''}}"
+        wx:for="{{vipPackages}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="selectVipPackage"
+      >
+        <view class="vip-tag" wx:if="{{item.popular}}">{{item.tag}}</view>
+        <view class="vip-duration">{{item.duration}}<text class="duration-unit">{{item.unit}}</text></view>
+        <view class="vip-name">{{item.name}}</view>
+        <view class="vip-price">
+          <text class="price-symbol">¥</text>
+          <text class="price-value">{{item.price}}</text>
+        </view>
+        <view class="vip-original" wx:if="{{item.originalPrice > item.price}}">
+          原价 ¥{{item.originalPrice}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 会员权益 -->
+    <view class="vip-benefits" wx:if="{{selectedVipPackage}}">
+      <view class="benefits-title">{{selectedVipPackage.name}}权益</view>
+      <view class="benefits-list">
+        <view class="benefit-item" wx:for="{{selectedVipPackage.benefits}}" wx:key="index">
+          <image class="benefit-icon" src="/assets/icons/icon-check.png" />
+          <text class="benefit-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 支付方式 -->
+  <view class="section payment-section">
+    <view class="section-title">支付方式</view>
+    <view class="payment-methods">
+      <view class="payment-item" wx:for="{{paymentMethods}}" wx:key="id">
+        <view class="payment-left">
+          <image class="payment-icon" src="{{item.icon}}" />
+          <text class="payment-name">{{item.name}}</text>
+        </view>
+        <view class="payment-check {{item.checked ? 'checked' : ''}}">
+          <image wx:if="{{item.checked}}" src="/assets/icons/icon-check-fill.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户协议 -->
+  <view class="agreement-section">
+    <view class="agreement-checkbox" bindtap="toggleAgreement">
+      <image 
+        class="checkbox-icon" 
+        src="{{agreementChecked ? '/assets/icons/icon-check-fill.png' : '/assets/icons/icon-uncheck.png'}}" 
+      />
+      <text class="agreement-text">
+        我已阅读并同意
+        <text class="agreement-link" catchtap="viewAgreement">《用户充值协议》</text>
+      </text>
+    </view>
+  </view>
+
+  <!-- 底部支付按钮 -->
+  <view class="bottom-bar">
+    <view class="price-info">
+      <text class="pay-label">实付金额：</text>
+      <text class="pay-amount" wx:if="{{activeTab === 'coin'}}">
+        ¥{{selectedCoinPackage ? selectedCoinPackage.amount : 0}}
+      </text>
+      <text class="pay-amount" wx:if="{{activeTab === 'vip'}}">
+        ¥{{selectedVipPackage ? selectedVipPackage.price : 0}}
+      </text>
+    </view>
+    <button 
+      class="pay-btn {{loading ? 'loading' : ''}}" 
+      bindtap="payNow"
+      disabled="{{loading}}"
+    >
+      <text wx:if="{{!loading}}">立即支付</text>
+      <text wx:else>支付中...</text>
+    </button>
+  </view>
+
+  <!-- 客服入口 -->
+  <view class="service-section" bindtap="contactService">
+    <text class="service-text">支付遇到问题？联系客服</text>
+  </view>
+</view>

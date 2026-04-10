@@ -1,0 +1,135 @@
+<!--
+  首页
+  @description 首页展示：搜索、分类、推荐课程、热门帖子
+-->
+<view class="page-container">
+  <!-- 顶部搜索栏 -->
+  <view class="search-bar" bindtap="onSearchTap">
+    <i-search placeholder="搜索课程、老师" disabled />
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view 
+    scroll-y 
+    class="content-scroll"
+    enable-back-to-top
+    bindscrolltolower="onLoadMore"
+  >
+    <!-- 轮播图 -->
+    <view class="banner-section">
+      <swiper 
+        class="banner-swiper" 
+        indicator-dots 
+        autoplay 
+        interval="3000" 
+        circular
+        indicator-color="rgba(255,255,255,0.5)"
+        indicator-active-color="#ffffff"
+      >
+        <swiper-item wx:for="{{banners}}" wx:key="id">
+          <image class="banner-image" src="{{item.image}}" mode="aspectFill" />
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <!-- 热门课程 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">热门课程</text>
+        <view class="section-more" bindtap="goToCourseList">
+          <text>查看更多</text>
+          <text class="iconfont icon-arrow-right">›</text>
+        </view>
+      </view>
+      <scroll-view scroll-x class="course-scroll">
+        <view class="course-list">
+          <view 
+            class="course-card" 
+            wx:for="{{hotCourses}}" 
+            wx:key="id"
+            bindtap="goToCourseDetail"
+            data-id="{{item.id}}"
+          >
+            <image class="course-cover" src="{{item.cover}}" mode="aspectFill" />
+            <view class="course-info">
+              <text class="course-title text-ellipsis">{{item.title}}</text>
+              <view class="course-meta">
+                <text class="course-teacher">{{item.teacherName}}</text>
+                <text class="course-price">¥{{item.price}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 精选推荐 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">精选推荐</text>
+      </view>
+      <view class="recommend-list">
+        <view 
+          class="recommend-card" 
+          wx:for="{{recommendCourses}}" 
+          wx:key="id"
+          bindtap="goToCourseDetail"
+          data-id="{{item.id}}"
+        >
+          <image class="recommend-cover" src="{{item.cover}}" mode="aspectFill" />
+          <view class="recommend-info">
+            <text class="recommend-title text-ellipsis-2">{{item.title}}</text>
+            <view class="recommend-bottom">
+              <view class="recommend-teacher">
+                <image class="teacher-avatar" src="{{item.teacherAvatar}}" />
+                <text>{{item.teacherName}}</text>
+              </view>
+              <text class="recommend-price">¥{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 热门社区 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">热门社区</text>
+        <view class="section-more" bindtap="switchToCommunity">
+          <text>查看更多</text>
+          <text class="iconfont icon-arrow-right">›</text>
+        </view>
+      </view>
+      <view class="community-list">
+        <view 
+          class="community-card" 
+          wx:for="{{hotPosts}}" 
+          wx:key="id"
+          bindtap="goToPostDetail"
+          data-id="{{item.id}}"
+        >
+          <image class="community-image" src="{{item.coverImage}}" mode="aspectFill" />
+          <view class="community-info">
+            <text class="community-title text-ellipsis-2">{{item.content}}</text>
+            <view class="community-meta">
+              <image class="user-avatar" src="{{item.userAvatar}}" />
+              <text class="user-name">{{item.userName}}</text>
+              <view class="interaction">
+                <text>❤️ {{item.likeCount}}</text>
+                <text>💬 {{item.commentCount}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="loading-more" wx:if="{{hasMore}}">
+      <text>加载中...</text>
+    </view>
+    <view class="loading-more" wx:else>
+      <text>没有更多了</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,181 @@
+<!-- pages/community/publish/publish.wxml -->
+<view class="publish-container">
+  <!-- 导航栏 -->
+  <view class="nav-bar">
+    <text class="nav-cancel" bindtap="onCancel">取消</text>
+    <text class="nav-title">发布笔记</text>
+    <text class="nav-submit {{isSubmitting ? 'disabled' : ''}}" bindtap="submit">发布</text>
+  </view>
+
+  <!-- 内容输入 -->
+  <view class="content-area">
+    <textarea
+      class="content-input"
+      placeholder="分享你的美妆心得..."
+      maxlength="{{maxLength}}"
+      bindinput="onContentInput"
+      value="{{content}}"
+    ></textarea>
+    <text class="content-count">{{contentLength}}/{{maxLength}}</text>
+  </view>
+
+  <!-- 图片/视频区域 -->
+  <view class="media-area">
+    <!-- 图片 -->
+    <view class="media-list">
+      <view
+        wx:for="{{images}}"
+        wx:key="index"
+        class="media-item"
+        bindtap="previewImage"
+        data-url="{{item}}"
+      >
+        <image src="{{item}}" mode="aspectFill"></image>
+        <view class="remove-btn" catchtap="removeImage" data-index="{{index}}">
+          <text class="remove-icon">×</text>
+        </view>
+      </view>
+
+      <!-- 视频 -->
+      <view
+        wx:for="{{videos}}"
+        wx:key="index"
+        class="media-item video"
+      >
+        <video src="{{item.url}}" controls show-center-play-btn object-fit="cover"></video>
+        <view class="remove-btn" catchtap="removeVideo">
+          <text class="remove-icon">×</text>
+        </view>
+      </view>
+
+      <!-- 添加按钮组 -->
+      <view class="add-buttons" wx:if="{{images.length < maxImages || videos.length < maxVideos}}">
+        <!-- 添加图片按钮 -->
+        <view 
+          wx:if="{{images.length < maxImages}}" 
+          class="add-btn add-image" 
+          bindtap="chooseImage"
+        >
+          <view class="add-icon-wrap">
+            <text class="add-icon">+</text>
+          </view>
+          <text class="add-text">添加图片</text>
+          <text class="add-hint">最多{{maxImages}}张</text>
+        </view>
+
+        <!-- 添加视频按钮 -->
+        <view 
+          wx:if="{{videos.length < maxVideos}}" 
+          class="add-btn add-video" 
+          bindtap="chooseVideo"
+        >
+          <view class="add-icon-wrap video-icon">
+            <text class="add-icon video">▶</text>
+          </view>
+          <text class="add-text">添加视频</text>
+          <text class="add-hint">最长60秒</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工具栏 -->
+  <view class="tool-bar">
+    <!-- 话题 -->
+    <view class="tool-item {{selectedTopic ? 'has-value' : ''}}" bindtap="toggleTopicPicker">
+      <view class="tool-circle {{selectedTopic ? 'active' : ''}}">
+        <text class="circle-icon">{{selectedTopic ? '#' : '+'}}</text>
+      </view>
+      <text>{{selectedTopic ? selectedTopic.name : '话题'}}</text>
+    </view>
+    <!-- 位置 -->
+    <view class="tool-item {{location ? 'has-value' : ''}}" bindtap="chooseLocation">
+      <view class="tool-circle {{location ? 'active' : ''}}">
+        <text class="circle-icon">📍</text>
+      </view>
+      <text>{{location || '位置'}}</text>
+    </view>
+    <!-- 权限 -->
+    <view class="tool-item" bindtap="toggleVisibility">
+      <view class="tool-circle">
+        <text class="circle-icon">👁</text>
+      </view>
+      <text>权限</text>
+    </view>
+  </view>
+
+  <!-- 话题选择器 -->
+  <view wx:if="{{showTopicPicker}}" class="picker-modal">
+    <view class="picker-header">
+      <text class="picker-title">选择话题</text>
+      <text class="picker-close" bindtap="toggleTopicPicker">关闭</text>
+    </view>
+    
+    <!-- 推荐话题 -->
+    <view class="recommend-section" wx:if="{{recommendTopics.length > 0}}">
+      <view class="section-label">
+        <text class="label-icon">🔥</text>
+        <text class="label-text">推荐话题</text>
+      </view>
+      <scroll-view scroll-x class="recommend-scroll">
+        <view class="recommend-tags">
+          <view 
+            wx:for="{{recommendTopics}}"
+            wx:key="id"
+            class="recommend-tag {{selectedTopic && selectedTopic.id === item.id ? 'active' : ''}}"
+            bindtap="selectTopic"
+            data-topic="{{item}}"
+          >
+            <text>#</text>
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    
+    <!-- 全部话题 -->
+    <view class="section-label all-topics">
+      <text class="label-icon">📋</text>
+      <text class="label-text">全部话题</text>
+    </view>
+    <scroll-view scroll-y class="picker-list">
+      <view
+        wx:for="{{topics}}"
+        wx:key="id"
+        class="picker-item {{selectedTopic && selectedTopic.id === item.id ? 'active' : ''}}"
+        bindtap="selectTopic"
+        data-topic="{{item}}"
+      >
+        <text class="topic-name"># {{item.name}}</text>
+        <text class="topic-count">{{item.postCount}}篇</text>
+        <view class="topic-check" wx:if="{{selectedTopic && selectedTopic.id === item.id}}">✓</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 可见性选择 -->
+  <view wx:if="{{showVisibilityPicker}}" class="visibility-picker">
+    <view class="visibility-mask" bindtap="toggleVisibility"></view>
+    <view class="visibility-content">
+      <view class="visibility-header">
+        <text>谁可以看</text>
+      </view>
+      <view
+        wx:for="{{visibilityOptions}}"
+        wx:key="id"
+        class="visibility-item {{visibility === item.id ? 'active' : ''}}"
+        bindtap="selectVisibility"
+        data-id="{{item.id}}"
+      >
+        <image src="{{item.icon}}" mode="aspectFit"></image>
+        <view class="visibility-text">
+          <text class="visibility-name">{{item.name}}</text>
+          <text class="visibility-desc">{{item.desc}}</text>
+        </view>
+        <view class="check-wrap" wx:if="{{visibility === item.id}}">
+          <text class="check-icon">✓</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
